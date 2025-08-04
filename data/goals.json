@@ -1,0 +1,496 @@
+{
+  "weeklyGoals": [
+    {
+      "id": 1754296890180,
+      "title": "ghost detection 처리 논문 조사",
+      "subGoals": [
+        {
+          "id": 1754296890181,
+          "title": "20개 abstract 정리",
+          "completed": false
+        },
+        {
+          "id": 1754296890182,
+          "title": "괜찮은 5개 추리기",
+          "completed": false
+        },
+        {
+          "id": 1754296890183,
+          "title": "논문 1개 정독 & 정리",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:41:30.181Z"
+    },
+    {
+      "id": 1754297023964,
+      "title": "[도전학기] 파이썬을 이용한 인문사회과학논문 쓰기",
+      "subGoals": [
+        {
+          "id": 1754297023964,
+          "title": "계획서 재체출",
+          "completed": false
+        },
+        {
+          "id": 1754297023965,
+          "title": "한국 관련 데이터 조사",
+          "completed": false
+        },
+        {
+          "id": 1754297023966,
+          "title": "외국 관련 데이터 조사",
+          "completed": false
+        },
+        {
+          "id": 1754297023967,
+          "title": "논문 초안 작성",
+          "completed": false
+        },
+        {
+          "id": 1754297023968,
+          "title": "]퀴즈 풀기",
+          "completed": false
+        },
+        {
+          "id": 1754297023969,
+          "title": "이번 주 과제",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:43:43.964Z"
+    },
+    {
+      "id": 1754297220995,
+      "title": "공학수학1 복습",
+      "subGoals": [
+        {
+          "id": 1754297220995,
+          "title": "지난 개념 복습",
+          "completed": false
+        },
+        {
+          "id": 1754297220996,
+          "title": "11주차 강의 수강",
+          "completed": false
+        },
+        {
+          "id": 1754297220997,
+          "title": "12주차 강의 수강",
+          "completed": false
+        },
+        {
+          "id": 1754297220998,
+          "title": "13주차 강의 수강",
+          "completed": false
+        },
+        {
+          "id": 1754297220999,
+          "title": "14주차 강의 수강",
+          "completed": false
+        },
+        {
+          "id": 1754297221000,
+          "title": "15주차 강의 수강",
+          "completed": false
+        },
+        {
+          "id": 1754297250932,
+          "title": "복습용 자료 정리",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:47:00.995Z"
+    },
+    {
+      "id": 1754300424776,
+      "title": "바텐더 로봇팔 논문 조사 & 모터 선정",
+      "subGoals": [
+        {
+          "id": 1754300424776,
+          "title": "비슷한 스펙을 가진 로봇팔 연구 논문 10개 정리",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T09:40:24.776Z"
+    },
+    {
+      "id": 1754300367517,
+      "title": "탄천 야외 러닝 9km 뛰기",
+      "subGoals": [],
+      "completed": false,
+      "createdAt": "2025-08-04T09:39:27.517Z"
+    },
+    {
+      "id": 1754301636901,
+      "title": "F1 PPT 만들고 발표 준비",
+      "subGoals": [],
+      "completed": false,
+      "createdAt": "2025-08-04T10:00:36.901Z"
+    }
+  ],
+  "monthlyGoals": [
+    {
+      "id": 1754297271931,
+      "title": "공학수학 1 복습",
+      "subGoals": [
+        {
+          "id": 1754306636751,
+          "title": "중간고사 범위",
+          "completed": false
+        },
+        {
+          "id": 1754306636753,
+          "title": "Convolution",
+          "completed": false
+        },
+        {
+          "id": 1754306636752,
+          "title": "Laplace Transform",
+          "completed": false
+        },
+        {
+          "id": 1754306636754,
+          "title": "9~11주차",
+          "completed": false
+        },
+        {
+          "id": 1754306636755,
+          "title": "12주차",
+          "completed": false
+        },
+        {
+          "id": 1754306636756,
+          "title": "13주차",
+          "completed": false
+        },
+        {
+          "id": 1754306636757,
+          "title": "14주차",
+          "completed": false
+        },
+        {
+          "id": 1754306636758,
+          "title": "15주차",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:47:51.931Z"
+    },
+    {
+      "id": 1754297278735,
+      "title": "공학수학 2 복습",
+      "subGoals": [
+        {
+          "id": 1754306766583,
+          "title": "9주차",
+          "completed": false
+        },
+        {
+          "id": 1754306766584,
+          "title": "10주차",
+          "completed": false
+        },
+        {
+          "id": 1754306766585,
+          "title": "11주차",
+          "completed": false
+        },
+        {
+          "id": 1754306766586,
+          "title": "12주차",
+          "completed": false
+        },
+        {
+          "id": 1754306766587,
+          "title": "13주차",
+          "completed": false
+        },
+        {
+          "id": 1754306766588,
+          "title": "14주차",
+          "completed": false
+        },
+        {
+          "id": 1754306766589,
+          "title": "15주차",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:47:58.735Z"
+    },
+    {
+      "id": 1754297310229,
+      "title": "바텐더 로봇팔 수동 조작",
+      "subGoals": [
+        {
+          "id": 1754306550194,
+          "title": "논문 조사",
+          "completed": false
+        },
+        {
+          "id": 1754306550195,
+          "title": "모터 선정 & 구매",
+          "completed": false
+        },
+        {
+          "id": 1754306550196,
+          "title": "하드웨어 설계",
+          "completed": false
+        },
+        {
+          "id": 1754306550197,
+          "title": "URDF 파일 생성",
+          "completed": false
+        },
+        {
+          "id": 1754306550198,
+          "title": "ROS2 Gazebo 환경에서 키보드로 수동조작",
+          "completed": false
+        },
+        {
+          "id": 1754306550199,
+          "title": "하드웨어 조립",
+          "completed": false
+        },
+        {
+          "id": 1754306550200,
+          "title": "로봇팔 키보드 수동조작",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:48:30.229Z"
+    },
+    {
+      "id": 1754306602605,
+      "title": "고체역학 공부",
+      "subGoals": [
+        {
+          "id": 1754306602605,
+          "title": "1주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602606,
+          "title": "2주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602607,
+          "title": "3주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602608,
+          "title": "4주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602609,
+          "title": "5주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602610,
+          "title": "6주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602611,
+          "title": "7주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602612,
+          "title": "8주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602613,
+          "title": "9주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602614,
+          "title": "10주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602615,
+          "title": "11주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602616,
+          "title": "12주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602617,
+          "title": "13주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602618,
+          "title": "14주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602619,
+          "title": "15주차",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T11:23:22.605Z"
+    }
+  ],
+  "thinkBigGoals": [
+    {
+      "id": 1754296182024,
+      "title": "바텐더 로봇팔",
+      "startDate": "2025-08-04",
+      "endDate": "2025-12-31",
+      "subGoals": [
+        {
+          "id": 1754296182024,
+          "title": "논문 정리",
+          "completed": false
+        },
+        {
+          "id": 1754296182025,
+          "title": "모터 선정",
+          "completed": false
+        },
+        {
+          "id": 1754296182026,
+          "title": "하드웨어 설계",
+          "completed": false
+        },
+        {
+          "id": 1754296182027,
+          "title": "URDF 파일 생성",
+          "completed": false
+        },
+        {
+          "id": 1754296182028,
+          "title": "Gazebo 환경에 로봇 모델 띄우기",
+          "completed": false
+        },
+        {
+          "id": 1754296182029,
+          "title": "Gazebo에서 키보드로 로봇 팔 수동조작",
+          "completed": false
+        },
+        {
+          "id": 1754296182030,
+          "title": "키보드로 실제 로봇 팔 수동조작",
+          "completed": false
+        },
+        {
+          "id": 1754296182031,
+          "title": "정해진 경로를 따라 로봇 팔 움직이기",
+          "completed": false
+        },
+        {
+          "id": 1754296182032,
+          "title": "웹사이트와 로봇 팔 연동",
+          "completed": false
+        },
+        {
+          "id": 1754297119431,
+          "title": "센서 부착하기",
+          "completed": false
+        },
+        {
+          "id": 1754297119432,
+          "title": "인공지능 결합",
+          "completed": false
+        },
+        {
+          "id": 1754297119433,
+          "title": "바텐더 로봇팔 완성",
+          "completed": false
+        },
+        {
+          "id": 1754297119434,
+          "title": "논문 작성하기",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:29:42.024Z"
+    },
+    {
+      "id": 1754296379964,
+      "title": "3학년 2학기 학점 4.5 받기",
+      "startDate": "2025-08-04",
+      "endDate": "2025-12-27",
+      "subGoals": [
+        {
+          "id": 1754296379964,
+          "title": "기계진동학 1등",
+          "completed": false
+        },
+        {
+          "id": 1754296379965,
+          "title": "기계학습원론 5등",
+          "completed": false
+        },
+        {
+          "id": 1754296379966,
+          "title": "로봇공학 1등",
+          "completed": false
+        },
+        {
+          "id": 1754296379967,
+          "title": "열유체설계공학실습 A+",
+          "completed": false
+        },
+        {
+          "id": 1754296379968,
+          "title": "CAE 1등",
+          "completed": false
+        },
+        {
+          "id": 1754296379969,
+          "title": "응용고체역학 1등",
+          "completed": false
+        },
+        {
+          "id": 1754306019624,
+          "title": "Co-op; 논문 작성 2학기에 완료해버릴 수 있게 선배님 도와드리기",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:32:59.964Z"
+    }
+  ],
+  "completedTasks": [],
+  "motivationItems": [
+    {
+      "id": 1754299955568,
+      "title": "유행 따라, 남들 따라 살면 절대 인정 못 받는 이유 | 김갑진 KAIST 물리학과 교수 | 꿈 도전 성장 | 세바시 1999회",
+      "url": "https://www.youtube.com/watch?v=NfanUrcvtVY",
+      "type": "youtube",
+      "notes": "나는 무조건 남과 달라야 한다. \n경쟁을 한다는 것. 경쟁에서 이길 필요가 없다. 내가 아니더라도 다른 사람이 해줄 거니까. \n남들이 이거 해라. 이거하면 성공한다. 저 사람 말이 맞다는 것을 증명하기 위해 왜 내 인생을 허비해야 하는가?",
+      "createdAt": "2025-08-04T09:32:35.568Z"
+    }
+  ],
+  "studySubjects": [
+    {
+      "id": 1754302210106,
+      "title": "공학수학1",
+      "description": "",
+      "curriculum": [],
+      "createdAt": "2025-08-04T10:10:10.106Z"
+    }
+  ]
+}

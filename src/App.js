@@ -1,0 +1,209 @@
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import Home from './components/Home';
+import Weekly from './components/Weekly';
+import Monthly from './components/Monthly';
+import ThinkBig from './components/ThinkBig';
+import Analysis from './components/Analysis';
+import Motivation from './components/Motivation';
+import Study from './components/Study';
+
+function App() {
+  const [activeTab, setActiveTab] = useState('Home');
+  const [data, setData] = useState({
+    weeklyGoals: [],
+    monthlyGoals: [],
+    thinkBigGoals: [],
+    completedTasks: [],
+    motivationItems: [],
+    studySubjects: []
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 서버에서 데이터 로드
+  const loadData = async () => {
+    try {
+      const response = await fetch('/api/data');
+      if (response.ok) {
+        const jsonData = await response.json();
+        setData(jsonData);
+      } else {
+        console.error('데이터 로드 실패');
+      }
+    } catch (error) {
+      console.error('서버 연결 실패:', error);
+      // 서버 연결 실패 시 로컬스토리지 사용
+      const savedData = localStorage.getItem('goalTrackerData');
+      if (savedData) {
+        setData(JSON.parse(savedData));
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // 서버에 데이터 저장
+  const saveData = async (newData) => {
+    try {
+      const response = await fetch('/api/data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
+      });
+      
+      if (response.ok) {
+        console.log('데이터가 파일에 저장되었습니다.');
+      } else {
+        console.error('데이터 저장 실패');
+      }
+      
+      // 로컬스토리지에도 백업
+      localStorage.setItem('goalTrackerData', JSON.stringify(newData));
+    } catch (error) {
+      console.error('서버 저장 실패:', error);
+      // 서버 저장 실패 시 로컬스토리지만 사용
+      localStorage.setItem('goalTrackerData', JSON.stringify(newData));
+    }
+  };
+
+  // 컴포넌트 마운트 시 데이터 로드
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  // 데이터 변경 시 저장 (디바운싱 적용)
+  useEffect(() => {
+    if (!isLoading) {
+      const timeoutId = setTimeout(() => {
+        saveData(data);
+      }, 500); // 500ms 후에 저장
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [data, isLoading]);
+
+  const updateData = (newData) => {
+    setData(newData);
+  };
+
+  // 데이터 다운로드 기능
+  const downloadData = () => {
+    const dataStr = JSON.stringify(data, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `goal-tracker-backup-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // 데이터 업로드 기능
+  const uploadData = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const uploadedData = JSON.parse(e.target.result);
+          setData(uploadedData);
+          alert('데이터가 성공적으로 불러와졌습니다!');
+        } catch (error) {
+          alert('파일 형식이 올바르지 않습니다.');
+        }
+      };
+      reader.readAsText(file);
+    }
+    // 파일 입력 초기화
+    event.target.value = '';
+  };
+
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '50vh',
+          fontSize: '1.2rem',
+          color: 'var(--secondary-color)'
+        }}>
+          데이터를 불러오는 중...
+        </div>
+      );
+    }
+
+    switch (activeTab) {
+      case 'Home':
+        return <Home data={data} />;
+      case 'Weekly':
+        return <Weekly data={data} updateData={updateData} />;
+      case 'Monthly':
+        return <Monthly data={data} updateData={updateData} />;
+      case 'Think Big':
+        return <ThinkBig data={data} updateData={updateData} />;
+      case 'Analysis':
+        return <Analysis data={data} />;
+      case 'Study':
+        return <Study data={data} updateData={updateData} />;
+      case 'Motivation':
+        return <Motivation data={data} updateData={updateData} />;
+      default:
+        return <Home data={data} />;
+    }
+  };
+
+  return (
+    <div className="App">
+      <nav className="navbar">
+        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Study', 'Motivation'].map((tab) => (
+          <button
+            key={tab}
+            className={`nav-button ${activeTab === tab ? 'active' : ''}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+        
+        {/* 데이터 백업/복원 버튼들 */}
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <button
+            className="nav-button"
+            onClick={downloadData}
+            title="데이터 백업 다운로드"
+            style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
+          >
+            💾 백업
+          </button>
+          
+          <label style={{ cursor: 'pointer' }}>
+            <input
+              type="file"
+              accept=".json"
+              onChange={uploadData}
+              style={{ display: 'none' }}
+            />
+            <span
+              className="nav-button"
+              title="데이터 백업 불러오기"
+              style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
+            >
+              📁 복원
+            </span>
+          </label>
+        </div>
+      </nav>
+      <main className="main-content">
+        {renderContent()}
+      </main>
+    </div>
+  );
+}
+
+export default App;
