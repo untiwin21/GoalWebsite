@@ -8,6 +8,7 @@ import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
 import WritingSpace from './components/Study';
 import GitHubStorage from './utils/githubStorage';
+import { useScreenSize } from './utils/deviceDetection';
 
 function App() {
   const [activeTab, setActiveTab] = useState('Home');
@@ -23,6 +24,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentSha, setCurrentSha] = useState(null);
   const githubStorage = new GitHubStorage();
+  const screenSize = useScreenSize();
 
   // GitHub 클라우드에서 데이터 로드
   const loadData = async () => {
@@ -123,6 +125,23 @@ function App() {
     event.target.value = '';
   };
 
+  // 탭 이름 모바일 최적화
+  const getTabDisplayName = (tabName) => {
+    if (screenSize.isMobile) {
+      const mobileNames = {
+        'Home': '홈',
+        'Weekly': '주간',
+        'Monthly': '월간',
+        'ThinkBig': '장기',
+        'Analysis': '분석',
+        'Motivation': '동기',
+        'Study': '학습'
+      };
+      return mobileNames[tabName] || tabName;
+    }
+    return tabName;
+  };
+
   const renderContent = () => {
     if (isLoading) {
       return (
@@ -131,7 +150,7 @@ function App() {
           justifyContent: 'center', 
           alignItems: 'center', 
           height: '50vh',
-          fontSize: '1.2rem',
+          fontSize: screenSize.isMobile ? '1rem' : '1.2rem',
           color: 'var(--secondary-color)'
         }}>
           데이터를 불러오는 중...
@@ -168,7 +187,7 @@ function App() {
             className={`nav-button ${activeTab === tab ? 'active' : ''}`}
             onClick={() => setActiveTab(tab)}
           >
-            {tab}
+            {getTabDisplayName(tab)}
           </button>
         ))}
         
