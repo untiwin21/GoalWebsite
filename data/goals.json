@@ -62,6 +62,34 @@
       "createdAt": "2025-08-04T08:43:43.964Z"
     },
     {
+      "id": 1754301636901,
+      "title": "독서 모임",
+      "subGoals": [
+        {
+          "id": 1754309415864,
+          "title": "F1 PPT 만들기",
+          "completed": false
+        },
+        {
+          "id": 1754309415865,
+          "title": "F1 PPT 발표 준비",
+          "completed": false
+        },
+        {
+          "id": 1754309415866,
+          "title": "문화의 수수께끼 구매",
+          "completed": false
+        },
+        {
+          "id": 1754309415867,
+          "title": "이기적 유전자 마저 읽기",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T10:00:36.901Z"
+    },
+    {
       "id": 1754297220995,
       "title": "공학수학1 복습",
       "subGoals": [
@@ -103,34 +131,6 @@
       ],
       "completed": false,
       "createdAt": "2025-08-04T08:47:00.995Z"
-    },
-    {
-      "id": 1754301636901,
-      "title": "독서 모임",
-      "subGoals": [
-        {
-          "id": 1754309415864,
-          "title": "F1 PPT 만들기",
-          "completed": false
-        },
-        {
-          "id": 1754309415865,
-          "title": "F1 PPT 발표 준비",
-          "completed": false
-        },
-        {
-          "id": 1754309415866,
-          "title": "문화의 수수께끼 구매",
-          "completed": false
-        },
-        {
-          "id": 1754309415867,
-          "title": "이기적 유전자 마저 읽기",
-          "completed": false
-        }
-      ],
-      "completed": false,
-      "createdAt": "2025-08-04T10:00:36.901Z"
     },
     {
       "id": 1754300424776,
