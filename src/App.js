@@ -23,6 +23,15 @@ function App() {
   // 서버에서 데이터 로드
   const loadData = async () => {
     try {
+      // 먼저 로컬스토리지 확인
+      const savedData = localStorage.getItem('goalTrackerData');
+      if (savedData) {
+        setData(JSON.parse(savedData));
+        setIsLoading(false);
+        return;
+      }
+
+      // 로컬스토리지에 없으면 서버 시도
       const response = await fetch('/api/data');
       if (response.ok) {
         const jsonData = await response.json();
@@ -32,11 +41,7 @@ function App() {
       }
     } catch (error) {
       console.error('서버 연결 실패:', error);
-      // 서버 연결 실패 시 로컬스토리지 사용
-      const savedData = localStorage.getItem('goalTrackerData');
-      if (savedData) {
-        setData(JSON.parse(savedData));
-      }
+      // 서버 연결 실패 시에도 빈 초기 데이터 사용
     } finally {
       setIsLoading(false);
     }
@@ -45,6 +50,10 @@ function App() {
   // 서버에 데이터 저장
   const saveData = async (newData) => {
     try {
+      // 항상 로컬스토리지에 저장
+      localStorage.setItem('goalTrackerData', JSON.stringify(newData));
+      
+      // 서버가 있으면 서버에도 저장 시도
       const response = await fetch('/api/data', {
         method: 'POST',
         headers: {
@@ -54,17 +63,12 @@ function App() {
       });
       
       if (response.ok) {
-        console.log('데이터가 파일에 저장되었습니다.');
+        console.log('데이터가 서버에도 저장되었습니다.');
       } else {
-        console.error('데이터 저장 실패');
+        console.log('서버 저장 실패, 로컬스토리지만 사용합니다.');
       }
-      
-      // 로컬스토리지에도 백업
-      localStorage.setItem('goalTrackerData', JSON.stringify(newData));
     } catch (error) {
-      console.error('서버 저장 실패:', error);
-      // 서버 저장 실패 시 로컬스토리지만 사용
-      localStorage.setItem('goalTrackerData', JSON.stringify(newData));
+      console.log('서버 저장 실패, 로컬스토리지만 사용합니다.');
     }
   };
 
