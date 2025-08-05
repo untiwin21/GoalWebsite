@@ -1,3 +1,6 @@
+// 화면 크기 변경 감지 훅
+import { useState, useEffect } from 'react';
+
 // 디바이스 감지 유틸리티
 export const isMobile = () => {
   if (typeof window === 'undefined') return false;
@@ -25,9 +28,6 @@ export const isMobileBrowser = () => {
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
   return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
 };
-
-// 화면 크기 변경 감지 훅
-import { useState, useEffect } from 'react';
 
 export const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState({
