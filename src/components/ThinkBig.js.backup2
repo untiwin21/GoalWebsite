@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const ThinkBig = ({ data, updateData }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingGoal, setEditingGoal] = useState(null);
+  const [editingSubGoalIndex, setEditingSubGoalIndex] = useState(null);
   const [newGoal, setNewGoal] = useState({ 
     title: '', 
     startDate: '', 
@@ -13,8 +14,6 @@ const ThinkBig = ({ data, updateData }) => {
   const [draggedItem, setDraggedItem] = useState(null);
   const [draggedSubGoal, setDraggedSubGoal] = useState(null);
   const [draggedFromGoal, setDraggedFromGoal] = useState(null);
-  const [editingSubGoal, setEditingSubGoal] = useState(null);
-  const [editingSubGoalText, setEditingSubGoalText] = useState('');
 
   const addGoal = () => {
     if (newGoal.title.trim() && newGoal.startDate && newGoal.endDate) {
@@ -124,40 +123,6 @@ const ThinkBig = ({ data, updateData }) => {
     });
   };
 
-  const startEditingSubGoal = (goalId, subGoalId, currentText) => {
-    setEditingSubGoal({ goalId, subGoalId });
-    setEditingSubGoalText(currentText);
-  };
-
-  const saveSubGoalEdit = () => {
-    if (editingSubGoal && editingSubGoalText.trim()) {
-      const updatedGoals = data.thinkBigGoals.map(goal => {
-        if (goal.id === editingSubGoal.goalId) {
-          const updatedSubGoals = goal.subGoals.map(sub => 
-            sub.id === editingSubGoal.subGoalId 
-              ? { ...sub, title: editingSubGoalText.trim() } 
-              : sub
-          );
-          return { ...goal, subGoals: updatedSubGoals };
-        }
-        return goal;
-      });
-      
-      updateData({
-        ...data,
-        thinkBigGoals: updatedGoals
-      });
-    }
-    
-    setEditingSubGoal(null);
-    setEditingSubGoalText('');
-  };
-
-  const cancelSubGoalEdit = () => {
-    setEditingSubGoal(null);
-    setEditingSubGoalText('');
-  };
-
   const addSubGoal = () => {
     if (newSubGoal.trim()) {
       setNewGoal({
@@ -173,6 +138,17 @@ const ThinkBig = ({ data, updateData }) => {
       ...newGoal,
       subGoals: newGoal.subGoals.filter((_, i) => i !== index)
     });
+  };
+
+  // 폼에서 하위 목표 편집
+  const editSubGoalInForm = (index, newText) => {
+    const updatedSubGoals = [...newGoal.subGoals];
+    updatedSubGoals[index] = newText;
+    setNewGoal({
+      ...newGoal,
+      subGoals: updatedSubGoals
+    });
+    setEditingSubGoalIndex(null);
   };
 
   const getGoalProgress = (goal) => {
@@ -399,7 +375,49 @@ const ThinkBig = ({ data, updateData }) => {
                 borderRadius: '8px',
                 margin: '0.5rem 0'
               }}>
-                <span>• {sub}</span>
+                {editingSubGoalIndex === index ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+                    <span>• </span>
+                    <input
+                      type="text"
+                      value={sub}
+                      onChange={(e) => {
+                        const updatedSubGoals = [...newGoal.subGoals];
+                        updatedSubGoals[index] = e.target.value;
+                        setNewGoal({ ...newGoal, subGoals: updatedSubGoals });
+                      }}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          setEditingSubGoalIndex(null);
+                        }
+                        if (e.key === 'Escape') {
+                          setEditingSubGoalIndex(null);
+                        }
+                      }}
+                      onBlur={() => setEditingSubGoalIndex(null)}
+                      autoFocus
+                      style={{
+                        flex: 1,
+                        padding: '4px 8px',
+                        border: '1px solid #007bff',
+                        borderRadius: '4px',
+                        background: 'white',
+                        color: 'black'
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <span 
+                    style={{ 
+                      cursor: 'pointer',
+                      flex: 1
+                    }}
+                    onClick={() => setEditingSubGoalIndex(index)}
+                    title="클릭해서 편집"
+                  >
+                    • {sub}
+                  </span>
+                )}
                 <button 
                   className="action-btn remove-btn"
                   onClick={() => removeSubGoal(index)}
@@ -574,52 +592,9 @@ const ThinkBig = ({ data, updateData }) => {
                             checked={sub.completed}
                             onChange={() => toggleSubGoal(goal.id, sub.id)}
                           />
-                          {editingSubGoal && 
-                           editingSubGoal.goalId === goal.id && 
-                           editingSubGoal.subGoalId === sub.id ? (
-                            <input
-                              type="text"
-                              value={editingSubGoalText}
-                              onChange={(e) => setEditingSubGoalText(e.target.value)}
-                              onKeyPress={(e) => {
-                                if (e.key === 'Enter') {
-                                  saveSubGoalEdit();
-                                } else if (e.key === 'Escape') {
-                                  cancelSubGoalEdit();
-                                }
-                              }}
-                              onBlur={saveSubGoalEdit}
-                              autoFocus
-                              style={{
-                                background: 'var(--bg-color)',
-                                border: '1px solid var(--primary-color)',
-                                borderRadius: '4px',
-                                padding: '2px 6px',
-                                color: 'var(--text-color)',
-                                fontSize: 'inherit'
-                              }}
-                            />
-                          ) : (
-                            <span 
-                              style={{ 
-                                textDecoration: sub.completed ? 'line-through' : 'none',
-                                cursor: 'pointer',
-                                padding: '2px 4px',
-                                borderRadius: '4px',
-                                transition: 'background-color 0.2s'
-                              }}
-                              onClick={() => startEditingSubGoal(goal.id, sub.id, sub.title)}
-                              onMouseEnter={(e) => {
-                                e.target.style.backgroundColor = 'var(--hover-bg)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.target.style.backgroundColor = 'transparent';
-                              }}
-                              title="클릭하여 수정"
-                            >
-                              {sub.title}
-                            </span>
-                          )}
+                          <span style={{ textDecoration: sub.completed ? 'line-through' : 'none' }}>
+                            {sub.title}
+                          </span>
                         </div>
                       ))}
                     </div>

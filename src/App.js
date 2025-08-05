@@ -6,7 +6,7 @@ import Monthly from './components/Monthly';
 import ThinkBig from './components/ThinkBig';
 import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
-import Study from './components/Study';
+import WritingSpace from './components/Study';
 
 function App() {
   const [activeTab, setActiveTab] = useState('Home');
@@ -149,8 +149,8 @@ function App() {
         return <ThinkBig data={data} updateData={updateData} />;
       case 'Analysis':
         return <Analysis data={data} />;
-      case 'Study':
-        return <Study data={data} updateData={updateData} />;
+      case 'Writing Space':
+        return <WritingSpace data={data} updateData={updateData} />;
       case 'Motivation':
         return <Motivation data={data} updateData={updateData} />;
       default:
@@ -161,7 +161,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Study', 'Motivation'].map((tab) => (
+        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Writing Space', 'Motivation'].map((tab) => (
           <button
             key={tab}
             className={`nav-button ${activeTab === tab ? 'active' : ''}`}

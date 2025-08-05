@@ -1372,3 +1372,137 @@ body {
     margin-left: 2rem;
   }
 }
+
+/* Writing Space Styles */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.note-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all var(--transition-speed) ease;
+  box-shadow: var(--shadow-light);
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-heavy);
+  border-color: var(--primary-color);
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.note-title {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.note-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.note-content {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  min-height: 100px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.note-footer {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.note-date {
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background: var(--card-bg);
+  border: 2px dashed var(--border-color);
+  border-radius: 15px;
+  margin-top: 2rem;
+}
+
+.page-subtitle {
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Form Actions 스타일 개선 */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.form-actions button {
+  padding: 0.75rem 1.5rem !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  min-width: 80px !important;
+  white-space: nowrap !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.form-actions .save-btn {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+.form-actions .save-btn:hover {
+  background: var(--secondary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important;
+}
+
+.form-actions .cancel-btn {
+  background: var(--gray-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.form-actions .cancel-btn:hover {
+  background: var(--hover-bg) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}

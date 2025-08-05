@@ -4,7 +4,7 @@ const path = require('path');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3013;
+const PORT = 3022;
 const DATA_FILE = path.join(__dirname, 'data', 'goals.json');
 
 // 미들웨어
@@ -26,7 +26,9 @@ if (!fs.existsSync(DATA_FILE)) {
     thinkBigGoals: [],
     completedTasks: [],
     motivationItems: [],
-    studySubjects: []
+    studySubjects: [],
+    writingNotes: [],
+    events: []
   };
   fs.writeFileSync(DATA_FILE, JSON.stringify(initialData, null, 2));
 }
