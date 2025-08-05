@@ -27,19 +27,27 @@ function App() {
   // GitHub 클라우드에서 데이터 로드
   const loadData = async () => {
     try {
+      console.log('🔄 GitHub에서 데이터 로드 시도...');
+      console.log('환경변수 토큰:', process.env.REACT_APP_GITHUB_TOKEN ? '설정됨' : '없음');
+      
       // GitHub에서 데이터 로드 시도
       const result = await githubStorage.getFileContent();
       setData(result.content);
       setCurrentSha(result.sha);
       console.log('✅ GitHub에서 데이터 로드 성공');
+      console.log('로드된 데이터:', result.content);
     } catch (error) {
-      console.error('GitHub 로드 실패, 로컬스토리지 사용:', error);
+      console.error('❌ GitHub 로드 실패, 로컬스토리지 사용:', error);
       
       // GitHub 실패 시 로컬스토리지 사용
       const savedData = localStorage.getItem('goalTrackerData');
       if (savedData) {
-        setData(JSON.parse(savedData));
+        const parsedData = JSON.parse(savedData);
+        setData(parsedData);
         console.log('📱 로컬스토리지에서 데이터 로드');
+        console.log('로컬 데이터:', parsedData);
+      } else {
+        console.log('📭 로컬스토리지에도 데이터 없음');
       }
     } finally {
       setIsLoading(false);

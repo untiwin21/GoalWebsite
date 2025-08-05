@@ -4,8 +4,12 @@ class GitHubStorage {
     this.repo = 'GoalWebsite';
     this.dataPath = 'data/goals.json';
     this.apiBase = 'https://api.github.com';
-    // 환경변수에서 토큰 가져오기 (Vercel에서 설정)
+    // 브라우저 환경에서 환경변수 가져오기
     this.token = process.env.REACT_APP_GITHUB_TOKEN;
+    
+    if (!this.token) {
+      console.warn('GitHub token not found. Using localStorage only.');
+    }
   }
 
   async getFileContent() {
