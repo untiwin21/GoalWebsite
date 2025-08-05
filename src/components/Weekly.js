@@ -223,9 +223,9 @@ const Weekly = ({ data, updateData }) => {
     });
   };
 
-  const getEventsForDate = (date) => {
-    return data.events?.filter(event => event.date === date) || [];
-  };
+  // const getEventsForDate = (date) => {
+  //   return data.events?.filter(event => event.date === date) || [];
+  // };
 
   const formatEventTime = (time) => {
     if (!time) return '';

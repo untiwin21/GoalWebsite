@@ -216,9 +216,9 @@ const Monthly = ({ data, updateData }) => {
     });
   };
 
-  const getEventsForDate = (date) => {
-    return data.events?.filter(event => event.date === date) || [];
-  };
+  // const getEventsForDate = (date) => {
+  //   return data.events?.filter(event => event.date === date) || [];
+  // };
 
   const formatEventTime = (time) => {
     if (!time) return '';
@@ -354,7 +354,7 @@ const Monthly = ({ data, updateData }) => {
     const month = today.getMonth();
     
     const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
+    // const lastDay = new Date(year, month + 1, 0); // 사용하지 않는 변수 주석 처리
     const startDate = new Date(firstDay);
     startDate.setDate(startDate.getDate() - firstDay.getDay());
     

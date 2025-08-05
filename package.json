@@ -18,13 +18,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node server.js",
     "dev": "npm run build && npm run server",
     "clean-start": "npx kill-port 3022 && npm run server",
-    "vercel-build": "npm run build"
+    "vercel-build": "cross-env CI=false react-scripts build"
   },
   "proxy": "http://localhost:3022",
   "eslintConfig": {
@@ -44,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^10.0.0"
   }
 }
