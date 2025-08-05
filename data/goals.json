@@ -140,6 +140,11 @@
           "id": 1754300424776,
           "title": "비슷한 스펙을 가진 로봇팔 연구 논문 10개 정리",
           "completed": false
+        },
+        {
+          "id": 1754406687397,
+          "title": "로봇 하드웨어 오픈소스 검색",
+          "completed": false
         }
       ],
       "completed": false,
