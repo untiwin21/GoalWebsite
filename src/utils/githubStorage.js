@@ -12,6 +12,45 @@ class GitHubStorage {
     }
   }
 
+  // 유니코드 안전한 base64 디코딩
+  base64ToUtf8(base64) {
+    try {
+      // base64를 바이너리 문자열로 변환
+      const binaryString = atob(base64);
+      // 바이너리 문자열을 Uint8Array로 변환
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      // UTF-8로 디코딩
+      return new TextDecoder('utf-8').decode(bytes);
+    } catch (error) {
+      console.error('Base64 디코딩 오류:', error);
+      // 폴백: 기본 atob 사용
+      return atob(base64);
+    }
+  }
+
+  // 유니코드 안전한 base64 인코딩
+  utf8ToBase64(utf8String) {
+    try {
+      // UTF-8 문자열을 Uint8Array로 변환
+      const encoder = new TextEncoder();
+      const bytes = encoder.encode(utf8String);
+      // Uint8Array를 바이너리 문자열로 변환
+      let binaryString = '';
+      for (let i = 0; i < bytes.length; i++) {
+        binaryString += String.fromCharCode(bytes[i]);
+      }
+      // base64로 인코딩
+      return btoa(binaryString);
+    } catch (error) {
+      console.error('Base64 인코딩 오류:', error);
+      // 폴백: 기본 btoa 사용
+      return btoa(utf8String);
+    }
+  }
+
   async getFileContent() {
     if (!this.token) {
       throw new Error('GitHub token not found');
@@ -27,7 +66,8 @@ class GitHubStorage {
 
       if (response.ok) {
         const data = await response.json();
-        const content = atob(data.content.replace(/\s/g, ''));
+        // 유니코드 안전한 디코딩 사용
+        const content = this.base64ToUtf8(data.content.replace(/\s/g, ''));
         return { content: JSON.parse(content), sha: data.sha };
       } else if (response.status === 404) {
         // 파일이 없으면 초기 데이터 생성
@@ -57,7 +97,8 @@ class GitHubStorage {
     }
 
     try {
-      const content = btoa(JSON.stringify(data, null, 2));
+      // 유니코드 안전한 인코딩 사용
+      const content = this.utf8ToBase64(JSON.stringify(data, null, 2));
       
       const body = {
         message: `Update goals data - ${new Date().toISOString()}`,
