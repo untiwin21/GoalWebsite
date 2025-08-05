@@ -151,6 +151,34 @@
       "createdAt": "2025-08-04T09:40:24.776Z"
     },
     {
+      "id": 1754409292013,
+      "title": "고체역학 복습",
+      "subGoals": [
+        {
+          "id": 1754409292013,
+          "title": "Week1",
+          "completed": false
+        },
+        {
+          "id": 1754409292014,
+          "title": "Week 2",
+          "completed": false
+        },
+        {
+          "id": 1754409292015,
+          "title": "Hw 1",
+          "completed": false
+        },
+        {
+          "id": 1754409292016,
+          "title": "Hw 2",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-05T15:54:52.013Z"
+    },
+    {
       "id": 1754300367517,
       "title": "운동",
       "subGoals": [
@@ -227,34 +255,6 @@
       ],
       "completed": false,
       "createdAt": "2025-08-04T09:39:27.517Z"
-    },
-    {
-      "id": 1754409292013,
-      "title": "고체역학 복습",
-      "subGoals": [
-        {
-          "id": 1754409292013,
-          "title": "Week1",
-          "completed": false
-        },
-        {
-          "id": 1754409292014,
-          "title": "Week 2",
-          "completed": false
-        },
-        {
-          "id": 1754409292015,
-          "title": "Hw 1",
-          "completed": false
-        },
-        {
-          "id": 1754409292016,
-          "title": "Hw 2",
-          "completed": false
-        }
-      ],
-      "completed": false,
-      "createdAt": "2025-08-05T15:54:52.013Z"
     },
     {
       "id": 1754309463071,
