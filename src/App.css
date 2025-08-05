@@ -1669,7 +1669,7 @@ body {
     max-width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
-    padding: 1rem !important;
+    padding: 2vw !important;
   }
 
   /* 모든 하위 요소 강제 제약 */
@@ -1977,15 +1977,16 @@ body {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: hidden !important;
+    padding: 0 !important;
   }
 
   .think-big-goal {
     width: 100% !important;
     max-width: 100% !important;
-    margin-bottom: 3vw !important;
-    padding: 4vw !important;
+    margin-bottom: 2vw !important;
+    padding: 3vw !important;
     background: var(--card-bg) !important;
-    border-radius: 3vw !important;
+    border-radius: 2vw !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
   }
@@ -1993,45 +1994,56 @@ body {
   .think-big-title {
     font-size: 4vw !important;
     line-height: 1.3 !important;
-    margin-bottom: 2vw !important;
+    margin-bottom: 1.5vw !important;
     word-break: keep-all !important;
     overflow-wrap: break-word !important;
   }
 
   .think-big-deadline {
-    font-size: 3.5vw !important;
-    margin-bottom: 2vw !important;
+    font-size: 3.2vw !important;
+    margin-bottom: 1.5vw !important;
     color: var(--accent-color) !important;
   }
 
   .think-big-progress {
-    font-size: 3vw !important;
-    margin-bottom: 3vw !important;
+    font-size: 2.8vw !important;
+    margin-bottom: 2vw !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .think-big-progress .progress-percentage {
+    font-size: 2.8vw !important;
+    font-weight: normal !important;
+    color: var(--secondary-color) !important;
   }
 
   .think-big-buttons {
     display: flex !important;
-    gap: 2vw !important;
-    flex-wrap: wrap !important;
+    gap: 1.5vw !important;
+    flex-wrap: nowrap !important;
     width: 100% !important;
+    justify-content: space-between !important;
   }
 
   .think-big-buttons button {
     flex: 1 !important;
     min-width: 0 !important;
-    padding: 3vw 2vw !important;
-    font-size: 3vw !important;
-    min-height: 10vw !important;
+    padding: 2.5vw 1.5vw !important;
+    font-size: 2.8vw !important;
+    min-height: 8vw !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    border-radius: 1.5vw !important;
   }
 
   /* Think Big 날짜 입력 완전 제어 */
   .date-input-container {
     width: 100% !important;
     flex-direction: column !important;
-    gap: 2vw !important;
+    gap: 1.5vw !important;
     box-sizing: border-box;
   }
 
@@ -2039,9 +2051,9 @@ body {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box;
-    font-size: 3.5vw !important;
-    padding: 3vw !important;
-    min-height: 10vw !important;
+    font-size: 3.2vw !important;
+    padding: 2.5vw !important;
+    min-height: 8vw !important;
   }
 
   /* Motivation 전용 최적화 */
@@ -2049,59 +2061,63 @@ body {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: hidden !important;
+    padding: 0 !important;
   }
 
   .motivation-item {
     width: 100% !important;
     max-width: 100% !important;
-    margin-bottom: 3vw !important;
-    padding: 4vw !important;
+    margin-bottom: 2vw !important;
+    padding: 3vw !important;
     background: var(--card-bg) !important;
-    border-radius: 3vw !important;
+    border-radius: 2vw !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
+    position: relative !important;
   }
 
   .motivation-title {
-    font-size: 4vw !important;
+    font-size: 3.5vw !important;
     line-height: 1.3 !important;
-    margin-bottom: 2vw !important;
+    margin-bottom: 1.5vw !important;
     word-break: keep-all !important;
     overflow-wrap: break-word !important;
   }
 
   .motivation-url {
-    font-size: 3vw !important;
-    margin-bottom: 2vw !important;
+    font-size: 2.8vw !important;
+    margin-bottom: 1.5vw !important;
     color: var(--secondary-color) !important;
     word-break: break-all !important;
     overflow-wrap: break-word !important;
   }
 
   .motivation-notes {
-    font-size: 3.5vw !important;
+    font-size: 3vw !important;
     line-height: 1.4 !important;
-    margin-bottom: 3vw !important;
+    margin-bottom: 2.5vw !important;
     word-break: keep-all !important;
     overflow-wrap: break-word !important;
   }
 
   .motivation-buttons {
     display: flex !important;
-    gap: 2vw !important;
-    flex-wrap: wrap !important;
+    gap: 1.5vw !important;
+    flex-wrap: nowrap !important;
     width: 100% !important;
+    justify-content: space-between !important;
   }
 
   .motivation-buttons button {
     flex: 1 !important;
     min-width: 0 !important;
-    padding: 3vw 2vw !important;
-    font-size: 3vw !important;
-    min-height: 10vw !important;
+    padding: 2.5vw 1.5vw !important;
+    font-size: 2.8vw !important;
+    min-height: 8vw !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    border-radius: 1.5vw !important;
   }
 
   /* 모달 완전 제어 */
