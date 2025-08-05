@@ -121,8 +121,8 @@ const Home = ({ data }) => {
             {getDDays().length > 0 ? (
               getDDays().map((dday, index) => (
                 <div key={index} className="dday-item">
-                  <span className="dday-name">{dday.name}</span>
-                  <span className="dday-count">D-{dday.daysLeft}</span>
+                  <span className="dday-name short-text">{dday.name}</span>
+                  <span className="dday-count short-text">D-{dday.daysLeft}</span>
                 </div>
               ))
             ) : (
