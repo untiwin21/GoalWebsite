@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "katex": "^0.16.22",
+    "kill-port": "^2.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-scripts": "5.0.1",
@@ -21,8 +22,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node server.js",
-    "dev": "npm run build && npm run server"
+    "dev": "npm run build && npm run server",
+    "clean-start": "npx kill-port 3022 && npm run server",
+    "vercel-build": "npm run build"
   },
+  "proxy": "http://localhost:3022",
   "eslintConfig": {
     "extends": [
       "react-app",
