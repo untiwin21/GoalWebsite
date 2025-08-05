@@ -7,6 +7,7 @@ import ThinkBig from './components/ThinkBig';
 import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
 import WritingSpace from './components/Study';
+import GitHubStorage from './utils/githubStorage';
 
 function App() {
   const [activeTab, setActiveTab] = useState('Home');
@@ -16,59 +17,47 @@ function App() {
     thinkBigGoals: [],
     completedTasks: [],
     motivationItems: [],
-    studySubjects: []
+    studySubjects: [],
+    events: []
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [currentSha, setCurrentSha] = useState(null);
+  const githubStorage = new GitHubStorage();
 
-  // 서버에서 데이터 로드
+  // GitHub 클라우드에서 데이터 로드
   const loadData = async () => {
     try {
-      // 먼저 로컬스토리지 확인
+      // GitHub에서 데이터 로드 시도
+      const result = await githubStorage.getFileContent();
+      setData(result.content);
+      setCurrentSha(result.sha);
+      console.log('✅ GitHub에서 데이터 로드 성공');
+    } catch (error) {
+      console.error('GitHub 로드 실패, 로컬스토리지 사용:', error);
+      
+      // GitHub 실패 시 로컬스토리지 사용
       const savedData = localStorage.getItem('goalTrackerData');
       if (savedData) {
         setData(JSON.parse(savedData));
-        setIsLoading(false);
-        return;
+        console.log('📱 로컬스토리지에서 데이터 로드');
       }
-
-      // 로컬스토리지에 없으면 서버 시도
-      const response = await fetch('/api/data');
-      if (response.ok) {
-        const jsonData = await response.json();
-        setData(jsonData);
-      } else {
-        console.error('데이터 로드 실패');
-      }
-    } catch (error) {
-      console.error('서버 연결 실패:', error);
-      // 서버 연결 실패 시에도 빈 초기 데이터 사용
     } finally {
       setIsLoading(false);
     }
   };
 
-  // 서버에 데이터 저장
+  // GitHub 클라우드에 데이터 저장
   const saveData = async (newData) => {
     try {
-      // 항상 로컬스토리지에 저장
+      // 항상 로컬스토리지에 즉시 저장 (빠른 응답)
       localStorage.setItem('goalTrackerData', JSON.stringify(newData));
       
-      // 서버가 있으면 서버에도 저장 시도
-      const response = await fetch('/api/data', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newData),
-      });
-      
-      if (response.ok) {
-        console.log('데이터가 서버에도 저장되었습니다.');
-      } else {
-        console.log('서버 저장 실패, 로컬스토리지만 사용합니다.');
-      }
+      // GitHub에 저장 시도
+      const newSha = await githubStorage.saveFileContent(newData, currentSha);
+      setCurrentSha(newSha);
+      console.log('☁️ GitHub 클라우드에 저장 완료');
     } catch (error) {
-      console.log('서버 저장 실패, 로컬스토리지만 사용합니다.');
+      console.error('GitHub 저장 실패, 로컬스토리지만 사용:', error);
     }
   };
 
