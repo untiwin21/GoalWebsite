@@ -1722,7 +1722,7 @@ body {
   }
 
   /* 카드 레이아웃 완전 제어 */
-  .goal-card, .motivation-card, .study-card {
+  .goal-card, .motivation-card {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 0 1rem 0 !important;

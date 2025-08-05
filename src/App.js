@@ -6,7 +6,6 @@ import Monthly from './components/Monthly';
 import ThinkBig from './components/ThinkBig';
 import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
-import WritingSpace from './components/Study';
 import GitHubStorage from './utils/githubStorage';
 import { useScreenSize } from './utils/deviceDetection';
 
@@ -18,7 +17,6 @@ function App() {
     thinkBigGoals: [],
     completedTasks: [],
     motivationItems: [],
-    studySubjects: [],
     events: []
   });
   const [isLoading, setIsLoading] = useState(true);
@@ -134,8 +132,7 @@ function App() {
         'Monthly': '월간',
         'ThinkBig': '장기',
         'Analysis': '분석',
-        'Motivation': '동기',
-        'Study': '학습'
+        'Motivation': '동기'
       };
       return mobileNames[tabName] || tabName;
     }
@@ -169,8 +166,6 @@ function App() {
         return <ThinkBig data={data} updateData={updateData} />;
       case 'Analysis':
         return <Analysis data={data} />;
-      case 'Writing Space':
-        return <WritingSpace data={data} updateData={updateData} />;
       case 'Motivation':
         return <Motivation data={data} updateData={updateData} />;
       default:
@@ -181,7 +176,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Writing Space', 'Motivation'].map((tab) => (
+        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation'].map((tab) => (
           <button
             key={tab}
             className={`nav-button ${activeTab === tab ? 'active' : ''}`}
