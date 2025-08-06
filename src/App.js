@@ -6,6 +6,7 @@ import Monthly from './components/Monthly';
 import ThinkBig from './components/ThinkBig';
 import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
+import WritingSpace from './components/Study'; // 'WritingSpace' 컴포넌트 추가
 import GitHubStorage from './utils/githubStorage';
 import { useScreenSize } from './utils/deviceDetection';
 
@@ -17,7 +18,8 @@ function App() {
     thinkBigGoals: [],
     completedTasks: [],
     motivationItems: [],
-    events: []
+    events: [],
+    writingNotes: [] // writingNotes 추가
   });
   const [isLoading, setIsLoading] = useState(true);
   const [currentSha, setCurrentSha] = useState(null);
@@ -130,9 +132,10 @@ function App() {
         'Home': '홈',
         'Weekly': '주간',
         'Monthly': '월간',
-        'ThinkBig': '장기',
+        'Think Big': '장기', // 'ThinkBig' -> 'Think Big' 으로 수정
         'Analysis': '분석',
-        'Motivation': '동기'
+        'Motivation': '동기',
+        'Writing Space': '글쓰기' // 'Writing Space' 탭 이름 추가
       };
       return mobileNames[tabName] || tabName;
     }
@@ -168,6 +171,8 @@ function App() {
         return <Analysis data={data} />;
       case 'Motivation':
         return <Motivation data={data} updateData={updateData} />;
+      case 'Writing Space': // 'Writing Space' 케이스 추가
+        return <WritingSpace data={data} updateData={updateData} />;
       default:
         return <Home data={data} />;
     }
@@ -176,7 +181,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation'].map((tab) => (
+        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation', 'Writing Space'].map((tab) => ( // 'Writing Space' 탭 추가
           <button
             key={tab}
             className={`nav-button ${activeTab === tab ? 'active' : ''}`}
