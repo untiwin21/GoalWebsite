@@ -23,6 +23,11 @@
           "id": 1754454460451,
           "title": "[Ghost Target Detection in 3D Radar Data using Point Cloud based Deep Neural Network] 코드 구현",
           "completed": true
+        },
+        {
+          "id": 1754489460877,
+          "title": "구글 코랩으로 딥러닝 돌려서 결과내기",
+          "completed": false
         }
       ],
       "completed": false,
