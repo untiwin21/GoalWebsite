@@ -10,7 +10,7 @@ const Weekly = ({ data, updateData }) => {
   const [draggedFromGoal, setDraggedFromGoal] = useState(null);
   const [editingSubGoal, setEditingSubGoal] = useState(null);
   const [editingSubGoalText, setEditingSubGoalText] = useState('');
-  
+
   // 일정 관리 상태
   const [showEventForm, setShowEventForm] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => {
@@ -223,10 +223,6 @@ const Weekly = ({ data, updateData }) => {
     });
   };
 
-  // const getEventsForDate = (date) => {
-  //   return data.events?.filter(event => event.date === date) || [];
-  // };
-
   const formatEventTime = (time) => {
     if (!time) return '';
     return time;
@@ -284,12 +280,19 @@ const Weekly = ({ data, updateData }) => {
 
   const getTotalProgress = () => {
     if (!data.weeklyGoals || data.weeklyGoals.length === 0) return 0;
-    
-    const totalProgress = data.weeklyGoals.reduce((sum, goal) => {
-      return sum + getGoalProgress(goal);
+
+    const totalTasks = data.weeklyGoals.reduce((sum, goal) => {
+      return sum + (goal.subGoals ? goal.subGoals.length : 1);
     }, 0);
-    
-    return Math.round(totalProgress / data.weeklyGoals.length);
+
+    const completedTasks = data.weeklyGoals.reduce((sum, goal) => {
+      if (goal.subGoals) {
+        return sum + goal.subGoals.filter(sub => sub.completed).length;
+      }
+      return sum + (goal.completed ? 1 : 0);
+    }, 0);
+
+    return totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
   };
 
   // 드래그 앤 드롭 핸들러
