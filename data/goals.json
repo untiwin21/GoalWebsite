@@ -279,6 +279,11 @@
       "title": "Task",
       "subGoals": [
         {
+          "id": 1754464538617,
+          "title": "위 홈페이지 완성하기",
+          "completed": false
+        },
+        {
           "id": 1754309463071,
           "title": "노트북 충전선 구매",
           "completed": false
@@ -306,11 +311,6 @@
         {
           "id": 1754449695182,
           "title": "<문화의 수수께끼> 구매",
-          "completed": false
-        },
-        {
-          "id": 1754464538617,
-          "title": "위 홈페이지 완성하기",
           "completed": false
         }
       ],
