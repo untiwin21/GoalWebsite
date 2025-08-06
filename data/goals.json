@@ -262,6 +262,19 @@
       "createdAt": "2025-08-04T09:39:27.517Z"
     },
     {
+      "id": 1754454515947,
+      "title": "혁펜하임",
+      "subGoals": [
+        {
+          "id": 1754454515947,
+          "title": "<Easy 딥러닝> Ch 1 정독",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-06T04:28:35.947Z"
+    },
+    {
       "id": 1754309463071,
       "title": "Task",
       "subGoals": [
@@ -298,19 +311,6 @@
       ],
       "completed": false,
       "createdAt": "2025-08-04T12:11:03.071Z"
-    },
-    {
-      "id": 1754454515947,
-      "title": "혁펜하임",
-      "subGoals": [
-        {
-          "id": 1754454515947,
-          "title": "<Easy 딥러닝> Ch 1 정독",
-          "completed": false
-        }
-      ],
-      "completed": false,
-      "createdAt": "2025-08-06T04:28:35.947Z"
     }
   ],
   "monthlyGoals": [
