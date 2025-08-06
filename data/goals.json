@@ -298,6 +298,19 @@
       ],
       "completed": false,
       "createdAt": "2025-08-04T12:11:03.071Z"
+    },
+    {
+      "id": 1754454515947,
+      "title": "혁펜하임",
+      "subGoals": [
+        {
+          "id": 1754454515947,
+          "title": "<Easy 딥러닝> Ch 1 정독",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-06T04:28:35.947Z"
     }
   ],
   "monthlyGoals": [
