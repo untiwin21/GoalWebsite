@@ -33,6 +33,11 @@
           "completed": false
         },
         {
+          "id": 1754449640258,
+          "title": "통계적 가설 검증 강의 수강",
+          "completed": false
+        },
+        {
           "id": 1754297023965,
           "title": "한국 관련 데이터 조사",
           "completed": false
@@ -55,11 +60,6 @@
         {
           "id": 1754297023969,
           "title": "이번 주 과제",
-          "completed": false
-        },
-        {
-          "id": 1754449640258,
-          "title": "통계적 가설 검증 강의 수강",
           "completed": false
         }
       ],
