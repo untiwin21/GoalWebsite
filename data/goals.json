@@ -851,6 +851,13 @@
       "updatedAt": "2025-08-05T14:23:37.104Z"
     }
   ],
-  "todayTodos": [],
+  "todayTodos": [
+    {
+      "id": 1754575177512,
+      "text": "구글 코랩 세팅",
+      "completed": false,
+      "createdAt": "2025-08-07T13:59:37.512Z"
+    }
+  ],
   "todayTodosDate": "Thu Aug 07 2025"
 }
