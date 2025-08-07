@@ -78,7 +78,10 @@ class GitHubStorage {
           completedTasks: [],
           motivationItems: [],
           studySubjects: [],
-          events: []
+          events: [],
+          writingNotes: [],
+          todayTodos: [],
+          todayTodosDate: null
         };
         await this.saveFileContent(initialData);
         return { content: initialData, sha: null };
