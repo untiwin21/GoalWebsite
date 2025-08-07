@@ -17,26 +17,22 @@
   --gradient-secondary: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
 
-/* ===== 전역 오버플로우 방지 안전장치 ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
 body {
   font-family: 'Poppins', sans-serif;
   background: var(--dark-bg);
   color: var(--light-text);
   line-height: 1.6;
-  width: 100%;
 }
 
 .App {
   min-height: 100vh;
   background: var(--dark-bg);
-  width: 100%;
 }
 
 /* Navigation Bar */
@@ -56,14 +52,12 @@ body {
   overflow-x: auto;
 }
 
-/* 기본 컨테이너 */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 .nav-button {
@@ -114,8 +108,9 @@ body {
 
 /* Main Content */
 .main-content {
-  padding: 3rem;
-  max-width: 1400px;
+  width: 100%;
+  max-width: none; /* 최대 너비 제한 제거 */
+  padding: 3rem calc(2vw + 1rem); /* 화면 너비에 따라 동적으로 여백 조절 */
   margin: 0 auto;
   min-height: calc(100vh - 100px);
 }
