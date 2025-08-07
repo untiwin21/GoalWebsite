@@ -863,6 +863,12 @@
       "text": "목표 웹사이트 수정",
       "completed": true,
       "createdAt": "2025-08-07T13:59:54.141Z"
+    },
+    {
+      "id": 1754575779747,
+      "text": "속초 당일치기 가족여행",
+      "completed": false,
+      "createdAt": "2025-08-07T14:09:39.747Z"
     }
   ],
   "todayTodosDate": "Thu Aug 07 2025"
