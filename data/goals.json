@@ -855,13 +855,13 @@
     {
       "id": 1754575177512,
       "text": "구글 코랩 세팅",
-      "completed": true,
+      "completed": false,
       "createdAt": "2025-08-07T13:59:37.512Z"
     },
     {
       "id": 1754575194141,
       "text": "목표 웹사이트 수정",
-      "completed": false,
+      "completed": true,
       "createdAt": "2025-08-07T13:59:54.141Z"
     }
   ],
