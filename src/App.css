@@ -30,7 +30,6 @@ body {
   background: var(--dark-bg);
   color: var(--light-text);
   line-height: 1.6;
-  overflow-x: hidden;
   width: 100%;
 }
 
@@ -38,7 +37,6 @@ body {
   min-height: 100vh;
   background: var(--dark-bg);
   width: 100%;
-  overflow-x: hidden;
 }
 
 /* Navigation Bar */
