@@ -6,7 +6,7 @@ import Monthly from './components/Monthly';
 import ThinkBig from './components/ThinkBig';
 import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
-import WritingSpace from './components/Study'; // 'WritingSpace' 컴포넌트 추가
+import WritingSpace from './components/Study';
 import GitHubStorage from './utils/githubStorage';
 import { useScreenSize } from './utils/deviceDetection';
 
@@ -19,7 +19,9 @@ function App() {
     completedTasks: [],
     motivationItems: [],
     events: [],
-    writingNotes: [] // writingNotes 추가
+    writingNotes: [],
+    todayTodos: [], // 오늘 할 일 목록 추가
+    todayTodosDate: null // 오늘 할 일 목록의 날짜 추가
   });
   const [isLoading, setIsLoading] = useState(true);
   const [currentSha, setCurrentSha] = useState(null);
@@ -32,22 +34,30 @@ function App() {
       console.log('🔄 GitHub에서 데이터 로드 시도...');
       console.log('환경변수 토큰:', process.env.REACT_APP_GITHUB_TOKEN ? '설정됨' : '없음');
       
-      // GitHub에서 데이터 로드 시도
       const result = await githubStorage.getFileContent();
-      setData(result.content);
+      // 불러온 데이터에 todayTodos 관련 필드가 없으면 추가해줍니다.
+      const sanitizedData = {
+        ...result.content,
+        todayTodos: result.content.todayTodos || [],
+        todayTodosDate: result.content.todayTodosDate || null,
+      };
+      setData(sanitizedData);
       setCurrentSha(result.sha);
       console.log('✅ GitHub에서 데이터 로드 성공');
-      console.log('로드된 데이터:', result.content);
     } catch (error) {
       console.error('❌ GitHub 로드 실패, 로컬스토리지 사용:', error);
       
-      // GitHub 실패 시 로컬스토리지 사용
       const savedData = localStorage.getItem('goalTrackerData');
       if (savedData) {
         const parsedData = JSON.parse(savedData);
-        setData(parsedData);
+        // 불러온 데이터에 todayTodos 관련 필드가 없으면 추가해줍니다.
+        const sanitizedData = {
+            ...parsedData,
+            todayTodos: parsedData.todayTodos || [],
+            todayTodosDate: parsedData.todayTodosDate || null,
+        };
+        setData(sanitizedData);
         console.log('📱 로컬스토리지에서 데이터 로드');
-        console.log('로컬 데이터:', parsedData);
       } else {
         console.log('📭 로컬스토리지에도 데이터 없음');
       }
@@ -59,10 +69,8 @@ function App() {
   // GitHub 클라우드에 데이터 저장
   const saveData = async (newData) => {
     try {
-      // 항상 로컬스토리지에 즉시 저장 (빠른 응답)
       localStorage.setItem('goalTrackerData', JSON.stringify(newData));
       
-      // GitHub에 저장 시도
       const newSha = await githubStorage.saveFileContent(newData, currentSha);
       setCurrentSha(newSha);
       console.log('☁️ GitHub 클라우드에 저장 완료');
@@ -71,17 +79,16 @@ function App() {
     }
   };
 
-  // 컴포넌트 마운트 시 데이터 로드
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 데이터 변경 시 저장 (디바운싱 적용)
   useEffect(() => {
     if (!isLoading) {
       const timeoutId = setTimeout(() => {
         saveData(data);
-      }, 500); // 500ms 후에 저장
+      }, 500);
 
       return () => clearTimeout(timeoutId);
     }
@@ -121,7 +128,6 @@ function App() {
       };
       reader.readAsText(file);
     }
-    // 파일 입력 초기화
     event.target.value = '';
   };
 
@@ -132,10 +138,10 @@ function App() {
         'Home': '홈',
         'Weekly': '주간',
         'Monthly': '월간',
-        'Think Big': '장기', // 'ThinkBig' -> 'Think Big' 으로 수정
+        'Think Big': '장기',
         'Analysis': '분석',
         'Motivation': '동기',
-        'Writing Space': '글쓰기' // 'Writing Space' 탭 이름 추가
+        'Writing Space': '글쓰기'
       };
       return mobileNames[tabName] || tabName;
     }
@@ -171,7 +177,7 @@ function App() {
         return <Analysis data={data} />;
       case 'Motivation':
         return <Motivation data={data} updateData={updateData} />;
-      case 'Writing Space': // 'Writing Space' 케이스 추가
+      case 'Writing Space':
         return <WritingSpace data={data} updateData={updateData} />;
       default:
         return <Home data={data} />;
@@ -181,7 +187,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation', 'Writing Space'].map((tab) => ( // 'Writing Space' 탭 추가
+        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation', 'Writing Space'].map((tab) => (
           <button
             key={tab}
             className={`nav-button ${activeTab === tab ? 'active' : ''}`}
@@ -191,7 +197,6 @@ function App() {
           </button>
         ))}
         
-        {/* 데이터 백업/복원 버튼들 */}
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <button
             className="nav-button"
