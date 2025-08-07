@@ -851,6 +851,13 @@
       "updatedAt": "2025-08-07T16:00:08.469Z"
     }
   ],
-  "todayTodos": [],
+  "todayTodos": [
+    {
+      "id": 1754585009205,
+      "text": "[도전학기] 논문 계획서 작성",
+      "completed": false,
+      "createdAt": "2025-08-07T16:43:29.205Z"
+    }
+  ],
   "todayTodosDate": "Fri Aug 08 2025"
 }
