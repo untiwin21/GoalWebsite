@@ -851,25 +851,6 @@
       "updatedAt": "2025-08-05T14:23:37.104Z"
     }
   ],
-  "todayTodos": [
-    {
-      "id": 1754575177512,
-      "text": "구글 코랩 세팅",
-      "completed": false,
-      "createdAt": "2025-08-07T13:59:37.512Z"
-    },
-    {
-      "id": 1754575194141,
-      "text": "목표 웹사이트 수정",
-      "completed": true,
-      "createdAt": "2025-08-07T13:59:54.141Z"
-    },
-    {
-      "id": 1754575779747,
-      "text": "속초 당일치기 가족여행",
-      "completed": true,
-      "createdAt": "2025-08-07T14:09:39.747Z"
-    }
-  ],
-  "todayTodosDate": "Thu Aug 07 2025"
+  "todayTodos": [],
+  "todayTodosDate": "Fri Aug 08 2025"
 }
