@@ -957,6 +957,12 @@
       "text": "9시 기상 & 헬스장",
       "completed": false,
       "createdAt": "2025-08-08T16:11:00.752Z"
+    },
+    {
+      "id": 1754669476633,
+      "text": "오늘 할 일 순서 바꿀 수 있게 수정",
+      "completed": false,
+      "createdAt": "2025-08-08T16:11:16.633Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
