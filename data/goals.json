@@ -895,12 +895,6 @@
       "createdAt": "2025-08-07T16:45:57.023Z"
     },
     {
-      "id": 1754585253049,
-      "text": "[도전학기] 외국 데이터 수집",
-      "completed": false,
-      "createdAt": "2025-08-07T16:47:33.049Z"
-    },
-    {
       "id": 1754587196508,
       "text": "태희랑 만나는 날",
       "completed": true,
@@ -911,6 +905,12 @@
       "text": "[도전학기] 님비 현상과 기술적 대안의 연결",
       "completed": false,
       "createdAt": "2025-08-08T05:13:52.451Z"
+    },
+    {
+      "id": 1754630056457,
+      "text": "[도전학기] GPT 활용 문헌 연구",
+      "completed": false,
+      "createdAt": "2025-08-08T05:14:16.457Z"
     }
   ],
   "todayTodosDate": "Fri Aug 08 2025"
