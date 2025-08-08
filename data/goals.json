@@ -77,16 +77,11 @@
       "subGoals": [
         {
           "id": 1754309415864,
-          "title": "F1 PPT 만들기",
-          "completed": false
-        },
-        {
-          "id": 1754309415865,
           "title": "F1 PPT 발표 준비",
           "completed": false
         },
         {
-          "id": 1754309415867,
+          "id": 1754309415865,
           "title": "이기적 유전자 마저 읽기",
           "completed": false
         }
