@@ -49,27 +49,22 @@
         },
         {
           "id": 1754297023965,
-          "title": "한국 관련 데이터 조사",
-          "completed": false
-        },
-        {
-          "id": 1754297023966,
-          "title": "외국 관련 데이터 조사",
-          "completed": false
-        },
-        {
-          "id": 1754297023967,
           "title": "논문 Into 작성",
           "completed": false
         },
         {
-          "id": 1754297023969,
+          "id": 1754297023966,
           "title": "이번 주 과제",
           "completed": false
         },
         {
-          "id": 1754297023968,
+          "id": 1754297023967,
           "title": "퀴즈 풀기",
+          "completed": false
+        },
+        {
+          "id": 1754297023969,
+          "title": "논문 데이터 수집 완료",
           "completed": false
         }
       ],
