@@ -963,6 +963,12 @@
       "text": "오늘 할 일 순서 바꿀 수 있게 수정",
       "completed": false,
       "createdAt": "2025-08-08T16:11:16.633Z"
+    },
+    {
+      "id": 1754669519019,
+      "text": "8시 이용민 ai 대전 논의",
+      "completed": false,
+      "createdAt": "2025-08-08T16:11:59.019Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
