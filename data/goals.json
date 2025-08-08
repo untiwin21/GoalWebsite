@@ -736,6 +736,15 @@
       "createdAt": "2025-08-05T08:01:47.032Z"
     },
     {
+      "id": 1754622086616,
+      "title": "대학생 창작 무인 모빌리티 대회 입상",
+      "startDate": "2025-08-08",
+      "endDate": "2025-10-31",
+      "subGoals": [],
+      "completed": false,
+      "createdAt": "2025-08-08T03:01:26.616Z"
+    },
+    {
       "id": 1754379914089,
       "title": "석사 때 탑티어 논문 3편 작성(3개)  -> 미국박사 합격",
       "startDate": "2025-08-05",
@@ -794,15 +803,6 @@
       ],
       "completed": false,
       "createdAt": "2025-08-05T08:05:49.744Z"
-    },
-    {
-      "id": 1754622086616,
-      "title": "대학생 창작 무인 모빌리티 대회 입상",
-      "startDate": "2025-08-08",
-      "endDate": "2025-10-31",
-      "subGoals": [],
-      "completed": false,
-      "createdAt": "2025-08-08T03:01:26.616Z"
     }
   ],
   "completedTasks": [],
