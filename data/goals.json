@@ -933,43 +933,6 @@
       "updatedAt": "2025-08-08T05:16:20.419Z"
     }
   ],
-  "todayTodos": [
-    {
-      "id": 1754585009205,
-      "text": "[도전학기] 논문 계획서 작성",
-      "completed": true,
-      "createdAt": "2025-08-07T16:43:29.205Z"
-    },
-    {
-      "id": 1754585157022,
-      "text": "[독서토론] F1 발표자료 정리",
-      "completed": false,
-      "createdAt": "2025-08-07T16:45:57.023Z"
-    },
-    {
-      "id": 1754587196508,
-      "text": "태희랑 만나는 날",
-      "completed": true,
-      "createdAt": "2025-08-07T17:19:56.509Z"
-    },
-    {
-      "id": 1754630032451,
-      "text": "[도전학기] 님비 현상과 기술적 대안의 연결",
-      "completed": false,
-      "createdAt": "2025-08-08T05:13:52.451Z"
-    },
-    {
-      "id": 1754630056457,
-      "text": "[도전학기] GPT 활용 문헌 연구",
-      "completed": false,
-      "createdAt": "2025-08-08T05:14:16.457Z"
-    },
-    {
-      "id": 1754630109609,
-      "text": "[도전학기] 지역별 전력 공급량 수요량 조사",
-      "completed": false,
-      "createdAt": "2025-08-08T05:15:09.609Z"
-    }
-  ],
-  "todayTodosDate": "Fri Aug 08 2025"
+  "todayTodos": [],
+  "todayTodosDate": "Sat Aug 09 2025"
 }
