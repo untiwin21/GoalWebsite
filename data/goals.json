@@ -911,6 +911,12 @@
       "text": "태희랑 만나는 날",
       "completed": true,
       "createdAt": "2025-08-07T17:19:56.509Z"
+    },
+    {
+      "id": 1754630032451,
+      "text": "[도전학기] 님비 현상과 기술적 대안의 연결",
+      "completed": false,
+      "createdAt": "2025-08-08T05:13:52.451Z"
     }
   ],
   "todayTodosDate": "Fri Aug 08 2025"
