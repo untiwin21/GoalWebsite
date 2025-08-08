@@ -951,6 +951,12 @@
       "text": "2시 박지환 카공",
       "completed": false,
       "createdAt": "2025-08-08T16:10:18.873Z"
+    },
+    {
+      "id": 1754669460752,
+      "text": "9시 기상 & 헬스장",
+      "completed": false,
+      "createdAt": "2025-08-08T16:11:00.752Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
