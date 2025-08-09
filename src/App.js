@@ -8,6 +8,7 @@ import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
 import WritingSpace from './components/Study';
 import Workout from './components/Workout';
+import Budget from './components/Budget';
 import GitHubStorage from './utils/githubStorage';
 import { useScreenSize } from './utils/deviceDetection';
 
@@ -182,6 +183,8 @@ function App() {
         return <WritingSpace data={data} updateData={updateData} />;
       case 'Workout':
         return <Workout />;
+      case 'Budget':
+        return <Budget />;
       default:
         return <Home data={data} />;
     }
@@ -190,7 +193,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation', 'Writing Space', 'Workout'].map((tab) => (
+        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation', 'Writing Space', 'Workout', 'Budget'].map((tab) => (
           <button
             key={tab}
             className={`nav-button ${activeTab === tab ? 'active' : ''}`}

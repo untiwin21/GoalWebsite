@@ -226,7 +226,7 @@ const Workout = () => {
     setWorkoutInput('');
   };
 
-  // 인바디 데이터 추가
+  // 인바디 데이터 추가/수정
   const handleInbodySubmit = () => {
     if (!inbodyInput.weight) return;
 
@@ -242,12 +242,46 @@ const Workout = () => {
       whr: parseFloat(inbodyInput.whr)
     };
 
-    updatedData.bodyData.history.push(newBodyData);
+    // 같은 날짜의 기존 데이터가 있는지 확인
+    const existingIndex = updatedData.bodyData.history.findIndex(item => item.date === today);
+    
+    if (existingIndex !== -1) {
+      // 기존 데이터 수정
+      updatedData.bodyData.history[existingIndex] = newBodyData;
+      alert('오늘의 인바디 데이터가 수정되었습니다.');
+    } else {
+      // 새 데이터 추가
+      updatedData.bodyData.history.push(newBodyData);
+      alert('인바디 데이터가 저장되었습니다.');
+    }
+    
     updatedData.bodyData.current = { ...newBodyData, lastUpdated: today };
-
     saveWorkoutData(updatedData);
-    // 입력 필드는 초기화하지 않고 유지
-    alert('인바디 데이터가 저장되었습니다. 수정이 필요하면 값을 변경 후 다시 저장하세요.');
+  };
+
+  // 오늘의 인바디 데이터 확인
+  const getTodayInbodyData = () => {
+    if (!workoutData || !workoutData.bodyData.history) return null;
+    const today = new Date().toISOString().split('T')[0];
+    return workoutData.bodyData.history.find(item => item.date === today);
+  };
+
+  // 오늘의 인바디 데이터를 입력 필드에 로드
+  const loadTodayInbodyData = () => {
+    const todayData = getTodayInbodyData();
+    if (todayData) {
+      setInbodyInput({
+        weight: todayData.weight.toString(),
+        muscleMass: todayData.muscleMass.toString(),
+        bodyFat: todayData.bodyFatPercentage.toString(),
+        vfa: todayData.vfa.toString(),
+        whr: todayData.whr.toString(),
+        bmr: '',
+        bodyDevelopment: ''
+      });
+    } else {
+      alert('오늘 입력된 인바디 데이터가 없습니다.');
+    }
   };
 
   // AI 분석 추가
@@ -405,10 +439,17 @@ const Workout = () => {
               <div className="inbody-controls">
                 <button 
                   type="button" 
+                  onClick={loadTodayInbodyData} 
+                  className="load-current-btn"
+                >
+                  오늘 데이터 불러오기
+                </button>
+                <button 
+                  type="button" 
                   onClick={loadCurrentInbodyData} 
                   className="load-current-btn"
                 >
-                  현재 데이터 불러오기
+                  최신 데이터 불러오기
                 </button>
                 <button 
                   type="button" 
@@ -419,6 +460,16 @@ const Workout = () => {
                 </button>
               </div>
             </div>
+            
+            {/* 오늘 데이터 상태 표시 */}
+            <div className="today-status">
+              {getTodayInbodyData() ? (
+                <p className="has-data">✅ 오늘 인바디 데이터가 이미 입력되어 있습니다. 수정 가능합니다.</p>
+              ) : (
+                <p className="no-data">📝 오늘 인바디 데이터를 입력해주세요.</p>
+              )}
+            </div>
+            
             <div className="inbody-inputs">
               <input
                 type="number"
@@ -453,7 +504,7 @@ const Workout = () => {
               />
             </div>
             <button onClick={handleInbodySubmit} className="submit-btn">
-              인바디 결과 저장
+              {getTodayInbodyData() ? '오늘 인바디 데이터 수정' : '인바디 결과 저장'}
             </button>
           </div>
 
