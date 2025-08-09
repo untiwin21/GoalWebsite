@@ -17,6 +17,7 @@ const Weekly = ({ data, updateData }) => {
   const [newTodo, setNewTodo] = useState('');
   const [showTodoInput, setShowTodoInput] = useState(false);
   const [lastCheckDate, setLastCheckDate] = useState(new Date().toDateString());
+  const [draggedTodoIndex, setDraggedTodoIndex] = useState(null); // 오늘 할 일 드래그 상태
 
   // --- 일정 관리 상태 변수들 ---
   const [showEventForm, setShowEventForm] = useState(false);
@@ -60,7 +61,7 @@ const Weekly = ({ data, updateData }) => {
     }, 60000);
 
     return () => clearInterval(interval);
-  }, [data.todayTodos, data.todayTodosDate, lastCheckDate, updateData]);
+  }, [data.todayTodos, data.todayTodosDate]);
 
   // --- 오늘 할 일 관련 함수들 ---
   const saveTodayTodos = (todos) => {
@@ -106,6 +107,37 @@ const Weekly = ({ data, updateData }) => {
     return Math.round((completed / todayTodos.length) * 100);
   };
   
+  // --- 오늘 할 일 드래그 앤 드롭 핸들러 ---
+  const handleTodoDragStart = (e, index) => {
+    setDraggedTodoIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleTodoDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleTodoDrop = (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedTodoIndex === null || draggedTodoIndex === dropIndex) {
+      setDraggedTodoIndex(null);
+      return;
+    }
+
+    const newTodos = [...todayTodos];
+    const draggedItem = newTodos[draggedTodoIndex];
+
+    newTodos.splice(draggedTodoIndex, 1);
+    newTodos.splice(dropIndex, 0, draggedItem);
+
+    saveTodayTodos(newTodos);
+    setDraggedTodoIndex(null);
+  };
+
+  const handleTodoDragEnd = () => {
+    setDraggedTodoIndex(null);
+  };
+
   // --- 기존 함수들 (수정 없음) ---
   const addGoal = () => {
     if (newGoal.title.trim()) {
@@ -382,7 +414,6 @@ const Weekly = ({ data, updateData }) => {
 
   const handleDragOver = (e) => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
   };
 
   const handleDrop = (e, dropIndex) => {
@@ -421,7 +452,6 @@ const Weekly = ({ data, updateData }) => {
 
   const handleSubGoalDragOver = (e) => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
   };
 
   const handleSubGoalDrop = (e, goalId, dropIndex) => {
@@ -495,8 +525,17 @@ const Weekly = ({ data, updateData }) => {
         <span className="today-progress-text">{getTodayProgress()}% 달성</span>
 
         <div className="todo-list">
-          {todayTodos.map(todo => (
-            <div key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
+          {todayTodos.map((todo, index) => (
+            <div 
+              key={todo.id} 
+              className={`todo-item ${todo.completed ? 'completed' : ''} ${draggedTodoIndex === index ? 'dragging' : ''}`}
+              draggable
+              onDragStart={(e) => handleTodoDragStart(e, index)}
+              onDragOver={handleTodoDragOver}
+              onDrop={(e) => handleTodoDrop(e, index)}
+              onDragEnd={handleTodoDragEnd}
+            >
+              <span className="todo-drag-handle" title="드래그해서 순서 변경">⋮⋮</span>
               <input
                 type="checkbox"
                 className="checkbox"
