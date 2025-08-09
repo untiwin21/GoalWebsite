@@ -887,6 +887,12 @@
       "text": "도전학기 3주차 과제 재제출",
       "completed": false,
       "createdAt": "2025-08-09T16:17:22.533Z"
+    },
+    {
+      "id": 1754756248812,
+      "text": "도전학기 4주차 과제 제출",
+      "completed": false,
+      "createdAt": "2025-08-09T16:17:28.812Z"
     }
   ],
   "todayTodosDate": "Sun Aug 10 2025"
