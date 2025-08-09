@@ -870,61 +870,6 @@
       "updatedAt": "2025-08-08T05:16:20.419Z"
     }
   ],
-  "todayTodos": [
-    {
-      "id": 1754669460752,
-      "text": "9시 기상 & 헬스장",
-      "completed": true,
-      "createdAt": "2025-08-08T16:11:00.752Z"
-    },
-    {
-      "id": 1754669418873,
-      "text": "2시 박지환 카공",
-      "completed": true,
-      "createdAt": "2025-08-08T16:10:18.873Z"
-    },
-    {
-      "id": 1754669333510,
-      "text": "구자춘 교수님 머신러닝 자료 출력",
-      "completed": true,
-      "createdAt": "2025-08-08T16:08:53.510Z"
-    },
-    {
-      "id": 1754669476633,
-      "text": "오늘 할 일 순서 바꿀 수 있게 수정",
-      "completed": true,
-      "createdAt": "2025-08-08T16:11:16.633Z"
-    },
-    {
-      "id": 1754747008458,
-      "text": "논문 계획서 재작성(구체적으로)",
-      "completed": false,
-      "createdAt": "2025-08-09T13:43:28.458Z"
-    },
-    {
-      "id": 1754747016106,
-      "text": "데이터 수집",
-      "completed": false,
-      "createdAt": "2025-08-09T13:43:36.106Z"
-    },
-    {
-      "id": 1754747107390,
-      "text": "도전학기 3주차 과제",
-      "completed": false,
-      "createdAt": "2025-08-09T13:45:07.390Z"
-    },
-    {
-      "id": 1754747114061,
-      "text": "도전학기 4주차 과제",
-      "completed": false,
-      "createdAt": "2025-08-09T13:45:14.061Z"
-    },
-    {
-      "id": 1754736673464,
-      "text": "백성원 형 생일축하",
-      "completed": false,
-      "createdAt": "2025-08-09T10:51:13.464Z"
-    }
-  ],
-  "todayTodosDate": "Sat Aug 09 2025"
+  "todayTodos": [],
+  "todayTodosDate": "Sun Aug 10 2025"
 }
