@@ -881,6 +881,12 @@
       "text": "계획서 재제출",
       "completed": false,
       "createdAt": "2025-08-09T16:16:35.739Z"
+    },
+    {
+      "id": 1754756242533,
+      "text": "도전학기 3주차 과제 재제출",
+      "completed": false,
+      "createdAt": "2025-08-09T16:17:22.533Z"
     }
   ],
   "todayTodosDate": "Sun Aug 10 2025"
