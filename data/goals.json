@@ -908,16 +908,16 @@
       "createdAt": "2025-08-09T13:43:36.106Z"
     },
     {
-      "id": 1754736673464,
-      "text": "백성원 형 생일축하",
-      "completed": false,
-      "createdAt": "2025-08-09T10:51:13.464Z"
-    },
-    {
       "id": 1754747107390,
       "text": "도전학기 3주차 과제",
       "completed": false,
       "createdAt": "2025-08-09T13:45:07.390Z"
+    },
+    {
+      "id": 1754736673464,
+      "text": "백성원 형 생일축하",
+      "completed": false,
+      "createdAt": "2025-08-09T10:51:13.464Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
