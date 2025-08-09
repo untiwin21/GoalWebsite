@@ -692,7 +692,7 @@
         {
           "id": 1754721247316,
           "text": "1/3",
-          "completed": true
+          "completed": false
         },
         {
           "id": 1754721251134,
@@ -713,39 +713,22 @@
       "id": 1754379914089
     },
     {
-      "id": 1754381149744,
       "title": "로봇 5개 만들기",
       "startDate": "2025-08-05",
       "endDate": "2027-02-28",
       "subGoals": [
         {
-          "id": 1754381149744,
-          "title": "바텐더 로봇팔",
+          "id": 1754721285608,
+          "text": "바텐더 로봇팔",
           "completed": false
         },
         {
-          "id": 1754381149747,
-          "title": "사족보행",
-          "completed": false
-        },
-        {
-          "id": 1754381149745,
-          "title": "드론",
-          "completed": false
-        },
-        {
-          "id": 1754381149748,
-          "title": "이족보행",
-          "completed": false
-        },
-        {
-          "id": 1754381219943,
-          "title": "변형가능 원형이동로봇",
+          "id": 1754721289529,
+          "text": "드론",
           "completed": false
         }
       ],
-      "completed": false,
-      "createdAt": "2025-08-05T08:05:49.744Z"
+      "id": 1754381149744
     }
   ],
   "completedTasks": [],
