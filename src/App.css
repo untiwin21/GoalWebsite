@@ -109,8 +109,8 @@ body {
 /* Main Content */
 .main-content {
   width: 100%;
-  max-width: none; /* 최대 너비 제한 제거 */
-  padding: 3rem calc(2vw + 1rem); /* 화면 너비에 따라 동적으로 여백 조절 */
+  max-width: none;
+  padding: 3rem calc(2vw + 1rem);
   margin: 0 auto;
   min-height: calc(100vh - 100px);
 }
@@ -1223,6 +1223,7 @@ body {
   padding: 0.5rem;
   border-radius: 8px;
   transition: background-color 0.2s;
+  position: relative;
 }
 
 .todo-item:hover {
@@ -1232,6 +1233,22 @@ body {
 .todo-item.completed .todo-text {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+.todo-item.dragging {
+  opacity: 0.5;
+  background-color: var(--hover-bg);
+}
+
+.todo-drag-handle {
+  cursor: grab;
+  padding: 0 0.5rem;
+  color: rgba(255, 255, 255, 0.4);
+  user-select: none;
+}
+
+.todo-drag-handle:active {
+  cursor: grabbing;
 }
 
 .todo-text {
