@@ -2167,3 +2167,94 @@ body {
   color: var(--light-text);
   margin-bottom: 1rem;
 }
+/* Form Header with Controls */
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.inbody-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.load-current-btn, .clear-btn {
+  background: var(--gray-color);
+  color: var(--light-text);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.load-current-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.clear-btn:hover {
+  background: var(--accent-color);
+  color: white;
+}
+
+/* Data Persistence Indicator */
+.data-status {
+  background: var(--gray-color);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--secondary-color);
+}
+
+.data-status p {
+  margin: 0;
+  color: var(--light-text);
+  font-size: 0.9rem;
+}
+
+.data-status .status-indicator {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+/* Backup Controls */
+.input-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.backup-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.backup-btn, .restore-btn {
+  background: var(--gray-color);
+  color: var(--light-text);
+  border: 1px solid var(--border-color);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.backup-btn:hover {
+  background: var(--secondary-color);
+  color: var(--dark-bg);
+  transform: translateY(-1px);
+}
+
+.restore-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-1px);
+}

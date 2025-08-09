@@ -28,7 +28,16 @@ const Workout = () => {
     // 워크아웃 데이터 로드
     const loadWorkoutData = async () => {
       try {
-        // public 폴더에서 데이터 로드
+        // 먼저 로컬스토리지에서 확인
+        const localData = localStorage.getItem('workoutData');
+        if (localData) {
+          const parsedData = JSON.parse(localData);
+          setWorkoutData(parsedData);
+          setLoading(false);
+          return;
+        }
+
+        // 로컬스토리지에 없으면 public 폴더에서 데이터 로드
         const response = await fetch(`${process.env.PUBLIC_URL}/data/workout.json`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,7 +48,7 @@ const Workout = () => {
       } catch (error) {
         console.error('워크아웃 데이터 로드 실패:', error);
         // 기본 데이터로 폴백
-        setWorkoutData({
+        const defaultData = {
           bodyData: {
             current: { weight: 0, muscleMass: 0, bodyFatPercentage: 0, vfa: 0, whr: 0 },
             history: []
@@ -53,13 +62,70 @@ const Workout = () => {
           recovery: { sleepLog: [], dailyCondition: [] },
           todayPlan: { date: new Date().toISOString().split('T')[0], workout: "", focus: "", targetVolume: 0 },
           aiAnalysis: { lastAnalysis: "", weeklyDiagnosis: "", actionItems: [], nextWeekFocus: "" }
-        });
+        };
+        setWorkoutData(defaultData);
         setLoading(false);
       }
     };
 
     loadWorkoutData();
   }, []);
+
+  // 현재 인바디 데이터를 입력 필드에 로드
+  const loadCurrentInbodyData = () => {
+    if (workoutData && workoutData.bodyData.current.weight > 0) {
+      setInbodyInput({
+        weight: workoutData.bodyData.current.weight.toString(),
+        muscleMass: workoutData.bodyData.current.muscleMass.toString(),
+        bodyFat: workoutData.bodyData.current.bodyFatPercentage.toString(),
+        vfa: workoutData.bodyData.current.vfa.toString(),
+        whr: workoutData.bodyData.current.whr.toString(),
+        bmr: '',
+        bodyDevelopment: ''
+      });
+    }
+  };
+
+  // 입력 필드 초기화
+  const clearInbodyInput = () => {
+    setInbodyInput({
+      weight: '', muscleMass: '', bodyFat: '', vfa: '', whr: '', bmr: '', bodyDevelopment: ''
+    });
+  };
+
+  // 데이터 백업 다운로드
+  const downloadBackup = () => {
+    const dataStr = JSON.stringify(workoutData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `workout-backup-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // 데이터 백업 복원
+  const handleBackupRestore = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const backupData = JSON.parse(e.target.result);
+        setWorkoutData(backupData);
+        localStorage.setItem('workoutData', JSON.stringify(backupData));
+        alert('백업 데이터가 성공적으로 복원되었습니다!');
+      } catch (error) {
+        alert('백업 파일을 읽는데 실패했습니다.');
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = ''; // 파일 입력 초기화
+  };
 
   // 운동 데이터 파싱 함수
   const parseWorkoutData = (input) => {
@@ -180,9 +246,8 @@ const Workout = () => {
     updatedData.bodyData.current = { ...newBodyData, lastUpdated: today };
 
     saveWorkoutData(updatedData);
-    setInbodyInput({
-      weight: '', muscleMass: '', bodyFat: '', vfa: '', whr: '', bmr: '', bodyDevelopment: ''
-    });
+    // 입력 필드는 초기화하지 않고 유지
+    alert('인바디 데이터가 저장되었습니다. 수정이 필요하면 값을 변경 후 다시 저장하세요.');
   };
 
   // AI 분석 추가
@@ -273,12 +338,41 @@ const Workout = () => {
         >
           {showInputForm ? '📊 대시보드 보기' : '✏️ 데이터 입력'}
         </button>
+        
+        {/* 백업/복원 버튼들 */}
+        <div className="backup-controls">
+          <button onClick={downloadBackup} className="backup-btn">
+            💾 백업 다운로드
+          </button>
+          <label className="restore-btn">
+            📂 백업 복원
+            <input
+              type="file"
+              accept=".json"
+              onChange={handleBackupRestore}
+              style={{ display: 'none' }}
+            />
+          </label>
+        </div>
       </div>
 
       {/* 데이터 입력 폼 */}
       {showInputForm && (
         <section className="data-input-section">
           <h2>📝 운동 데이터 입력</h2>
+          
+          {/* 데이터 상태 표시 */}
+          <div className="data-status">
+            <p>
+              <span className="status-indicator">💾 데이터 저장 상태:</span> 
+              {workoutData && (workoutData.bodyData.history.length > 0 || 
+                workoutData.strength.volumeHistory.length > 0 || 
+                workoutData.cardio.longRuns.length > 0) 
+                ? ' 저장된 데이터가 있습니다 (로컬 저장소에 보관됨)'
+                : ' 아직 저장된 데이터가 없습니다'
+              }
+            </p>
+          </div>
           
           {/* 운동 기록 입력 */}
           <div className="input-form">
@@ -306,7 +400,25 @@ const Workout = () => {
 
           {/* 인바디 입력 */}
           <div className="input-form">
-            <h3>인바디 결과</h3>
+            <div className="form-header">
+              <h3>인바디 결과</h3>
+              <div className="inbody-controls">
+                <button 
+                  type="button" 
+                  onClick={loadCurrentInbodyData} 
+                  className="load-current-btn"
+                >
+                  현재 데이터 불러오기
+                </button>
+                <button 
+                  type="button" 
+                  onClick={clearInbodyInput} 
+                  className="clear-btn"
+                >
+                  초기화
+                </button>
+              </div>
+            </div>
             <div className="inbody-inputs">
               <input
                 type="number"
