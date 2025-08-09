@@ -53,17 +53,17 @@
           "completed": false
         },
         {
-          "id": 1754297023965,
-          "title": "논문 Into 작성",
+          "id": 1754297023967,
+          "title": "논문 초안 작성",
           "completed": false
         },
         {
-          "id": 1754297023966,
+          "id": 1754297023965,
           "title": "이번 주 과제",
           "completed": false
         },
         {
-          "id": 1754297023967,
+          "id": 1754297023966,
           "title": "퀴즈 풀기",
           "completed": false
         }
@@ -898,12 +898,6 @@
       "createdAt": "2025-08-08T16:08:53.510Z"
     },
     {
-      "id": 1754669519019,
-      "text": "8시 이용민 ai 대전 논의",
-      "completed": false,
-      "createdAt": "2025-08-08T16:11:59.019Z"
-    },
-    {
       "id": 1754669476633,
       "text": "오늘 할 일 순서 바꿀 수 있게 수정",
       "completed": true,
@@ -922,22 +916,16 @@
       "createdAt": "2025-08-09T06:04:13.145Z"
     },
     {
-      "id": 1754719472772,
-      "text": "전력망 논문 외국 데이터 수집",
-      "completed": false,
-      "createdAt": "2025-08-09T06:04:32.772Z"
-    },
-    {
-      "id": 1754719480159,
-      "text": "전력망 논문 외국 데이터 분석 및 결과 도출",
-      "completed": false,
-      "createdAt": "2025-08-09T06:04:40.159Z"
-    },
-    {
       "id": 1754719488260,
       "text": "넥슨 코딩캠프 문제 분석",
       "completed": false,
       "createdAt": "2025-08-09T06:04:48.260Z"
+    },
+    {
+      "id": 1754669519019,
+      "text": "8시 이용민 ai 대전 논의",
+      "completed": false,
+      "createdAt": "2025-08-08T16:11:59.019Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
