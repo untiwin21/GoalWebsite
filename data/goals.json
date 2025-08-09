@@ -38,6 +38,11 @@
       "title": "[도전학기] 파이썬을 이용한 인문사회과학논문 쓰기",
       "subGoals": [
         {
+          "id": 1754755992494,
+          "title": "논문 주제 다시 정하기",
+          "completed": false
+        },
+        {
           "id": 1754297023964,
           "title": "계획서 재체출",
           "completed": false
@@ -65,11 +70,6 @@
         {
           "id": 1754297023966,
           "title": "퀴즈 풀기",
-          "completed": false
-        },
-        {
-          "id": 1754755992494,
-          "title": "논문 주제 다시 정하기",
           "completed": false
         }
       ],
