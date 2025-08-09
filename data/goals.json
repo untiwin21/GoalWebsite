@@ -969,6 +969,12 @@
       "text": "전력망 논문 한국 데이터 수집",
       "completed": false,
       "createdAt": "2025-08-09T06:04:03.640Z"
+    },
+    {
+      "id": 1754719453145,
+      "text": "전력망 논문 한국 데이터 분석 및 결과 도출",
+      "completed": false,
+      "createdAt": "2025-08-09T06:04:13.145Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
