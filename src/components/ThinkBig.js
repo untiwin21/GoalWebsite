@@ -27,10 +27,24 @@ const ThinkBig = ({ data, updateData }) => {
       return;
     }
 
+    // 정렬된 상태를 기준으로 순서를 바꾸면 안 되므로, 원본 데이터의 인덱스를 찾아야 합니다.
+    // 하지만 현재 드래그 기능은 시각적 순서에만 의존하므로, 정렬된 배열을 기준으로 순서를 변경합니다.
+    const sortedGoals = [...(data.thinkBigGoals || [])].sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
+    const draggedGoal = sortedGoals[draggedItem];
+    
+    // 원본 데이터에서 드래그된 항목을 찾아 제거합니다.
+    const originalIndex = data.thinkBigGoals.findIndex(g => g.id === draggedGoal.id);
     const newGoals = [...data.thinkBigGoals];
-    const draggedGoal = newGoals[draggedItem];
-    newGoals.splice(draggedItem, 1);
-    newGoals.splice(dropIndex, 0, draggedGoal);
+    newGoals.splice(originalIndex, 1);
+
+    // 드롭 위치에 해당하는 항목을 찾습니다.
+    const dropTargetGoal = sortedGoals[dropIndex];
+    // 원본 데이터에서 드롭 위치의 인덱스를 찾습니다.
+    const newDropIndex = newGoals.findIndex(g => g.id === dropTargetGoal.id);
+
+    // 새 위치에 삽입합니다.
+    newGoals.splice(newDropIndex, 0, draggedGoal);
+
 
     updateData({
       ...data,
@@ -195,25 +209,25 @@ const ThinkBig = ({ data, updateData }) => {
                 onDragEnd={handleDragEnd}
               >
                 <div className="drag-handle" title="드래그해서 순서 변경">⋮⋮</div>
-                <div className="think-big-content">
-                  <div className="think-big-header">
-                    <h3 className="think-big-title">{goal.title}</h3>
-                    <div className="dday-count" style={{
-                      background: dDay <= 7 ? 'rgba(255, 107, 107, 0.3)' : 'rgba(255, 255, 255, 0.1)',
-                      color: dDay <= 7 ? '#FF6B6B' : 'var(--light-text)'
-                    }}>
-                      D-{dDay > 0 ? dDay : '+' + Math.abs(dDay)}
-                    </div>
+                <div className="think-big-header">
+                  <h3 className="think-big-title">{goal.title}</h3>
+                  <div className="think-big-actions">
+                    <button className="action-btn edit-btn" onClick={() => editGoal(goal)}>✏️</button>
+                    <button className="action-btn remove-btn" onClick={() => removeGoal(goal.id)}>-</button>
                   </div>
-                  <p className="think-big-period">
-                    {goal.startDate} ~ {goal.endDate}
-                  </p>
-                  {goal.description && <p className="think-big-description">{goal.description}</p>}
                 </div>
-                <div className="think-big-actions">
-                  <button className="action-btn edit-btn" onClick={() => editGoal(goal)}>✏️</button>
-                  <button className="action-btn remove-btn" onClick={() => removeGoal(goal.id)}>-</button>
+                <p className="think-big-period">
+                  {goal.startDate} ~ {goal.endDate}
+                </p>
+                <div className="dday-count" style={{
+                  alignSelf: 'flex-start',
+                  marginTop: '1rem',
+                  background: dDay <= 7 ? 'rgba(255, 107, 107, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                  color: dDay <= 7 ? '#FF6B6B' : 'var(--light-text)'
+                }}>
+                  D{dDay >= 0 ? '-' : '+'}{Math.abs(dDay)}
                 </div>
+                {goal.description && <p className="think-big-description" style={{marginTop: '1rem'}}>{goal.description}</p>}
               </div>
             );
           })}
