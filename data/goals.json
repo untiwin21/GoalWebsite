@@ -963,6 +963,12 @@
       "text": "오늘 할 일 순서 바꿀 수 있게 수정",
       "completed": true,
       "createdAt": "2025-08-08T16:11:16.633Z"
+    },
+    {
+      "id": 1754719443640,
+      "text": "전력망 논문 한국 데이터 수집",
+      "completed": false,
+      "createdAt": "2025-08-09T06:04:03.640Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
