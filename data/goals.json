@@ -896,6 +896,12 @@
       "createdAt": "2025-08-08T16:11:16.633Z"
     },
     {
+      "id": 1754747008458,
+      "text": "논문 계획서 재작성(구체적으로)",
+      "completed": false,
+      "createdAt": "2025-08-09T13:43:28.458Z"
+    },
+    {
       "id": 1754719443640,
       "text": "전력망 논문 한국 데이터 수집",
       "completed": false,
@@ -912,12 +918,6 @@
       "text": "백성원 형 생일축하",
       "completed": false,
       "createdAt": "2025-08-09T10:51:13.464Z"
-    },
-    {
-      "id": 1754747008458,
-      "text": "논문 계획서 재작성(구체적으로)",
-      "completed": false,
-      "createdAt": "2025-08-09T13:43:28.458Z"
     }
   ],
   "todayTodosDate": "Sat Aug 09 2025"
