@@ -53,6 +53,11 @@
           "completed": false
         },
         {
+          "id": 1754297023967,
+          "title": "논문 초안 작성",
+          "completed": false
+        },
+        {
           "id": 1754297023965,
           "title": "이번 주 과제",
           "completed": false
@@ -60,11 +65,6 @@
         {
           "id": 1754297023966,
           "title": "퀴즈 풀기",
-          "completed": false
-        },
-        {
-          "id": 1754297023967,
-          "title": "논문 초안 작성",
           "completed": false
         }
       ],
