@@ -7,231 +7,337 @@ const ThinkBig = ({ data, updateData }) => {
     title: '',
     description: '',
     startDate: '',
-    endDate: ''
+    endDate: '',
+    subGoals: []
   });
-  const [draggedItem, setDraggedItem] = useState(null);
+  const [newSubGoal, setNewSubGoal] = useState('');
 
-  const handleDragStart = (e, index) => {
-    setDraggedItem(index);
-    e.dataTransfer.effectAllowed = 'move';
-  };
+  // 날짜순으로 정렬된 목표들
+  const sortedGoals = [...(data.thinkBigGoals || [])].sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e, dropIndex) => {
-    e.preventDefault();
-    if (draggedItem === null || draggedItem === dropIndex) {
-      setDraggedItem(null);
-      return;
+  // 진행률 계산
+  const calculateProgress = (goal) => {
+    if (!goal.subGoals || goal.subGoals.length === 0) {
+      const today = new Date();
+      const start = new Date(goal.startDate);
+      const end = new Date(goal.endDate);
+      const totalDays = (end - start) / (1000 * 60 * 60 * 24);
+      const passedDays = (today - start) / (1000 * 60 * 60 * 24);
+      return Math.min(Math.max((passedDays / totalDays) * 100, 0), 100);
     }
-
-    // 정렬된 상태를 기준으로 순서를 바꾸면 안 되므로, 원본 데이터의 인덱스를 찾아야 합니다.
-    // 하지만 현재 드래그 기능은 시각적 순서에만 의존하므로, 정렬된 배열을 기준으로 순서를 변경합니다.
-    const sortedGoals = [...(data.thinkBigGoals || [])].sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
-    const draggedGoal = sortedGoals[draggedItem];
     
-    // 원본 데이터에서 드래그된 항목을 찾아 제거합니다.
-    const originalIndex = data.thinkBigGoals.findIndex(g => g.id === draggedGoal.id);
-    const newGoals = [...data.thinkBigGoals];
-    newGoals.splice(originalIndex, 1);
-
-    // 드롭 위치에 해당하는 항목을 찾습니다.
-    const dropTargetGoal = sortedGoals[dropIndex];
-    // 원본 데이터에서 드롭 위치의 인덱스를 찾습니다.
-    const newDropIndex = newGoals.findIndex(g => g.id === dropTargetGoal.id);
-
-    // 새 위치에 삽입합니다.
-    newGoals.splice(newDropIndex, 0, draggedGoal);
-
-
-    updateData({
-      ...data,
-      thinkBigGoals: newGoals
-    });
-    setDraggedItem(null);
+    const completedSubGoals = goal.subGoals.filter(sub => sub.completed).length;
+    return (completedSubGoals / goal.subGoals.length) * 100;
   };
 
-  const handleDragEnd = () => {
-    setDraggedItem(null);
-  };
-
-  const addGoal = () => {
-    if (newGoal.title.trim() && newGoal.startDate && newGoal.endDate) {
-      const goal = {
-        id: Date.now(),
-        ...newGoal,
-        createdAt: new Date().toISOString()
-      };
-      updateData({
-        ...data,
-        thinkBigGoals: [...(data.thinkBigGoals || []), goal]
-      });
-      setNewGoal({ title: '', description: '', startDate: '', endDate: '' });
-      setShowAddForm(false);
-    } else {
-      alert('제목, 시작일, 종료일을 모두 입력해주세요.');
-    }
-  };
-
-  const editGoal = (goal) => {
-    setEditingGoal(goal.id);
-    setNewGoal({
-      title: goal.title,
-      description: goal.description,
-      startDate: goal.startDate,
-      endDate: goal.endDate
-    });
-    setShowAddForm(true);
-  };
-
-  const updateGoal = () => {
-    if (newGoal.title.trim() && editingGoal) {
-      const updatedGoals = data.thinkBigGoals.map(g =>
-        g.id === editingGoal ? { ...g, ...newGoal, updatedAt: new Date().toISOString() } : g
+  // 목표 추가/수정
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (editingGoal) {
+      // 수정
+      const updatedGoals = data.thinkBigGoals.map(goal => 
+        goal.id === editingGoal.id ? { ...newGoal, id: editingGoal.id } : goal
       );
       updateData({
         ...data,
         thinkBigGoals: updatedGoals
       });
-      setNewGoal({ title: '', description: '', startDate: '', endDate: '' });
-      setShowAddForm(false);
       setEditingGoal(null);
+    } else {
+      // 추가
+      const goalToAdd = {
+        ...newGoal,
+        id: Date.now(),
+        createdAt: new Date().toISOString()
+      };
+      
+      updateData({
+        ...data,
+        thinkBigGoals: [...(data.thinkBigGoals || []), goalToAdd]
+      });
+    }
+    
+    setNewGoal({
+      title: '',
+      description: '',
+      startDate: '',
+      endDate: '',
+      subGoals: []
+    });
+    setShowAddForm(false);
+  };
+
+  // 목표 삭제
+  const deleteGoal = (goalId) => {
+    if (window.confirm('정말로 이 목표를 삭제하시겠습니까?')) {
+      updateData({
+        ...data,
+        thinkBigGoals: data.thinkBigGoals.filter(goal => goal.id !== goalId)
+      });
     }
   };
 
-  const removeGoal = (goalId) => {
-    updateData({
-      ...data,
-      thinkBigGoals: data.thinkBigGoals.filter(g => g.id !== goalId)
+  // 목표 수정 시작
+  const startEditing = (goal) => {
+    setEditingGoal(goal);
+    setNewGoal({
+      title: goal.title,
+      description: goal.description,
+      startDate: goal.startDate,
+      endDate: goal.endDate,
+      subGoals: goal.subGoals || []
+    });
+    setShowAddForm(true);
+  };
+
+  // 하위 목표 추가
+  const addSubGoal = () => {
+    if (newSubGoal.trim()) {
+      setNewGoal({
+        ...newGoal,
+        subGoals: [...(newGoal.subGoals || []), {
+          id: Date.now(),
+          text: newSubGoal.trim(),
+          completed: false
+        }]
+      });
+      setNewSubGoal('');
+    }
+  };
+
+  // 하위 목표 삭제
+  const removeSubGoal = (subGoalId) => {
+    setNewGoal({
+      ...newGoal,
+      subGoals: newGoal.subGoals.filter(sub => sub.id !== subGoalId)
     });
   };
 
-  const getDday = (endDate) => {
+  // 하위 목표 완료 토글
+  const toggleSubGoal = (goalId, subGoalId) => {
+    const updatedGoals = data.thinkBigGoals.map(goal => {
+      if (goal.id === goalId) {
+        return {
+          ...goal,
+          subGoals: goal.subGoals.map(sub => 
+            sub.id === subGoalId ? { ...sub, completed: !sub.completed } : sub
+          )
+        };
+      }
+      return goal;
+    });
+    
+    updateData({
+      ...data,
+      thinkBigGoals: updatedGoals
+    });
+  };
+
+  // D-Day 계산
+  const calculateDDay = (endDate) => {
     const today = new Date();
     const end = new Date(endDate);
-    today.setHours(0, 0, 0, 0);
-    end.setHours(0, 0, 0, 0);
-    const diff = end.getTime() - today.getTime();
-    const dDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    return dDay;
+    const diffTime = end - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays > 0) {
+      return `D-${diffDays}`;
+    } else if (diffDays === 0) {
+      return 'D-Day';
+    } else {
+      return `D+${Math.abs(diffDays)}`;
+    }
   };
 
   return (
-    <div className="page-container">
-      <h1 className="page-title">장기 목표 (Think Big)</h1>
-      <p className="page-subtitle">인생의 큰 그림을 그리고, 장기적인 비전을 설정하는 공간입니다.</p>
-
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2rem' }}>
-        <button
-          className="action-btn add-btn"
-          onClick={() => {
-            setShowAddForm(!showAddForm);
-            setEditingGoal(null);
-            setNewGoal({ title: '', description: '', startDate: '', endDate: '' });
-          }}
-          title="새 장기 목표 추가"
+    <div className="think-big-container">
+      <div className="think-big-header">
+        <h1>🎯 Think Big Goals</h1>
+        <button 
+          className="add-goal-btn"
+          onClick={() => setShowAddForm(!showAddForm)}
         >
-          +
+          {showAddForm ? '취소' : '+ 새 목표 추가'}
         </button>
       </div>
 
+      {/* 목표 추가/수정 폼 */}
       {showAddForm && (
-        <div className="add-goal-form">
-          <div className="form-group">
-            <label>목표 제목</label>
+        <div className="goal-form-container">
+          <form onSubmit={handleSubmit} className="goal-form">
+            <h3>{editingGoal ? '목표 수정' : '새 목표 추가'}</h3>
+            
             <input
               type="text"
+              placeholder="목표 제목"
               value={newGoal.title}
-              onChange={(e) => setNewGoal({ ...newGoal, title: e.target.value })}
-              placeholder="장기적인 목표나 비전을 입력하세요"
+              onChange={(e) => setNewGoal({...newGoal, title: e.target.value})}
+              required
             />
-          </div>
-          <div className="form-group">
-            <label>설명 (선택사항)</label>
+            
             <textarea
+              placeholder="목표 설명"
               value={newGoal.description}
-              onChange={(e) => setNewGoal({ ...newGoal, description: e.target.value })}
-              placeholder="목표에 대한 구체적인 설명을 추가하세요"
-              rows="4"
+              onChange={(e) => setNewGoal({...newGoal, description: e.target.value})}
+              rows={3}
             />
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-            <div className="form-group">
-              <label>시작일</label>
-              <input
-                type="date"
-                value={newGoal.startDate}
-                onChange={(e) => setNewGoal({ ...newGoal, startDate: e.target.value })}
-              />
+            
+            <div className="date-inputs">
+              <div>
+                <label>시작일</label>
+                <input
+                  type="date"
+                  value={newGoal.startDate}
+                  onChange={(e) => setNewGoal({...newGoal, startDate: e.target.value})}
+                  required
+                />
+              </div>
+              <div>
+                <label>목표일</label>
+                <input
+                  type="date"
+                  value={newGoal.endDate}
+                  onChange={(e) => setNewGoal({...newGoal, endDate: e.target.value})}
+                  required
+                />
+              </div>
             </div>
-            <div className="form-group">
-              <label>종료일</label>
-              <input
-                type="date"
-                value={newGoal.endDate}
-                onChange={(e) => setNewGoal({ ...newGoal, endDate: e.target.value })}
-              />
+
+            {/* 하위 목표 섹션 */}
+            <div className="sub-goals-section">
+              <h4>하위 목표</h4>
+              <div className="sub-goal-input">
+                <input
+                  type="text"
+                  placeholder="하위 목표 입력"
+                  value={newSubGoal}
+                  onChange={(e) => setNewSubGoal(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSubGoal())}
+                />
+                <button type="button" onClick={addSubGoal}>추가</button>
+              </div>
+              
+              <div className="sub-goals-list">
+                {(newGoal.subGoals || []).map(subGoal => (
+                  <div key={subGoal.id} className="sub-goal-item">
+                    <span>{subGoal.text}</span>
+                    <button 
+                      type="button" 
+                      onClick={() => removeSubGoal(subGoal.id)}
+                      className="remove-sub-goal"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="form-actions">
-            <button className="save-btn" onClick={editingGoal ? updateGoal : addGoal}>
-              {editingGoal ? '목표 수정' : '목표 추가'}
-            </button>
-            <button
-              className="cancel-btn"
-              onClick={() => {
-                setShowAddForm(false);
-                setEditingGoal(null);
-                setNewGoal({ title: '', description: '', startDate: '', endDate: '' });
-              }}
-            >
-              취소
-            </button>
-          </div>
+            
+            <div className="form-buttons">
+              <button type="submit" className="submit-btn">
+                {editingGoal ? '수정' : '추가'}
+              </button>
+              <button 
+                type="button" 
+                onClick={() => {
+                  setShowAddForm(false);
+                  setEditingGoal(null);
+                  setNewGoal({
+                    title: '',
+                    description: '',
+                    startDate: '',
+                    endDate: '',
+                    subGoals: []
+                  });
+                }}
+                className="cancel-btn"
+              >
+                취소
+              </button>
+            </div>
+          </form>
         </div>
       )}
 
-      <div className="think-big-list">
-        {[...(data.thinkBigGoals || [])]
-          .sort((a, b) => new Date(a.endDate) - new Date(b.endDate))
-          .map((goal, index) => {
-            const dDay = getDday(goal.endDate);
-            return (
-              <div
-                key={goal.id}
-                className={`think-big-item ${draggedItem === index ? 'dragging' : ''}`}
-                draggable
-                onDragStart={(e) => handleDragStart(e, index)}
-                onDragOver={handleDragOver}
-                onDrop={(e) => handleDrop(e, index)}
-                onDragEnd={handleDragEnd}
-              >
-                <div className="drag-handle" title="드래그해서 순서 변경">⋮⋮</div>
-                <div className="think-big-header">
-                  <h3 className="think-big-title">{goal.title}</h3>
-                  <div className="think-big-actions">
-                    <button className="action-btn edit-btn" onClick={() => editGoal(goal)}>✏️</button>
-                    <button className="action-btn remove-btn" onClick={() => removeGoal(goal.id)}>-</button>
+      {/* 목표 목록 */}
+      <div className="goals-list">
+        {sortedGoals.map((goal) => {
+          const progress = calculateProgress(goal);
+          const dDay = calculateDDay(goal.endDate);
+          
+          return (
+            <div key={goal.id} className="goal-card">
+              <div className="goal-header">
+                <div className="goal-title-section">
+                  <h3>{goal.title}</h3>
+                  <span className={`d-day ${dDay.includes('+') ? 'overdue' : ''}`}>
+                    {dDay}
+                  </span>
+                </div>
+                <div className="goal-actions">
+                  <button onClick={() => startEditing(goal)} className="edit-btn">
+                    ✏️
+                  </button>
+                  <button onClick={() => deleteGoal(goal.id)} className="delete-btn">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+
+              <p className="goal-description">{goal.description}</p>
+              
+              <div className="goal-dates">
+                <span>📅 {goal.startDate} ~ {goal.endDate}</span>
+              </div>
+
+              {/* 진행률 바 */}
+              <div className="progress-section">
+                <div className="progress-header">
+                  <span>진행률</span>
+                  <span className="progress-percentage">{progress.toFixed(1)}%</span>
+                </div>
+                <div className="progress-bar">
+                  <div 
+                    className="progress-fill" 
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* 하위 목표 */}
+              {goal.subGoals && goal.subGoals.length > 0 && (
+                <div className="sub-goals-display">
+                  <h4>하위 목표</h4>
+                  <div className="sub-goals">
+                    {goal.subGoals.map(subGoal => (
+                      <div key={subGoal.id} className="sub-goal">
+                        <label className="sub-goal-checkbox">
+                          <input
+                            type="checkbox"
+                            checked={subGoal.completed}
+                            onChange={() => toggleSubGoal(goal.id, subGoal.id)}
+                          />
+                          <span className={subGoal.completed ? 'completed' : ''}>
+                            {subGoal.text}
+                          </span>
+                        </label>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <p className="think-big-period">
-                  {goal.startDate} ~ {goal.endDate}
-                </p>
-                <div className="dday-count" style={{
-                  alignSelf: 'flex-start',
-                  marginTop: '1rem',
-                  background: dDay <= 7 ? 'rgba(255, 107, 107, 0.3)' : 'rgba(255, 255, 255, 0.1)',
-                  color: dDay <= 7 ? '#FF6B6B' : 'var(--light-text)'
-                }}>
-                  D{dDay >= 0 ? '-' : '+'}{Math.abs(dDay)}
-                </div>
-                {goal.description && <p className="think-big-description" style={{marginTop: '1rem'}}>{goal.description}</p>}
-              </div>
-            );
-          })}
+              )}
+            </div>
+          );
+        })}
       </div>
+
+      {sortedGoals.length === 0 && (
+        <div className="empty-state">
+          <p>아직 설정된 큰 목표가 없습니다.</p>
+          <p>새로운 목표를 추가해보세요! 🎯</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,33 @@
+{
+  "motivationItems": [
+    {
+      "id": 1,
+      "text": "매일 조금씩 성장하는 것이 목표다",
+      "category": "mindset",
+      "date": "2024-12-31"
+    },
+    {
+      "id": 2,
+      "text": "운동은 나를 더 강하게 만든다",
+      "category": "fitness",
+      "date": "2024-12-30"
+    }
+  ],
+  "quotes": [
+    {
+      "text": "성공은 매일의 작은 노력들이 쌓여서 만들어진다",
+      "author": "Unknown"
+    },
+    {
+      "text": "강한 몸은 강한 정신을 만든다",
+      "author": "Unknown"
+    }
+  ],
+  "achievements": [
+    {
+      "title": "첫 100kg 스쿼트 달성",
+      "date": "2024-11-15",
+      "description": "드디어 스쿼트 100kg를 달성했다!"
+    }
+  ]
+}
