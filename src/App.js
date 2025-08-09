@@ -7,6 +7,7 @@ import ThinkBig from './components/ThinkBig';
 import Analysis from './components/Analysis';
 import Motivation from './components/Motivation';
 import WritingSpace from './components/Study';
+import Workout from './components/Workout';
 import GitHubStorage from './utils/githubStorage';
 import { useScreenSize } from './utils/deviceDetection';
 
@@ -179,6 +180,8 @@ function App() {
         return <Motivation data={data} updateData={updateData} />;
       case 'Writing Space':
         return <WritingSpace data={data} updateData={updateData} />;
+      case 'Workout':
+        return <Workout />;
       default:
         return <Home data={data} />;
     }
@@ -187,7 +190,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation', 'Writing Space'].map((tab) => (
+        {['Home', 'Weekly', 'Monthly', 'Think Big', 'Analysis', 'Motivation', 'Writing Space', 'Workout'].map((tab) => (
           <button
             key={tab}
             className={`nav-button ${activeTab === tab ? 'active' : ''}`}
