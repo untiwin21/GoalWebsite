@@ -16,6 +16,13 @@ const Workout = () => {
     bodyDevelopment: ''
   });
   const [aiAnalysisInput, setAiAnalysisInput] = useState('');
+  const [runningInput, setRunningInput] = useState({
+    type: 'longRun', // 'longRun' or 'interval'
+    distance: '',
+    time: '',
+    pace: '',
+    description: ''
+  });
 
   useEffect(() => {
     // 워크아웃 데이터 로드
@@ -124,7 +131,7 @@ const Workout = () => {
       
       if (exerciseName.includes('데드리프트') || exerciseName.includes('deadlift')) {
         category = 'deadlift';
-      } else if (exerciseName.includes('벤치') || exerciseName.includes('bench')) {
+      } else if (exerciseName.includes('벤치') || exerciseName.includes('bench') || exerciseName.includes('바벨 플랫 벤치 프레스')) {
         category = 'benchPress';
       } else if (exerciseName.includes('스쿼트') || exerciseName.includes('squat')) {
         category = 'squat';
@@ -207,6 +214,40 @@ const Workout = () => {
 
     saveWorkoutData(updatedData);
     setAiAnalysisInput('');
+  };
+
+  // 러닝 기록 추가
+  const handleRunningSubmit = () => {
+    if (!runningInput.distance && !runningInput.time) return;
+
+    const today = new Date().toISOString().split('T')[0];
+    const updatedData = { ...workoutData };
+    
+    const runningRecord = {
+      date: today,
+      distance: parseFloat(runningInput.distance) || 0,
+      time: runningInput.time,
+      pace: runningInput.pace,
+      description: runningInput.description
+    };
+
+    if (runningInput.type === 'longRun') {
+      updatedData.cardio.longRuns.push(runningRecord);
+    } else {
+      updatedData.cardio.intervals.push({
+        ...runningRecord,
+        type: runningInput.description
+      });
+    }
+
+    saveWorkoutData(updatedData);
+    setRunningInput({
+      type: 'longRun',
+      distance: '',
+      time: '',
+      pace: '',
+      description: ''
+    });
   };
 
   if (loading) {
@@ -301,6 +342,62 @@ const Workout = () => {
             </div>
             <button onClick={handleInbodySubmit} className="submit-btn">
               인바디 결과 저장
+            </button>
+          </div>
+
+          {/* 러닝 기록 입력 */}
+          <div className="input-form">
+            <h3>러닝 기록</h3>
+            <div className="running-type-selector">
+              <label>
+                <input
+                  type="radio"
+                  value="longRun"
+                  checked={runningInput.type === 'longRun'}
+                  onChange={(e) => setRunningInput({...runningInput, type: e.target.value})}
+                />
+                장거리 러닝
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="interval"
+                  checked={runningInput.type === 'interval'}
+                  onChange={(e) => setRunningInput({...runningInput, type: e.target.value})}
+                />
+                인터벌 훈련
+              </label>
+            </div>
+            
+            <div className="running-inputs">
+              <input
+                type="number"
+                placeholder="거리 (km)"
+                step="0.1"
+                value={runningInput.distance}
+                onChange={(e) => setRunningInput({...runningInput, distance: e.target.value})}
+              />
+              <input
+                type="text"
+                placeholder="시간 (예: 42:30)"
+                value={runningInput.time}
+                onChange={(e) => setRunningInput({...runningInput, time: e.target.value})}
+              />
+              <input
+                type="text"
+                placeholder="페이스 (예: 5:00)"
+                value={runningInput.pace}
+                onChange={(e) => setRunningInput({...runningInput, pace: e.target.value})}
+              />
+              <input
+                type="text"
+                placeholder={runningInput.type === 'interval' ? "훈련 타입 (예: 400m x 6)" : "메모"}
+                value={runningInput.description}
+                onChange={(e) => setRunningInput({...runningInput, description: e.target.value})}
+              />
+            </div>
+            <button onClick={handleRunningSubmit} className="submit-btn">
+              러닝 기록 저장
             </button>
           </div>
 
@@ -472,6 +569,82 @@ const Workout = () => {
                     <Tooltip />
                     <Bar dataKey="totalVolume" fill="#8884d8" name="총 볼륨(kg)" />
                   </BarChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+
+            {/* 러닝 기록 */}
+            <div className="running-section">
+              <h3>🏃‍♂️ 러닝 기록</h3>
+              
+              {cardio.longRuns.length > 0 && (
+                <div className="chart-container">
+                  <h4>장거리 러닝 진행</h4>
+                  <ResponsiveContainer width="100%" height={250}>
+                    <LineChart data={cardio.longRuns}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="date" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Line type="monotone" dataKey="distance" stroke="#82ca9d" name="거리(km)" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
+
+              {cardio.intervals.length > 0 && (
+                <div className="chart-container">
+                  <h4>인터벌 훈련 기록</h4>
+                  <div className="interval-records">
+                    {cardio.intervals.map((record, index) => (
+                      <div key={index} className="interval-record">
+                        <span className="date">{record.date}</span>
+                        <span className="type">{record.type || record.description}</span>
+                        <span className="pace">평균 페이스: {record.pace}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* 회복 및 컨디션 섹션 */}
+          <section className="recovery-section">
+            <h2>😴 회복 및 컨디션</h2>
+            
+            {recovery.sleepLog.length > 0 && (
+              <div className="chart-container">
+                <h3>수면 로그</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={recovery.sleepLog}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="sleepHours" stroke="#8884d8" name="수면시간(시간)" />
+                    <Line type="monotone" dataKey="quality" stroke="#82ca9d" name="수면의질(1-5점)" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+
+            {recovery.dailyCondition.length > 0 && (
+              <div className="chart-container">
+                <h3>주관적 컨디션</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={recovery.dailyCondition}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis domain={[1, 5]} />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="fatigue" stroke="#ff7300" name="피로도" />
+                    <Line type="monotone" dataKey="stress" stroke="#ffc658" name="스트레스" />
+                    <Line type="monotone" dataKey="motivation" stroke="#82ca9d" name="운동의욕" />
+                  </LineChart>
                 </ResponsiveContainer>
               </div>
             )}

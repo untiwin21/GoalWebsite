@@ -1,127 +1,48 @@
 {
   "bodyData": {
     "current": {
-      "weight": 75.2,
-      "muscleMass": 32.1,
-      "bodyFatPercentage": 15.8,
-      "vfa": 8.5,
-      "whr": 0.85,
-      "lastUpdated": "2024-12-31"
+      "weight": 0,
+      "muscleMass": 0,
+      "bodyFatPercentage": 0,
+      "vfa": 0,
+      "whr": 0,
+      "lastUpdated": ""
     },
-    "history": [
-      {
-        "date": "2024-12-01",
-        "weight": 76.5,
-        "muscleMass": 31.8,
-        "bodyFatPercentage": 16.2,
-        "vfa": 9.1,
-        "whr": 0.87
-      },
-      {
-        "date": "2024-12-15",
-        "weight": 75.8,
-        "muscleMass": 32.0,
-        "bodyFatPercentage": 16.0,
-        "vfa": 8.8,
-        "whr": 0.86
-      },
-      {
-        "date": "2024-12-31",
-        "weight": 75.2,
-        "muscleMass": 32.1,
-        "bodyFatPercentage": 15.8,
-        "vfa": 8.5,
-        "whr": 0.85
-      }
-    ]
+    "history": []
   },
   "strength": {
     "current1RM": {
-      "squat": 140,
-      "benchPress": 100,
-      "deadlift": 170,
-      "total": 410,
+      "squat": 0,
+      "benchPress": 0,
+      "deadlift": 0,
+      "total": 0,
       "goal": 450
     },
     "workingSets": {
-      "squat": [
-        { "date": "2024-12-01", "weight": 120, "reps": 5, "sets": 3 },
-        { "date": "2024-12-08", "weight": 122.5, "reps": 5, "sets": 3 },
-        { "date": "2024-12-15", "weight": 125, "reps": 5, "sets": 3 },
-        { "date": "2024-12-22", "weight": 127.5, "reps": 5, "sets": 3 },
-        { "date": "2024-12-29", "weight": 130, "reps": 5, "sets": 3 }
-      ],
-      "benchPress": [
-        { "date": "2024-12-03", "weight": 85, "reps": 5, "sets": 3 },
-        { "date": "2024-12-10", "weight": 87.5, "reps": 5, "sets": 3 },
-        { "date": "2024-12-17", "weight": 90, "reps": 5, "sets": 3 },
-        { "date": "2024-12-24", "weight": 92.5, "reps": 5, "sets": 3 },
-        { "date": "2024-12-31", "weight": 95, "reps": 5, "sets": 3 }
-      ],
-      "deadlift": [
-        { "date": "2024-12-05", "weight": 140, "reps": 5, "sets": 1 },
-        { "date": "2024-12-12", "weight": 145, "reps": 5, "sets": 1 },
-        { "date": "2024-12-19", "weight": 150, "reps": 5, "sets": 1 },
-        { "date": "2024-12-26", "weight": 155, "reps": 5, "sets": 1 }
-      ]
+      "squat": [],
+      "benchPress": [],
+      "deadlift": []
     },
-    "volumeHistory": [
-      { "date": "2024-12-01", "totalVolume": 8250 },
-      { "date": "2024-12-08", "totalVolume": 8400 },
-      { "date": "2024-12-15", "totalVolume": 8650 },
-      { "date": "2024-12-22", "totalVolume": 8800 },
-      { "date": "2024-12-29", "totalVolume": 9000 }
-    ]
+    "volumeHistory": []
   },
   "cardio": {
-    "longRuns": [
-      { "date": "2024-12-07", "distance": 8.5, "time": "42:30", "pace": "5:00" },
-      { "date": "2024-12-14", "distance": 9.0, "time": "44:15", "pace": "4:55" },
-      { "date": "2024-12-21", "distance": 9.5, "time": "46:00", "pace": "4:50" },
-      { "date": "2024-12-28", "distance": 10.0, "time": "48:20", "pace": "4:50" }
-    ],
-    "intervals": [
-      { "date": "2024-12-04", "type": "400m x 6", "avgPace": "4:20" },
-      { "date": "2024-12-11", "type": "400m x 6", "avgPace": "4:15" },
-      { "date": "2024-12-18", "type": "800m x 4", "avgPace": "4:25" },
-      { "date": "2024-12-25", "type": "400m x 8", "avgPace": "4:10" }
-    ]
+    "longRuns": [],
+    "intervals": []
   },
   "recovery": {
-    "sleepLog": [
-      { "date": "2024-12-25", "sleepHours": 7.5, "timeToSleep": 15, "quality": 4 },
-      { "date": "2024-12-26", "sleepHours": 8.0, "timeToSleep": 10, "quality": 5 },
-      { "date": "2024-12-27", "sleepHours": 6.5, "timeToSleep": 25, "quality": 3 },
-      { "date": "2024-12-28", "sleepHours": 7.8, "timeToSleep": 12, "quality": 4 },
-      { "date": "2024-12-29", "sleepHours": 8.2, "timeToSleep": 8, "quality": 5 },
-      { "date": "2024-12-30", "sleepHours": 7.0, "timeToSleep": 20, "quality": 3 },
-      { "date": "2024-12-31", "sleepHours": 8.5, "timeToSleep": 5, "quality": 5 }
-    ],
-    "dailyCondition": [
-      { "date": "2024-12-25", "fatigue": 3, "stress": 2, "motivation": 4 },
-      { "date": "2024-12-26", "fatigue": 2, "stress": 1, "motivation": 5 },
-      { "date": "2024-12-27", "fatigue": 4, "stress": 4, "motivation": 2 },
-      { "date": "2024-12-28", "fatigue": 3, "stress": 2, "motivation": 4 },
-      { "date": "2024-12-29", "fatigue": 2, "stress": 1, "motivation": 5 },
-      { "date": "2024-12-30", "fatigue": 4, "stress": 3, "motivation": 3 },
-      { "date": "2024-12-31", "fatigue": 1, "stress": 1, "motivation": 5 }
-    ]
+    "sleepLog": [],
+    "dailyCondition": []
   },
   "todayPlan": {
-    "date": "2025-01-01",
-    "workout": "근력 B (스쿼트/OHP/풀업)",
-    "focus": "스쿼트 폼 체크 및 중량 증가",
-    "targetVolume": 9200
+    "date": "",
+    "workout": "",
+    "focus": "",
+    "targetVolume": 0
   },
   "aiAnalysis": {
-    "lastAnalysis": "2024-12-31",
-    "weeklyDiagnosis": "이번 주 데이터 분석 결과, 수면의 질이 운동 수행능력과 직접적인 상관관계를 보이고 있습니다. VFA 수치가 개선되고 있어 내장지방 관리가 잘 되고 있으나, 스트레스 관리가 필요해 보입니다.",
-    "actionItems": [
-      "스쿼트 중량을 132.5kg로 증량 시도",
-      "수면 시간 8시간 이상 유지",
-      "스트레스 관리를 위한 명상 시간 확보",
-      "장거리 러닝 거리를 11km로 증량"
-    ],
-    "nextWeekFocus": "수면의 질 개선과 스쿼트 중량 증량에 집중"
+    "lastAnalysis": "",
+    "weeklyDiagnosis": "",
+    "actionItems": [],
+    "nextWeekFocus": ""
   }
 }
