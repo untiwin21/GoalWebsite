@@ -875,6 +875,13 @@
       "updatedAt": "2025-08-08T05:16:20.419Z"
     }
   ],
-  "todayTodos": [],
+  "todayTodos": [
+    {
+      "id": 1754756195739,
+      "text": "계획서 재제출",
+      "completed": false,
+      "createdAt": "2025-08-09T16:16:35.739Z"
+    }
+  ],
   "todayTodosDate": "Sun Aug 10 2025"
 }
