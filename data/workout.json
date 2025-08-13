@@ -1,0 +1,48 @@
+{
+  "bodyData": {
+    "current": {
+      "weight": 0,
+      "muscleMass": 0,
+      "bodyFatPercentage": 0,
+      "vfa": 0,
+      "whr": 0,
+      "lastUpdated": ""
+    },
+    "history": []
+  },
+  "strength": {
+    "current1RM": {
+      "squat": 0,
+      "benchPress": 0,
+      "deadlift": 0,
+      "total": 0,
+      "goal": 450
+    },
+    "workingSets": {
+      "squat": [],
+      "benchPress": [],
+      "deadlift": []
+    },
+    "volumeHistory": []
+  },
+  "cardio": {
+    "longRuns": [],
+    "intervals": []
+  },
+  "recovery": {
+    "sleepLog": [],
+    "dailyCondition": []
+  },
+  "todayPlan": {
+    "date": "",
+    "workout": "",
+    "focus": "",
+    "targetVolume": 0
+  },
+  "aiAnalysis": {
+    "lastAnalysis": "",
+    "weeklyDiagnosis": "",
+    "actionItems": [],
+    "nextWeekFocus": ""
+  }
+}
