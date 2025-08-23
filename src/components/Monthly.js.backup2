@@ -1,0 +1,227 @@
+import React, { useState } from 'react';
+
+const Monthly = ({ data, updateData }) => {
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [editingGoal, setEditingGoal] = useState(null);
+  const [newGoal, setNewGoal] = useState({ title: '', subGoals: [] });
+  const [newSubGoal, setNewSubGoal] = useState('');
+
+  const addGoal = () => {
+    if (newGoal.title.trim()) {
+      const goal = {
+        id: Date.now(),
+        title: newGoal.title,
+        subGoals: newGoal.subGoals.map((sub, index) => ({
+          id: Date.now() + index,
+          title: sub,
+          completed: false
+        })),
+        completed: false,
+        createdAt: new Date().toISOString()
+      };
+      
+      updateData({
+        ...data,
+        monthlyGoals: [...(data.monthlyGoals || []), goal]
+      });
+      
+      setNewGoal({ title: '', subGoals: [] });
+      setShowAddForm(false);
+    }
+  };
+
+  const addSubGoal = () => {
+    if (newSubGoal.trim()) {
+      setNewGoal({
+        ...newGoal,
+        subGoals: [...newGoal.subGoals, newSubGoal.trim()]
+      });
+      setNewSubGoal('');
+    }
+  };
+
+  const removeSubGoal = (index) => {
+    setNewGoal({
+      ...newGoal,
+      subGoals: newGoal.subGoals.filter((_, i) => i !== index)
+    });
+  };
+
+  const deleteGoal = (goalId) => {
+    updateData({
+      ...data,
+      monthlyGoals: data.monthlyGoals?.filter(goal => goal.id !== goalId) || []
+    });
+  };
+
+  const toggleSubGoal = (goalId, subGoalId) => {
+    const updatedGoals = data.monthlyGoals?.map(goal => {
+      if (goal.id === goalId) {
+        const updatedSubGoals = goal.subGoals.map(subGoal =>
+          subGoal.id === subGoalId
+            ? { ...subGoal, completed: !subGoal.completed }
+            : subGoal
+        );
+        return { ...goal, subGoals: updatedSubGoals };
+      }
+      return goal;
+    }) || [];
+
+    updateData({ ...data, monthlyGoals: updatedGoals });
+  };
+
+  return (
+    <div className="page-container">
+      <h1 className="page-title">월간 목표</h1>
+      
+      <div className="weekly-container">
+        <div className="goals-section">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+            <h3 style={{ color: 'var(--secondary-color)', fontSize: '1.5rem' }}>이번 달 목표</h3>
+              <button 
+                className="action-btn add-btn"
+                onClick={() => {
+                  setShowAddForm(!showAddForm);
+                  setEditingGoal(null);
+                  setNewGoal({ title: '', subGoals: [] });
+                }}
+                title="새 목표 추가"
+              >
+                +
+              </button>
+            </div>
+
+            {showAddForm && (
+              <div className="add-goal-form">
+                <div className="form-group">
+                  <label>목표 제목</label>
+                  <input
+                    type="text"
+                    value={newGoal.title}
+                    onChange={(e) => setNewGoal({ ...newGoal, title: e.target.value })}
+                    placeholder="새로운 월간 목표를 입력하세요"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label>하위 목표</label>
+                  <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                    <input
+                      type="text"
+                      value={newSubGoal}
+                      onChange={(e) => setNewSubGoal(e.target.value)}
+                      placeholder="하위 목표를 입력하세요"
+                      onKeyPress={(e) => e.key === 'Enter' && addSubGoal()}
+                    />
+                    <button 
+                      type="button" 
+                      className="action-btn add-btn"
+                      onClick={addSubGoal}
+                      title="하위 목표 추가"
+                    >
+                      +
+                    </button>
+                  </div>
+                  
+                  <div className="sub-goals-list">
+                    {newGoal.subGoals.map((subGoal, index) => (
+                      <div key={index} className="sub-goal-item">
+                        <span>{subGoal}</span>
+                        <button
+                          type="button"
+                          className="action-btn delete-btn"
+                          onClick={() => removeSubGoal(index)}
+                          title="하위 목표 삭제"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="form-actions">
+                  <button 
+                    type="button" 
+                    className="action-btn save-btn"
+                    onClick={addGoal}
+                  >
+                    추가
+                  </button>
+                  <button 
+                    type="button" 
+                    className="action-btn cancel-btn"
+                    onClick={() => {
+                      setShowAddForm(false);
+                      setEditingGoal(null);
+                      setNewGoal({ title: '', subGoals: [] });
+                      setNewSubGoal('');
+                    }}
+                  >
+                    취소
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="goals-list">
+              {data.monthlyGoals?.map((goal) => (
+                <div key={goal.id} className="goal-card">
+                  <div className="goal-header">
+                    <h3 className="goal-title">{goal.title}</h3>
+                    <div className="goal-actions">
+                      <button
+                        className="action-btn delete-btn"
+                        onClick={() => deleteGoal(goal.id)}
+                        title="목표 삭제"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="sub-goals">
+                    {goal.subGoals?.map((subGoal) => (
+                      <div key={subGoal.id} className={`sub-goal ${subGoal.completed ? 'completed' : ''}`}>
+                        <div className="sub-goal-content">
+                          <input
+                            type="checkbox"
+                            checked={subGoal.completed}
+                            onChange={() => toggleSubGoal(goal.id, subGoal.id)}
+                            className="sub-goal-checkbox"
+                          />
+                          <span className="sub-goal-text">{subGoal.title}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="goal-progress">
+                    <div className="progress-bar">
+                      <div 
+                        className="progress-fill" 
+                        style={{ 
+                          width: `${goal.subGoals?.length > 0 
+                            ? (goal.subGoals.filter(sg => sg.completed).length / goal.subGoals.length) * 100 
+                            : 0}%` 
+                        }}
+                      ></div>
+                    </div>
+                    <span className="progress-text">
+                      {goal.subGoals?.length > 0 
+                        ? `${goal.subGoals.filter(sg => sg.completed).length}/${goal.subGoals.length} 완료`
+                        : '0/0 완료'
+                      }
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Monthly;

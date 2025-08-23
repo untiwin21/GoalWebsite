@@ -1,0 +1,2111 @@
+{
+  "weeklyGoals": {
+    "2025": {
+      "32": [
+        {
+          "id": 1754296890180,
+          "title": "ghost detection 처리 논문 조사",
+          "subGoals": [
+            {
+              "id": 1754296890181,
+              "title": "논문 10개 간단 정리",
+              "completed": true
+            },
+            {
+              "id": 1754296890182,
+              "title": "괜찮은 3개 추리기",
+              "completed": true
+            },
+            {
+              "id": 1754296890183,
+              "title": "[Ghost Target Detection in 3D Radar Data using Point Cloud based Deep Neural Network] 정독 & 정리",
+              "completed": true
+            },
+            {
+              "id": 1754454460451,
+              "title": "코드 구현",
+              "completed": true
+            },
+            {
+              "id": 1754489460877,
+              "title": "딥러닝 돌려서 결과내기",
+              "completed": true
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-04T08:41:30.181Z"
+        },
+        {
+          "id": 1754297023964,
+          "title": "[도전학기] 파이썬을 이용한 인문사회과학논문 쓰기",
+          "subGoals": [
+            {
+              "id": 1754755992494,
+              "title": "논문 주제 다시 정하기",
+              "completed": true
+            },
+            {
+              "id": 1754297023964,
+              "title": "계획서 재체출",
+              "completed": true
+            },
+            {
+              "id": 1754449640258,
+              "title": "통계적 가설 검증 강의 수강",
+              "completed": false
+            },
+            {
+              "id": 1754297023969,
+              "title": "논문 데이터 수집 완료",
+              "completed": true
+            },
+            {
+              "id": 1754297023967,
+              "title": "논문 초안 작성",
+              "completed": true
+            },
+            {
+              "id": 1754297023965,
+              "title": "이번 주 과제",
+              "completed": true
+            },
+            {
+              "id": 1754297023966,
+              "title": "퀴즈 풀기",
+              "completed": true
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-04T08:43:43.964Z"
+        },
+        {
+          "id": 1754301636901,
+          "title": "독서 모임",
+          "subGoals": [
+            {
+              "id": 1754309415864,
+              "title": "F1 PPT 발표 준비",
+              "completed": true
+            },
+            {
+              "id": 1754309415865,
+              "title": "이기적 유전자 마저 읽기",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-04T10:00:36.901Z"
+        },
+        {
+          "id": 1754297220995,
+          "title": "공학수학1 복습",
+          "subGoals": [
+            {
+              "id": 1754297220995,
+              "title": "지난 개념 복습",
+              "completed": false
+            },
+            {
+              "id": 1754297220996,
+              "title": "11주차 강의 수강",
+              "completed": false
+            },
+            {
+              "id": 1754297220997,
+              "title": "12주차 강의 수강",
+              "completed": false
+            },
+            {
+              "id": 1754297220998,
+              "title": "13주차 강의 수강",
+              "completed": false
+            },
+            {
+              "id": 1754297220999,
+              "title": "14주차 강의 수강",
+              "completed": false
+            },
+            {
+              "id": 1754297221000,
+              "title": "15주차 강의 수강",
+              "completed": false
+            },
+            {
+              "id": 1754297250932,
+              "title": "복습용 자료 정리",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-04T08:47:00.995Z"
+        },
+        {
+          "id": 1754300424776,
+          "title": "바텐더 로봇팔 논문 조사 & 모터 선정",
+          "subGoals": [
+            {
+              "id": 1754300424776,
+              "title": "비슷한 스펙을 가진 로봇팔 연구 논문 10개 정리",
+              "completed": false
+            },
+            {
+              "id": 1754406687397,
+              "title": "로봇 하드웨어 오픈소스 검색",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-04T09:40:24.776Z"
+        },
+        {
+          "id": 1754409292013,
+          "title": "고체역학 복습",
+          "subGoals": [
+            {
+              "id": 1754409292013,
+              "title": "Week1",
+              "completed": false
+            },
+            {
+              "id": 1754409292014,
+              "title": "Week 2",
+              "completed": false
+            },
+            {
+              "id": 1754409292015,
+              "title": "Hw 1",
+              "completed": false
+            },
+            {
+              "id": 1754409292016,
+              "title": "Hw 2",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-05T15:54:52.013Z"
+        },
+        {
+          "id": 1754454515947,
+          "title": "혁펜하임",
+          "subGoals": [
+            {
+              "id": 1754454515947,
+              "title": "<Easy 딥러닝> Ch 1 정독",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-06T04:28:35.947Z"
+        },
+        {
+          "id": 1754300367517,
+          "title": "운동",
+          "subGoals": [
+            {
+              "id": 1754309606510,
+              "title": "월-가슴 운동",
+              "completed": true
+            },
+            {
+              "id": 1754309606512,
+              "title": "월-4.5km 달리기",
+              "completed": true
+            },
+            {
+              "id": 1754309606511,
+              "title": "화-등 운동",
+              "completed": true
+            },
+            {
+              "id": 1754309606513,
+              "title": "화- 7km 달리기",
+              "completed": false
+            },
+            {
+              "id": 1754309606514,
+              "title": "수-하체 운동",
+              "completed": false
+            },
+            {
+              "id": 1754309606515,
+              "title": "수- 4km 달리기",
+              "completed": false
+            },
+            {
+              "id": 1754309606516,
+              "title": "목-가슴 운동",
+              "completed": false
+            },
+            {
+              "id": 1754309606520,
+              "title": "목-2km 달리기",
+              "completed": false
+            },
+            {
+              "id": 1754309606517,
+              "title": "금-등 운동",
+              "completed": false
+            },
+            {
+              "id": 1754309606521,
+              "title": "금-2km 달리기",
+              "completed": false
+            },
+            {
+              "id": 1754309606518,
+              "title": "토- A세트",
+              "completed": true
+            },
+            {
+              "id": 1754309606519,
+              "title": "토- 9km 달리기",
+              "completed": false
+            },
+            {
+              "id": 1754309606523,
+              "title": "일- 3km 달리기",
+              "completed": false
+            },
+            {
+              "id": 1754309606522,
+              "title": "일- PT",
+              "completed": true
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-04T09:39:27.517Z"
+        },
+        {
+          "id": 1754309463071,
+          "title": "Task",
+          "subGoals": [
+            {
+              "id": 1754464538617,
+              "title": "위 홈페이지 수정하기",
+              "completed": true
+            },
+            {
+              "id": 1754309463071,
+              "title": "노트북 충전선 구매",
+              "completed": false
+            },
+            {
+              "id": 1754309463072,
+              "title": "자취할 때 필요한 것들 목록 정리",
+              "completed": false
+            },
+            {
+              "id": 1754309463073,
+              "title": "CV 작성",
+              "completed": false
+            },
+            {
+              "id": 1754309463074,
+              "title": "서울대 로보틱스 랩실 검색(겨울 인턴)",
+              "completed": true
+            },
+            {
+              "id": 1754408775266,
+              "title": "구독 내역 정리",
+              "completed": false
+            },
+            {
+              "id": 1754449695182,
+              "title": "<문화의 수수께끼> 구매",
+              "completed": false
+            },
+            {
+              "id": 1754631255832,
+              "title": "PT 횟수 확인",
+              "completed": true
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-04T12:11:03.071Z"
+        }
+      ],
+      "33": [
+        {
+          "id": 1754915909734,
+          "title": "Ghost Target Detection",
+          "subGoals": [
+            {
+              "id": 1754915909734,
+              "title": "[논문 읽기] RaGNNarok: A Light-Weight Graph Neural Network for Enhancing Radar Point Clouds on Unmanned Ground Vehicles",
+              "completed": false
+            },
+            {
+              "id": 1754915909735,
+              "title": "[딥러닝 학습 모델] input, output 정하기",
+              "completed": true
+            },
+            {
+              "id": 1754915909736,
+              "title": "[딥러닝 학습 모델] 모델 구현하고 학습시키기",
+              "completed": true
+            },
+            {
+              "id": 1754915909737,
+              "title": "[딥러닝 학습 모델] 테스트한 결과로 모든 프레임의 점들을 화면에 띄우기",
+              "completed": true
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-11T12:38:29.734Z"
+        },
+        {
+          "id": 1754916049878,
+          "title": "넥슨 코드 배틀",
+          "subGoals": [
+            {
+              "id": 1754916049878,
+              "title": "덱으로부터 가능한 가짓수 정리하는 시뮬레이션 구현",
+              "completed": true
+            },
+            {
+              "id": 1754916049879,
+              "title": "상대에 따라 다르게 전략을 구사하는 모델 구현",
+              "completed": false
+            },
+            {
+              "id": 1754916049880,
+              "title": "샘플 AI 10차전 모두 승리",
+              "completed": false
+            },
+            {
+              "id": 1754916049881,
+              "title": "전체 10등 안에 들기",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-11T12:40:49.878Z"
+        },
+        {
+          "id": 1754916146504,
+          "title": "도전학기; Python을 활용한 인문사회과학 논문 쓰기",
+          "subGoals": [
+            {
+              "id": 1754916146504,
+              "title": "5주차 1차시 강의 수강",
+              "completed": true
+            },
+            {
+              "id": 1754916146505,
+              "title": "5주차 2차시 강의 수강",
+              "completed": false
+            },
+            {
+              "id": 1754916146506,
+              "title": "5주차 과제",
+              "completed": false
+            },
+            {
+              "id": 1754916146507,
+              "title": "논문 초안 작성하기",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-11T12:42:26.504Z"
+        },
+        {
+          "id": 1754916247587,
+          "title": "독서 토론",
+          "subGoals": [
+            {
+              "id": 1754916247587,
+              "title": "F1 노션 발표자료 완성",
+              "completed": false
+            },
+            {
+              "id": 1754916247588,
+              "title": "문화의 수수께끼 구매",
+              "completed": true
+            },
+            {
+              "id": 1754916247589,
+              "title": "문화의 수수께끼 ch 1 정독",
+              "completed": true
+            },
+            {
+              "id": 1754916247590,
+              "title": "문화의 수수께끼 ch 1 생각정리",
+              "completed": true
+            },
+            {
+              "id": 1754916247591,
+              "title": "문화의 수수께끼 ch 2 정독",
+              "completed": false
+            },
+            {
+              "id": 1754916247592,
+              "title": "문화의 수수께끼 ch2 생각정리",
+              "completed": false
+            },
+            {
+              "id": 1755226461890,
+              "title": "문화의 수수께끼 ch 3 정독",
+              "completed": false
+            },
+            {
+              "id": 1755226461891,
+              "title": "문화의 수수께끼 ch 3 생각정리",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-11T12:44:07.587Z"
+        },
+        {
+          "id": 1754916344378,
+          "title": "공학수학 공부",
+          "subGoals": [
+            {
+              "id": 1755170803088,
+              "title": "공수 1 First order ordinary differential equations 정독",
+              "completed": false
+            },
+            {
+              "id": 1755170803089,
+              "title": "공수1 Complex Numbers 정독",
+              "completed": false
+            },
+            {
+              "id": 1755170803090,
+              "title": "공수1  The Complex Exponential 정독",
+              "completed": false
+            },
+            {
+              "id": 1755170803091,
+              "title": "공수1 Input Response Models 정독",
+              "completed": false
+            },
+            {
+              "id": 1755170803092,
+              "title": "공수2 11.1 정독",
+              "completed": false
+            },
+            {
+              "id": 1755170803093,
+              "title": "공수2 11.2 정독",
+              "completed": false
+            },
+            {
+              "id": 1755170803094,
+              "title": "공수2 11.3 정독",
+              "completed": false
+            },
+            {
+              "id": 1755170803095,
+              "title": "공수1 Input Respons model 전까지 개념 영상 촬영",
+              "completed": false
+            },
+            {
+              "id": 1755170803096,
+              "title": "공수2 11.1~2 영상 촬영",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-11T12:45:44.378Z"
+        },
+        {
+          "id": 1754916381727,
+          "title": "혁펜하임 공부",
+          "subGoals": [
+            {
+              "id": 1754916381727,
+              "title": "Easy 딥러닝 Ch1 정독",
+              "completed": false
+            },
+            {
+              "id": 1754916381728,
+              "title": "인스톨 파이토치스톨 파이토치 1-1 수강",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-11T12:46:21.727Z"
+        },
+        {
+          "id": 1754916496481,
+          "title": "바텐더 로봇팔",
+          "subGoals": [
+            {
+              "id": 1754916496481,
+              "title": "모터 선정",
+              "completed": false
+            },
+            {
+              "id": 1754916496482,
+              "title": "참고할 로봇팔  선정",
+              "completed": false
+            },
+            {
+              "id": 1754916496483,
+              "title": "payload 및 길이 설정",
+              "completed": false
+            },
+            {
+              "id": 1755226509033,
+              "title": "연구동향 정리",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-11T12:48:16.481Z"
+        }
+      ],
+      "34": [
+        {
+          "id": 1755404599381,
+          "title": "[Main] Lidar Radar 센서퓨전 딥러닝 모델 구현",
+          "subGoals": [
+            {
+              "id": 1755404599381,
+              "title": "Data 2 -> 수동 Labeling",
+              "completed": true
+            },
+            {
+              "id": 1755404599383,
+              "title": "Data 4 -> Labeling",
+              "completed": false
+            },
+            {
+              "id": 1755404599382,
+              "title": "GNN 학습",
+              "completed": false
+            },
+            {
+              "id": 1755404599384,
+              "title": "Data 4 -> 모델로 하여금 예측",
+              "completed": false
+            },
+            {
+              "id": 1755404599385,
+              "title": "Data 4 성능 잘 나오면, 객체 분류 구현",
+              "completed": false
+            },
+            {
+              "id": 1755404599386,
+              "title": "객체 Pairing 구현",
+              "completed": false
+            },
+            {
+              "id": 1755404599387,
+              "title": "물리적, 시간적 타당성 검증",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-17T04:23:19.381Z"
+        },
+        {
+          "id": 1755404984931,
+          "title": "[Main] 공학수학 1 Systems of ODEs 까지 공부",
+          "subGoals": [
+            {
+              "id": 1755404984931,
+              "title": "Complex Numbers 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984932,
+              "title": "Complex Exponential 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984933,
+              "title": "Input-response model 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984934,
+              "title": "Linear Differential Operators 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984935,
+              "title": "Impulse Repsonse and Convolution 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984936,
+              "title": "Laplace Transform 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984937,
+              "title": "Linear Systems -1 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984938,
+              "title": "Linear Systems -2 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984939,
+              "title": "Linear Systems -3 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984940,
+              "title": "Graphing ODE systems 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984941,
+              "title": "Linear Systems -5 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984942,
+              "title": "Lineary Systems -6 정독",
+              "completed": false
+            },
+            {
+              "id": 1755404984943,
+              "title": "Section 2 문풀",
+              "completed": false
+            },
+            {
+              "id": 1755404984944,
+              "title": "Section 3 문풀",
+              "completed": false
+            },
+            {
+              "id": 1755404984945,
+              "title": "Section 4 문풀",
+              "completed": false
+            },
+            {
+              "id": 1755404984946,
+              "title": "Section 5 문풀",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-17T04:29:44.931Z"
+        },
+        {
+          "id": 1755405161618,
+          "title": "[Main] 바텐더 로봇팔 하드웨어 구현",
+          "subGoals": [
+            {
+              "id": 1755405161618,
+              "title": "참고할 로봇 팔 하드웨어 검색",
+              "completed": false
+            },
+            {
+              "id": 1755405161619,
+              "title": "모터 선정",
+              "completed": false
+            },
+            {
+              "id": 1755405161620,
+              "title": "Base 설계",
+              "completed": false
+            },
+            {
+              "id": 1755405161621,
+              "title": "Rod_base 설계",
+              "completed": false
+            },
+            {
+              "id": 1755405161622,
+              "title": "joint_shoulder 설계",
+              "completed": false
+            },
+            {
+              "id": 1755405161623,
+              "title": "joint_elbow 설계",
+              "completed": false
+            },
+            {
+              "id": 1755405161624,
+              "title": "rod_forearm 설계",
+              "completed": false
+            },
+            {
+              "id": 1755405161625,
+              "title": "joint_wrist 설계",
+              "completed": false
+            },
+            {
+              "id": 1755405161626,
+              "title": "gripper 설계",
+              "completed": false
+            },
+            {
+              "id": 1755405161627,
+              "title": "3D 프린팅",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-17T04:32:41.618Z"
+        },
+        {
+          "id": 1755405283498,
+          "title": "[Growth] 다음 독서토론 준비",
+          "subGoals": [
+            {
+              "id": 1755405283498,
+              "title": "Ch 2 정독",
+              "completed": false
+            },
+            {
+              "id": 1755405283499,
+              "title": "Ch 3 정독",
+              "completed": false
+            },
+            {
+              "id": 1755405283500,
+              "title": "Ch 4 정독",
+              "completed": false
+            },
+            {
+              "id": 1755405283501,
+              "title": "Ch 5 정독",
+              "completed": false
+            },
+            {
+              "id": 1755405283502,
+              "title": "Ch 6 정독",
+              "completed": false
+            },
+            {
+              "id": 1755405283503,
+              "title": "F1 Tire 관련 내용 조사",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-17T04:34:43.498Z"
+        },
+        {
+          "id": 1755405469479,
+          "title": "[Growth] 기타 자기계발",
+          "subGoals": [
+            {
+              "id": 1755405469479,
+              "title": "15km 쉬지 않고 달리기",
+              "completed": false
+            },
+            {
+              "id": 1755405469480,
+              "title": "스피치 연습- 2, 3, 4강",
+              "completed": false
+            },
+            {
+              "id": 1755405553764,
+              "title": "도전학기 5주차 과제",
+              "completed": false
+            },
+            {
+              "id": 1755405553765,
+              "title": "도전학기 6주차 과제",
+              "completed": false
+            },
+            {
+              "id": 1755405553766,
+              "title": "마이루틴 쓰기",
+              "completed": false
+            },
+            {
+              "id": 1755405553767,
+              "title": "<Easy 딥러닝> 1장 마저 읽기",
+              "completed": false
+            },
+            {
+              "id": 1755405553768,
+              "title": "<Easy 딥러닝> 2장 정독",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-17T04:37:49.479Z"
+        },
+        {
+          "id": 1755405662256,
+          "title": "Task",
+          "subGoals": [
+            {
+              "id": 1755405662256,
+              "title": "자취방 준비 리스트 정리",
+              "completed": true
+            },
+            {
+              "id": 1755405662257,
+              "title": "자취방 이사 완료",
+              "completed": true
+            },
+            {
+              "id": 1755405662258,
+              "title": "자취방 여러 규칙들 세우기(청소 주기, 밥, 빨래 등등)",
+              "completed": false
+            },
+            {
+              "id": 1755405662259,
+              "title": "구독 리스트 정리",
+              "completed": false
+            },
+            {
+              "id": 1755405662260,
+              "title": "수강신청 완료",
+              "completed": true
+            },
+            {
+              "id": 1755405662261,
+              "title": "PT 횟수 세기",
+              "completed": true
+            },
+            {
+              "id": 1755405980386,
+              "title": "이 홈페이지 <오늘 할 일> 인라인 수정가능하도록 수정",
+              "completed": false
+            },
+            {
+              "id": 1755405980387,
+              "title": "이 홈페이지 Home에 시간표 추가",
+              "completed": false
+            },
+            {
+              "id": 1755405980388,
+              "title": "이 홈페이지 Writing Space 리스트 가로 길이 조정",
+              "completed": false
+            },
+            {
+              "id": 1755405980389,
+              "title": "이 홈페이지 Budget 시각화 보완",
+              "completed": false
+            },
+            {
+              "id": 1755405998767,
+              "title": "개인 웹사이트 Project 부분 수정",
+              "completed": false
+            },
+            {
+              "id": 1755519836139,
+              "title": "민혁씨 수강신청 대리",
+              "completed": true
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-17T04:41:02.256Z"
+        }
+      ],
+      "35": [
+        {
+          "id": 1755846651936,
+          "title": "학부연구생",
+          "subGoals": [
+            {
+              "id": 1755851705940,
+              "title": "1. IMU angular_z tf 되는지 확인해보기",
+              "completed": false
+            },
+            {
+              "id": 1755846651939,
+              "title": "2. Lidar, Radar, IMU 속도값 저장",
+              "completed": false
+            },
+            {
+              "id": 1755846651937,
+              "title": "3. Ramsac으로 벽 제거",
+              "completed": false
+            },
+            {
+              "id": 1755846651938,
+              "title": "4. 움직이는 물체 속도값 저장",
+              "completed": false
+            },
+            {
+              "id": 1755847078944,
+              "title": "GNN 아이디어 구체화",
+              "completed": false
+            },
+            {
+              "id": 1755847078945,
+              "title": "논문 조사",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-22T07:10:51.937Z"
+        }
+      ]
+    }
+  },
+  "monthlyGoals": [
+    {
+      "id": 1754308471936,
+      "title": "학부연구생",
+      "subGoals": [
+        {
+          "id": 1754308471936,
+          "title": "[RaGNNarok: A Light-Weight Graph Neural Network for Enhancing Radar Point Clouds on Unmanned Ground Vehicles] 논문 읽고 요약",
+          "completed": false
+        },
+        {
+          "id": 1754308471937,
+          "title": "Radar의 Ghost Target 지우는 딥러닝 모델 구현",
+          "completed": false
+        },
+        {
+          "id": 1754308471938,
+          "title": "실시간 물체 감지 딥러닝 모델 구현(로봇 PC용)",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T11:54:31.936Z"
+    },
+    {
+      "id": 1754297271931,
+      "title": "공학수학 1 복습",
+      "subGoals": [
+        {
+          "id": 1754306636751,
+          "title": "1st order ODE",
+          "completed": false
+        },
+        {
+          "id": 1754306636758,
+          "title": "2nd order ODE",
+          "completed": false
+        },
+        {
+          "id": 1754306636753,
+          "title": "Convolution",
+          "completed": false
+        },
+        {
+          "id": 1754306636752,
+          "title": "Laplace Transform",
+          "completed": false
+        },
+        {
+          "id": 1755315399022,
+          "title": "Systems of ODE",
+          "completed": false
+        },
+        {
+          "id": 1754306636754,
+          "title": "12주차",
+          "completed": false
+        },
+        {
+          "id": 1754306636755,
+          "title": "13주차",
+          "completed": false
+        },
+        {
+          "id": 1754306636756,
+          "title": "14주차",
+          "completed": false
+        },
+        {
+          "id": 1754306636757,
+          "title": "15주차",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:47:51.931Z"
+    },
+    {
+      "id": 1754297278735,
+      "title": "공학수학 2 기말고사 범위 공부",
+      "subGoals": [
+        {
+          "id": 1754306766583,
+          "title": "원서 ch 11",
+          "completed": false
+        },
+        {
+          "id": 1754306766584,
+          "title": "원서 ch 12",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:47:58.735Z"
+    },
+    {
+      "id": 1754297310229,
+      "title": "바텐더 로봇팔 하드웨어 완성",
+      "subGoals": [
+        {
+          "id": 1754306550194,
+          "title": "모터 선정 & 구매",
+          "completed": false
+        },
+        {
+          "id": 1754306550195,
+          "title": "하드웨어 설계",
+          "completed": false
+        },
+        {
+          "id": 1754306550196,
+          "title": "URDF 파일 생성",
+          "completed": false
+        },
+        {
+          "id": 1754306550197,
+          "title": "ROS2 Gazebo 환경에서 키보드로 수동조작",
+          "completed": false
+        },
+        {
+          "id": 1754306550198,
+          "title": "하드웨어 조립",
+          "completed": false
+        },
+        {
+          "id": 1754306550199,
+          "title": "로봇팔 키보드 수동조작",
+          "completed": false
+        },
+        {
+          "id": 1754306550200,
+          "title": "관련 논문 3개 정리",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T08:48:30.229Z"
+    },
+    {
+      "id": 1754306602605,
+      "title": "고체역학 공부",
+      "subGoals": [
+        {
+          "id": 1754306602605,
+          "title": "1주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602606,
+          "title": "2주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602607,
+          "title": "3주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602608,
+          "title": "4주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602609,
+          "title": "5주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602610,
+          "title": "6주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602611,
+          "title": "7주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602612,
+          "title": "8주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602613,
+          "title": "9주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602614,
+          "title": "10주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602615,
+          "title": "11주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602616,
+          "title": "12주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602617,
+          "title": "13주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602618,
+          "title": "14주차",
+          "completed": false
+        },
+        {
+          "id": 1754306602619,
+          "title": "15주차",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T11:23:22.605Z"
+    },
+    {
+      "id": 1754308577827,
+      "title": "독서",
+      "subGoals": [
+        {
+          "id": 1754308577827,
+          "title": "문화의 수수께끼",
+          "completed": true
+        },
+        {
+          "id": 1754308577828,
+          "title": "이기적 유전자 마무리",
+          "completed": false
+        },
+        {
+          "id": 1754308577829,
+          "title": "아비투스",
+          "completed": false
+        },
+        {
+          "id": 1754308577830,
+          "title": "천문학자는 별을 보지 않는다",
+          "completed": false
+        },
+        {
+          "id": 1754463286850,
+          "title": "카네기 인간관계론",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-04T11:56:17.827Z"
+    },
+    {
+      "id": 1754384369641,
+      "title": "Easy 딥러닝 완독",
+      "subGoals": [
+        {
+          "id": 1754384369641,
+          "title": "ch 1 정독 및 정리",
+          "completed": false
+        },
+        {
+          "id": 1754384369642,
+          "title": "Ch 2 정독 및 정리",
+          "completed": false
+        },
+        {
+          "id": 1755263596464,
+          "title": "Ch 3 정독 및 정리",
+          "completed": false
+        },
+        {
+          "id": 1755263596465,
+          "title": "Ch 4 정독 및 정리",
+          "completed": false
+        },
+        {
+          "id": 1755263596466,
+          "title": "Ch 5 정독 및 정리",
+          "completed": false
+        },
+        {
+          "id": 1755263596467,
+          "title": "Ch 6 정독 및 정리",
+          "completed": false
+        },
+        {
+          "id": 1755263596468,
+          "title": "Ch 7 정독 및 정리",
+          "completed": false
+        },
+        {
+          "id": 1755263596469,
+          "title": "Ch 8 정독 및 정리",
+          "completed": false
+        }
+      ],
+      "completed": false,
+      "createdAt": "2025-08-05T08:59:29.641Z"
+    }
+  ],
+  "thinkBigGoals": [
+    {
+      "title": "학부 학점 4.0 이상 졸업",
+      "startDate": "2025-08-05",
+      "endDate": "2027-02-28",
+      "subGoals": [],
+      "id": 1754380907032
+    },
+    {
+      "title": "3학년 여름~4학년 겨울 1저자 논문 2편 accept",
+      "startDate": "2025-08-05",
+      "endDate": "2026-12-31",
+      "subGoals": [],
+      "id": 1754380848634
+    },
+    {
+      "id": 1754622086616,
+      "title": "대학생 창작 무인 모빌리티 대회 입상",
+      "startDate": "2025-08-08",
+      "endDate": "2025-10-31",
+      "subGoals": [],
+      "completed": false,
+      "createdAt": "2025-08-08T03:01:26.616Z"
+    },
+    {
+      "title": "석사 때 탑티어 논문 3편 작성(3개)  -> 미국박사 합격",
+      "startDate": "2025-08-05",
+      "endDate": "2028-06-30",
+      "subGoals": [
+        {
+          "id": 1754721247316,
+          "text": "1/3",
+          "completed": false
+        },
+        {
+          "id": 1754721251134,
+          "text": "2/3",
+          "completed": false
+        },
+        {
+          "id": 1754721255698,
+          "text": "3/3",
+          "completed": false
+        },
+        {
+          "id": 1754721261182,
+          "text": "미국 대학원 컨택 성공",
+          "completed": false
+        }
+      ],
+      "id": 1754379914089
+    },
+    {
+      "title": "로봇 5개 만들기",
+      "startDate": "2025-08-05",
+      "endDate": "2027-02-28",
+      "subGoals": [
+        {
+          "id": 1754721285608,
+          "text": "바텐더 로봇팔",
+          "completed": false
+        },
+        {
+          "id": 1754721289529,
+          "text": "드론",
+          "completed": false
+        }
+      ],
+      "id": 1754381149744
+    }
+  ],
+  "completedTasks": [],
+  "motivationItems": [
+    {
+      "id": 1754299955568,
+      "title": "유행 따라, 남들 따라 살면 절대 인정 못 받는 이유 | 김갑진 KAIST 물리학과 교수 | 꿈 도전 성장 | 세바시 1999회",
+      "url": "https://www.youtube.com/watch?v=NfanUrcvtVY",
+      "type": "youtube",
+      "notes": "나는 무조건 남과 달라야 한다. \n경쟁을 한다는 것. 경쟁에서 이길 필요가 없다. 내가 아니더라도 다른 사람이 해줄 거니까. \n남들이 이거 해라. 이거하면 성공한다. 저 사람 말이 맞다는 것을 증명하기 위해 왜 내 인생을 허비해야 하는가?",
+      "createdAt": "2025-08-04T09:32:35.568Z"
+    },
+    {
+      "id": 1754378920905,
+      "title": " 방사능 때문에 카메라가 꺼진 로봇❓ 인류에 따뜻한 행복을 주는 UCLA 교수 겸 로봇 공학자 '데니스 홍' 자기님 | #유퀴즈온더블럭",
+      "url": "https://www.youtube.com/watch?v=6nk6TDU8TXs",
+      "type": "youtube",
+      "notes": "지금까지 40~50개의 로봇을 만드심; 재난현장, 고속이동 2족, 4족, 암벽 등반, 로봇 손, 소프트 로봇 등등\n\n3족 로봇 ->공원에서 딸의 머리를 땋는 아주머니의 모습을 봄. 머리카락이 다리로 보이게 됨. 여기서 아이디어를 얻음\n\n발루 -> 헬륨 풍선에 다리 달린 로봇. 물 위도 걷고 외줄도 탐. 이족 보행 로봇의 문제점인 잘 넘어지고 느린 문제를 해결하고 싶었다. 자신에게 황당한 질문을 던지면 황당한 대답이 나온다. 여기서 아이디어가 나올 때도 있다. 만약 중력의 방향이 반대라면? 헬륨 풍선을 쓰자. 넘어질 수가 없다!\n\n휴머노이드 로봇 다윈의 기술을 오픈 소스로 공개하였다. 그 결과 전세계 곳곳에서 활용되며 교육용으로 사용되기 시작했다. 왜 수많은 돈과 노력을 들인 기법을 왜 퍼트렸을까? 살면서 만나는 갈림길이 많다. 여기에 봉착했을 때 판단하는 자신만의 비법이 있다. 제일 중요한 것은 가슴에서 나오는 것이다. 스스로에게 이 질문을 하면 답이 항상 나온다. 내가 애초에 이걸 왜 시작했지? 아 연구와 교육을 위해 개발했기 때문에 오픈 소스로 공개하는 게 맞다.\n\n사람을 살리는 기술이 해하는 기술로 바뀌면 어떻게 해야 하는가? 교수님은 무기가 달린 로봇은 절대 만들지 않는다. 내가 안 하면 누군가는 할 것이다. 그러니 내가 조금 더 옳은 방향으로 써야겠다. 결국 윤리의 문제인데, 이것은 기술의 문제가 아닌 쓰는 사람의 문제다. 예를 들어 노벨은 다이너마이트의 악용 사례를 보고, 노벨상을 만드는데 사용했다. 아인슈타인은 핵 반대 운동을 했다. 교수님은 학교에서 학생들과 정기적으로 토론한다. 우리가 개발한 기술이 어떤 영향을 미치는지 토론한다.\n\n목숨을 걸고 후쿠시마 원전을 들어간 적이 있다. 팩봇이라는 로봇을 원전에 투입했다. 방사능 때문에 카메라 센서가 죽고 있었다. 그러다 화면이 다 꺼져버렸다. \n\n시각장애인을 위한 무인자동차 대회가 열렸다. 모두가 부정적이었고, 혼자 참가하게 된 것이다. 불가능하다 말하는 사람들 앞에서 코를 납작하게 해야겠다는 생각을 하게 된 것이다. \n\n저항이 있다는 것은 세상을 바꾼다는 증거야.\n------------------------------------------------------------------------\n정말 감명깊은 영상이다. 기본적인 태도부터가 활기차고 긍정적이고 자신감 넘친다. 그리고 내가 원하는 로봇들을 개발한다. 이 연구실에서 일해보고 싶다. 한국이 아닌 해외에서 저런 사람들과 같이 일해보고 싶고, 배우고 싶다.",
+      "createdAt": "2025-08-05T07:28:40.905Z"
+    }
+  ],
+  "events": [
+    {
+      "id": 1754390734303,
+      "date": "2025-08-06",
+      "title": "학연생 회의",
+      "time": "",
+      "description": "",
+      "createdAt": "2025-08-05T10:45:34.303Z"
+    },
+    {
+      "id": 1754630902977,
+      "date": "2025-08-08",
+      "title": "태희 약속",
+      "time": "16:00",
+      "description": "수서역 스타벅스",
+      "createdAt": "2025-08-08T05:28:22.977Z"
+    },
+    {
+      "id": 1754790021645,
+      "date": "2025-08-10",
+      "title": "태희 아트페어",
+      "time": "11:40",
+      "description": "",
+      "createdAt": "2025-08-10T01:40:21.645Z",
+      "updatedAt": "2025-08-14T01:32:03.817Z",
+      "status": "completed"
+    },
+    {
+      "id": 1754630971461,
+      "date": "2025-08-11",
+      "title": "[학부연구생] Ghost Detection 딥러닝 학습 결과 공유",
+      "time": "",
+      "description": "강현창 선배님께 보고/\n제대로 된 결과 내서 보고하자",
+      "createdAt": "2025-08-08T05:29:31.461Z",
+      "updatedAt": "2025-08-14T01:32:06.355Z",
+      "status": "completed"
+    },
+    {
+      "id": 1755158172703,
+      "date": "2025-08-14",
+      "title": "[연구실] 회의",
+      "time": "",
+      "description": "",
+      "status": "completed",
+      "createdAt": "2025-08-14T07:56:12.703Z",
+      "updatedAt": "2025-08-14T07:56:15.498Z"
+    },
+    {
+      "id": 1755232360994,
+      "date": "2025-08-14",
+      "title": "넥슨 코드배틀 회의",
+      "time": "21:00",
+      "description": "",
+      "status": "completed",
+      "createdAt": "2025-08-15T04:32:40.994Z",
+      "updatedAt": "2025-08-15T04:32:43.831Z"
+    },
+    {
+      "id": 1755232390803,
+      "date": "2025-08-15",
+      "title": "넥슨코드배틀 회의",
+      "time": "22:00",
+      "description": "",
+      "status": "skipped",
+      "createdAt": "2025-08-15T04:33:10.803Z",
+      "updatedAt": "2025-08-16T02:23:12.622Z"
+    },
+    {
+      "id": 1755232433629,
+      "date": "2025-08-16",
+      "title": "독서토론",
+      "time": "09:00",
+      "description": "주제발표 & 문화의 수수께끼 토론",
+      "status": "completed",
+      "createdAt": "2025-08-15T04:33:53.629Z",
+      "updatedAt": "2025-08-16T02:23:14.383Z"
+    },
+    {
+      "id": 1755232455353,
+      "date": "2025-08-16",
+      "title": "태희",
+      "time": "17:30",
+      "description": "-혜화\n-만화카페 가서 가재가 노래하는 곳 영화보기",
+      "status": "completed",
+      "createdAt": "2025-08-15T04:34:15.353Z",
+      "updatedAt": "2025-08-16T14:06:06.329Z"
+    },
+    {
+      "id": 1754390812840,
+      "date": "2025-08-18",
+      "title": "자취방 계약 마무리",
+      "time": "13:00",
+      "description": "",
+      "createdAt": "2025-08-05T10:46:52.840Z",
+      "status": "completed",
+      "updatedAt": "2025-08-18T06:13:32.186Z"
+    },
+    {
+      "id": 1754631158036,
+      "date": "2025-08-19",
+      "title": "선착순 수강신청",
+      "time": "10:00",
+      "description": "밤 11시까지/2차 증원 28일",
+      "createdAt": "2025-08-08T05:32:38.036Z",
+      "status": "completed",
+      "updatedAt": "2025-08-19T11:06:32.352Z"
+    },
+    {
+      "id": 1754631033873,
+      "date": "2025-08-22",
+      "title": "등록금 납부",
+      "time": "",
+      "description": "2025. 08. 22.(금) ~ 08. 28.(목), 09. 01.(월) ~ 09. 05.(금)",
+      "createdAt": "2025-08-08T05:30:33.873Z"
+    },
+    {
+      "id": 1754638948259,
+      "date": "2025-08-28",
+      "title": "ㅊㄱ",
+      "time": "",
+      "description": "",
+      "createdAt": "2025-08-08T07:42:28.259Z"
+    },
+    {
+      "id": 1754631214768,
+      "date": "2025-09-01",
+      "title": "수강 변경 및 확인 기간",
+      "time": "08:00",
+      "description": "9월 6일 (토) 밤 11시까지",
+      "createdAt": "2025-08-08T05:33:34.768Z"
+    },
+    {
+      "id": 1755421015466,
+      "date": "2025-08-18",
+      "title": "자취방 입주",
+      "time": "",
+      "description": "",
+      "status": "completed",
+      "createdAt": "2025-08-17T08:56:55.466Z",
+      "updatedAt": "2025-08-18T12:24:21.905Z"
+    }
+  ],
+  "writingNotes": [
+    {
+      "id": 1754403451829,
+      "title": "3학년 2학기",
+      "content": "[수업]\n-동적시스템제어\n-기계진동학\n-기계학습원론\n-로봇공학\n-확률및통계\n-확률및랜덤프로세스\n-열유체공학설계실습\n-Co-op\n\n[기타]\n-Easy 딥러닝\n-인스톨 파이토치\n-공학수학2 기말\n-선형대수학\n-열역학\n-유체역학\n-로봇 팔",
+      "createdAt": "2025-08-05T14:17:31.829Z",
+      "updatedAt": "2025-08-17T04:16:36.958Z"
+    },
+    {
+      "id": 1754623798093,
+      "title": "3학년 겨울",
+      "content": "[수업]\n-일반물리학2\n-현재 랩실 Co-op\n\n[기타]\n-TTT\n-고체역학\n-로봇팔 논문",
+      "createdAt": "2025-08-08T03:29:58.093Z",
+      "updatedAt": "2025-08-17T04:19:34.201Z"
+    },
+    {
+      "id": 1754623964278,
+      "title": "4학년 1학기",
+      "content": "[수업]\n-로봇공학입문\n-기계요소설계\n-미래모빌리티공학\n-동적시스템제어\n-컴퓨터비전개론\n-종설\n\n[연구실]\n안민성 박사님 랩실 학부연구생",
+      "createdAt": "2025-08-08T03:32:44.278Z",
+      "updatedAt": "2025-08-20T03:31:18.319Z"
+    },
+    {
+      "id": 1754625560101,
+      "title": "4학년 여름",
+      "content": "[계절학기]\n-이산수학\n-핵균\n[연구실]\n안민성 박사님 랩실 Co-op\n",
+      "createdAt": "2025-08-08T03:59:20.101Z",
+      "updatedAt": "2025-08-17T04:19:56.531Z"
+    },
+    {
+      "id": 1754625570608,
+      "title": "4학년 2학기",
+      "content": "[수업]\n-CAE/CFD\n-열유실\n-알고리즘개론\n-대학원 강의(학석연계)\n-글로벌\n-핵균\n-핵균",
+      "createdAt": "2025-08-08T03:59:30.608Z",
+      "updatedAt": "2025-08-20T03:33:02.757Z"
+    },
+    {
+      "id": 1754629277349,
+      "title": "4학년 겨울",
+      "content": "[계절학기]\n-창의적글쓰기\n-글로벌",
+      "createdAt": "2025-08-08T05:01:17.349Z",
+      "updatedAt": "2025-08-08T05:16:20.419Z"
+    },
+    {
+      "id": 1755403283779,
+      "title": "PT 횟수 정리",
+      "content": "<PT한 날>\n1월 26일 (1)\n2월 2일 (2)\n2월 16일 (3)\n3월 2일 (4)\n3월 9일 (5)\n3월 30일 (6)\n4월 6일 (7)\n4월 20일 (8)\n4월 27일 (9)\n5월 11일 (10)\n5월 25일 (11)\n6월 8일 (12)\n6월 29일 (13)\n7월 20일 (14)\n7월 27일 (15)\n8월 10일 (16)\n-----------------\n<빠진 날>\n2월 9일(쌤 심판)\n2월 23일(쌤 마라톤 때문에 못 올라옴)\n3월 16일(쌤 아픔)\n3월 23일(쌤 입원)\n4월 13일(회식)\n5월 4일(헬스장 문 닫음)\n5월 18일(개인 일정)\n6월 1일(개인 일정)\n6월 15일(개인 일정)\n6월 22일(나 혼자 나와서 패스함)\n7월 6일(개인 일정)\n7월 13일(쌤 몸살)\n8월 3일(개인 일정)",
+      "createdAt": "2025-08-17T04:01:23.779Z",
+      "updatedAt": "2025-08-17T04:01:31.564Z"
+    },
+    {
+      "id": 1755751518159,
+      "title": "공학자 팀원 모집 사이트",
+      "content": "공학 쪽 사람들이 모여 사이트를 만드는 거야. 프로젝트를 하고 싶다면, 팀원을 모집하는 글을 올려. 몇 명 필요한지, 구체적으로 어떤 역할을 해야 하는지 책임도 명시해.\n투자도 받을 수 있어. 크라우드 펀딩 형태로 갈 수도 있고.\n사람들의 신원도 링크드인처럼 보일 수 있게 해. 기존에 무슨 프로젝트를 진행했는지도 볼 수 있고, 점수도 매겨서 랭킹도 환산해.\n프로젝트를 진행하면서 기록들도 남길 수 있게 해. 기존 프로젝트를 무엇을 했는지 볼 때 이를 참고할 수도 있고, 깃허브처럼 오픈소스의 느낌도 날 수 있어.",
+      "createdAt": "2025-08-21T04:45:18.159Z",
+      "updatedAt": "2025-08-21T04:46:03.363Z"
+    }
+  ],
+  "todayTodos": [
+    {
+      "id": 1755065190279,
+      "text": "적절한 딥러닝 모델 선정하기",
+      "completed": false,
+      "createdAt": "2025-08-13T06:06:30.279Z"
+    },
+    {
+      "id": 1755065207445,
+      "text": "덱으로부터 가능한 가짓수 정리하는 시뮬레이션 구현",
+      "completed": false,
+      "createdAt": "2025-08-13T06:06:47.445Z"
+    },
+    {
+      "id": 1755066273165,
+      "text": "코옵 신청서 작성",
+      "completed": false,
+      "createdAt": "2025-08-13T06:24:33.165Z"
+    }
+  ],
+  "todayTodosDate": "Wed Aug 13 2025",
+  "studySubjects": [
+    {
+      "id": 1754302210106,
+      "title": "공학수학1",
+      "description": "",
+      "curriculum": [],
+      "createdAt": "2025-08-04T10:10:10.106Z"
+    }
+  ],
+  "weeklyGoalsByWeek": {
+    "2025-W33": {
+      "goals": [],
+      "events": [],
+      "todayTodos": [],
+      "todayTodosDate": "Mon Aug 11 2025",
+      "lastUpdated": "2025-08-10T16:44:32.577Z"
+    },
+    "2025-W32": {
+      "goals": [],
+      "events": [],
+      "todayTodos": [],
+      "todayTodosDate": "Mon Aug 11 2025",
+      "lastUpdated": "2025-08-10T16:44:34.047Z"
+    },
+    "2025-W34": {
+      "goals": [],
+      "events": [],
+      "todayTodos": [],
+      "todayTodosDate": "Mon Aug 11 2025",
+      "lastUpdated": "2025-08-10T16:15:51.555Z"
+    },
+    "2025-W35": {
+      "goals": [],
+      "events": [],
+      "todayTodos": [],
+      "todayTodosDate": "Mon Aug 11 2025",
+      "lastUpdated": "2025-08-10T15:43:32.386Z"
+    },
+    "2025-W31": {
+      "goals": [],
+      "events": [],
+      "todayTodos": [],
+      "todayTodosDate": "Mon Aug 11 2025",
+      "lastUpdated": "2025-08-10T15:37:22.288Z"
+    }
+  },
+  "dailyTodos": {
+    "Thu Aug 14 2025": [
+      {
+        "id": 1755184306539,
+        "text": "넥슨 코드배틀 코드 수정",
+        "completed": true,
+        "createdAt": "2025-08-14T15:11:46.539Z"
+      },
+      {
+        "id": 1755170985917,
+        "text": "인스톨 파이토치 1-1 30분 수강",
+        "completed": false,
+        "createdAt": "2025-08-14T11:29:45.917Z"
+      },
+      {
+        "id": 1755170857488,
+        "text": "Easy 딥러닝 20~28p 정독",
+        "completed": false,
+        "createdAt": "2025-08-14T11:27:37.488Z"
+      },
+      {
+        "id": 1755170191998,
+        "text": "문화의 수수께끼 53p까지 읽기",
+        "completed": false,
+        "createdAt": "2025-08-14T11:16:31.998Z"
+      },
+      {
+        "id": 1755231084865,
+        "text": "연구실 회의",
+        "completed": false,
+        "createdAt": "2025-08-15T04:11:24.865Z"
+      }
+    ],
+    "Fri Aug 15 2025": [
+      {
+        "id": 1755226194576,
+        "text": "도전학기 5주차 1차시 강의 수강",
+        "completed": false,
+        "createdAt": "2025-08-15T02:49:54.576Z"
+      },
+      {
+        "id": 1755226084680,
+        "text": "문화의 수수께끼 1장 읽기",
+        "completed": true,
+        "createdAt": "2025-08-15T02:48:04.680Z"
+      },
+      {
+        "id": 1755226201023,
+        "text": "도전학기 5주차 2차시 강의 수강",
+        "completed": false,
+        "createdAt": "2025-08-15T02:50:01.023Z"
+      },
+      {
+        "id": 1755226091725,
+        "text": "문화의 수수께끼 2장 읽기",
+        "completed": false,
+        "createdAt": "2025-08-15T02:48:11.725Z"
+      },
+      {
+        "id": 1755226637305,
+        "text": "Easy 딥러닝 ch 1 마저 다 읽기",
+        "completed": false,
+        "createdAt": "2025-08-15T02:57:17.305Z"
+      },
+      {
+        "id": 1755226051563,
+        "text": "객체 생성 -객체 pair 딥러닝 모델 구현",
+        "completed": false,
+        "createdAt": "2025-08-15T02:47:31.563Z"
+      },
+      {
+        "id": 1755226128945,
+        "text": "문화의 수수께끼 3장 읽기",
+        "completed": false,
+        "createdAt": "2025-08-15T02:48:48.945Z"
+      },
+      {
+        "id": 1755226122895,
+        "text": "F1 노션자료 완성",
+        "completed": false,
+        "createdAt": "2025-08-15T02:48:42.895Z"
+      },
+      {
+        "id": 1755226257055,
+        "text": "넥슨 코드배틀 샘플 AI 6승 달성",
+        "completed": false,
+        "createdAt": "2025-08-15T02:50:57.055Z"
+      },
+      {
+        "id": 1755226035167,
+        "text": "구독 내역 정리",
+        "completed": false,
+        "createdAt": "2025-08-15T02:47:15.167Z"
+      }
+    ],
+    "Sat Aug 16 2025": [
+      {
+        "id": 1755268596976,
+        "text": "도전학기 5주차 1차시 강의 마저 수강",
+        "completed": false,
+        "createdAt": "2025-08-15T14:36:36.976Z"
+      },
+      {
+        "id": 1755268603380,
+        "text": "도전학기 5주차 2차시 강의 수강",
+        "completed": false,
+        "createdAt": "2025-08-15T14:36:43.380Z"
+      },
+      {
+        "id": 1755268148669,
+        "text": "도전학기 5주차 과제",
+        "completed": false,
+        "createdAt": "2025-08-15T14:29:08.669Z"
+      }
+    ],
+    "Sun Aug 10 2025": [
+      {
+        "id": 1755311008789,
+        "text": "도전학기 5주차 1차시 강의 수강",
+        "completed": true,
+        "createdAt": "2025-08-16T02:23:28.789Z"
+      },
+      {
+        "id": 1755311015296,
+        "text": "도전학기 5주차 2차시 강의 수강",
+        "completed": false,
+        "createdAt": "2025-08-16T02:23:35.296Z"
+      },
+      {
+        "id": 1755311020690,
+        "text": "도전학기 5주차 과제",
+        "completed": false,
+        "createdAt": "2025-08-16T02:23:40.690Z"
+      },
+      {
+        "id": 1755311025503,
+        "text": "도전학기 5주차 퀴즈",
+        "completed": false,
+        "createdAt": "2025-08-16T02:23:45.503Z"
+      },
+      {
+        "id": 1755311089760,
+        "text": "학연생 복도 주행 프레임 Labeling",
+        "completed": false,
+        "createdAt": "2025-08-16T02:24:49.760Z"
+      },
+      {
+        "id": 1755311097765,
+        "text": "Easy 딥러닝 Ch 1 마저 정독",
+        "completed": false,
+        "createdAt": "2025-08-16T02:24:57.765Z"
+      }
+    ],
+    "Sun Aug 17 2025": [
+      {
+        "id": 1755405697292,
+        "text": "아침일기 쓰기",
+        "completed": true,
+        "createdAt": "2025-08-17T04:41:37.292Z"
+      },
+      {
+        "id": 1755405733788,
+        "text": "주간 Plan 세우기",
+        "completed": true,
+        "createdAt": "2025-08-17T04:42:13.788Z"
+      },
+      {
+        "id": 1755405763740,
+        "text": "Data 2 -> 수동 Labeling한 거 메타 데이터 설정하기",
+        "completed": true,
+        "createdAt": "2025-08-17T04:42:43.740Z"
+      },
+      {
+        "id": 1755405768643,
+        "text": "GNN 학습",
+        "completed": false,
+        "createdAt": "2025-08-17T04:42:48.643Z"
+      },
+      {
+        "id": 1755405792036,
+        "text": "Data 4 -> 모델로 하여금 예측",
+        "completed": false,
+        "createdAt": "2025-08-17T04:43:12.036Z"
+      },
+      {
+        "id": 1755405797406,
+        "text": "Data 4 성능 잘 나오면, 객체 분류 구현",
+        "completed": false,
+        "createdAt": "2025-08-17T04:43:17.406Z"
+      },
+      {
+        "id": 1755405719827,
+        "text": "스피치 강의 2강 수강",
+        "completed": false,
+        "createdAt": "2025-08-17T04:41:59.827Z"
+      },
+      {
+        "id": 1755405809250,
+        "text": "도전학기 5주차 과제",
+        "completed": false,
+        "createdAt": "2025-08-17T04:43:29.250Z"
+      },
+      {
+        "id": 1755405823106,
+        "text": "도전학기 5주차 퀴즈",
+        "completed": false,
+        "createdAt": "2025-08-17T04:43:43.106Z"
+      },
+      {
+        "id": 1755405816380,
+        "text": "도전학기 5주차 2차시 강의 수강",
+        "completed": false,
+        "createdAt": "2025-08-17T04:43:36.380Z"
+      },
+      {
+        "id": 1755405894513,
+        "text": "문화의 수수께끼 73p까지 정독",
+        "completed": false,
+        "createdAt": "2025-08-17T04:44:54.513Z"
+      },
+      {
+        "id": 1755409773706,
+        "text": "넥슨 코드배틀 50등 안에 들기",
+        "completed": false,
+        "createdAt": "2025-08-17T05:49:33.706Z"
+      },
+      {
+        "id": 1755425398137,
+        "text": "낼 자취방 가져갈거 준비(옷, 책, 화장품)",
+        "completed": false,
+        "createdAt": "2025-08-17T10:09:58.137Z"
+      }
+    ],
+    "Mon Aug 18 2025": [
+      {
+        "id": 1755504092929,
+        "text": "Co-op 문의",
+        "completed": true,
+        "createdAt": "2025-08-18T08:01:32.929Z"
+      },
+      {
+        "id": 1755497589500,
+        "text": "도전학기 5주차 과제",
+        "completed": true,
+        "createdAt": "2025-08-18T06:13:09.500Z"
+      },
+      {
+        "id": 1755497595124,
+        "text": "도전학기 5주차 강의 수강",
+        "completed": true,
+        "createdAt": "2025-08-18T06:13:15.124Z"
+      },
+      {
+        "id": 1755497605844,
+        "text": "자취방 이삿짐 풀기",
+        "completed": true,
+        "createdAt": "2025-08-18T06:13:25.844Z"
+      },
+      {
+        "id": 1755497661797,
+        "text": "자취방 청소",
+        "completed": true,
+        "createdAt": "2025-08-18T06:14:21.797Z"
+      },
+      {
+        "id": 1755497666366,
+        "text": "자취방 필요한 거 구매",
+        "completed": true,
+        "createdAt": "2025-08-18T06:14:26.366Z"
+      },
+      {
+        "id": 1755522526482,
+        "text": "수강신청 과목 정하기",
+        "completed": true,
+        "createdAt": "2025-08-18T13:08:46.482Z"
+      },
+      {
+        "id": 1755522537757,
+        "text": "드라이기 구매",
+        "completed": false,
+        "createdAt": "2025-08-18T13:08:57.757Z"
+      }
+    ],
+    "Tue Aug 19 2025": [
+      {
+        "id": 1755523201424,
+        "text": "코옵 신청서 제출",
+        "completed": false,
+        "createdAt": "2025-08-18T13:20:01.424Z"
+      },
+      {
+        "id": 1755523208602,
+        "text": "세탁기 드럼통 세척",
+        "completed": true,
+        "createdAt": "2025-08-18T13:20:08.602Z"
+      },
+      {
+        "id": 1755530292390,
+        "text": "주방 청소",
+        "completed": true,
+        "createdAt": "2025-08-18T15:18:12.390Z"
+      },
+      {
+        "id": 1755568724806,
+        "text": "침대 밑 청소",
+        "completed": false,
+        "createdAt": "2025-08-19T01:58:44.806Z"
+      },
+      {
+        "id": 1755568902351,
+        "text": "Lidar GNN 학습 모델 코드 작성",
+        "completed": false,
+        "createdAt": "2025-08-19T02:01:42.351Z"
+      },
+      {
+        "id": 1755568917363,
+        "text": "논문 Introduction 작성",
+        "completed": false,
+        "createdAt": "2025-08-19T02:01:57.363Z"
+      },
+      {
+        "id": 1755568924079,
+        "text": "논문 Related Work 작성",
+        "completed": false,
+        "createdAt": "2025-08-19T02:02:04.079Z"
+      },
+      {
+        "id": 1755568938294,
+        "text": "논문 무슨 내용 넣을지 확정",
+        "completed": false,
+        "createdAt": "2025-08-19T02:02:18.294Z"
+      },
+      {
+        "id": 1755573340632,
+        "text": "매직스펀지, 소독수, 면도크림, 칫솔 면도기 보관통,  식기건조대 구매",
+        "completed": true,
+        "createdAt": "2025-08-19T03:15:40.632Z"
+      },
+      {
+        "id": 1755574114071,
+        "text": "세탁조클리너, 작은 대야, 뿌리는 욕실+주방세제, 뿌리는 락스, 정전기 청소포, 걸레대 구매",
+        "completed": true,
+        "createdAt": "2025-08-19T03:28:34.071Z"
+      },
+      {
+        "id": 1755606589057,
+        "text": "빨래건조대, 드라이기 구매",
+        "completed": true,
+        "createdAt": "2025-08-19T12:29:49.057Z"
+      }
+    ],
+    "Wed Aug 20 2025": [
+      {
+        "id": 1755613162039,
+        "text": "3km 러닝",
+        "completed": false,
+        "createdAt": "2025-08-19T14:19:22.039Z"
+      },
+      {
+        "id": 1755613149353,
+        "text": "민혁 씨 수강신청 대리",
+        "completed": false,
+        "createdAt": "2025-08-19T14:19:09.353Z"
+      },
+      {
+        "id": 1755613402330,
+        "text": "코옵 신청서 제출",
+        "completed": false,
+        "createdAt": "2025-08-19T14:23:22.330Z"
+      },
+      {
+        "id": 1755613233361,
+        "text": "Radar 기반 클러스터링 시도",
+        "completed": false,
+        "createdAt": "2025-08-19T14:20:33.361Z"
+      },
+      {
+        "id": 1755613299585,
+        "text": "도전학기 논문 Abstract ~ Background 작성",
+        "completed": false,
+        "createdAt": "2025-08-19T14:21:39.585Z"
+      },
+      {
+        "id": 1755613307194,
+        "text": "빨래",
+        "completed": false,
+        "createdAt": "2025-08-19T14:21:47.194Z"
+      },
+      {
+        "id": 1755613528006,
+        "text": "빨래 건조",
+        "completed": false,
+        "createdAt": "2025-08-19T14:25:28.006Z"
+      },
+      {
+        "id": 1755613535157,
+        "text": "책상 정리",
+        "completed": false,
+        "createdAt": "2025-08-19T14:25:35.157Z"
+      }
+    ],
+    "Thu Aug 21 2025": [
+      {
+        "id": 1755749245035,
+        "text": "코옵 신청서 제출",
+        "completed": true,
+        "createdAt": "2025-08-21T04:07:25.035Z"
+      },
+      {
+        "id": 1755749259242,
+        "text": "Radar clustering",
+        "completed": false,
+        "createdAt": "2025-08-21T04:07:39.242Z"
+      },
+      {
+        "id": 1755749878083,
+        "text": "논문 서론 작성",
+        "completed": true,
+        "createdAt": "2025-08-21T04:17:58.083Z"
+      },
+      {
+        "id": 1755749882409,
+        "text": "논문 이론적 배경 작성",
+        "completed": true,
+        "createdAt": "2025-08-21T04:18:02.409Z"
+      },
+      {
+        "id": 1755749903652,
+        "text": "논문 결과 작성",
+        "completed": true,
+        "createdAt": "2025-08-21T04:18:23.652Z"
+      },
+      {
+        "id": 1755750090843,
+        "text": "10분 글쓰기",
+        "completed": false,
+        "createdAt": "2025-08-21T04:21:30.843Z"
+      },
+      {
+        "id": 1755750096185,
+        "text": "5km 러닝",
+        "completed": true,
+        "createdAt": "2025-08-21T04:21:36.185Z"
+      },
+      {
+        "id": 1755752094710,
+        "text": "박스, 음식물쓰레기, 일반 쓰레기 버리는 곳 위치 알아내기",
+        "completed": true,
+        "createdAt": "2025-08-21T04:54:54.710Z"
+      }
+    ],
+    "Fri Aug 22 2025": [
+      {
+        "id": 1755838711523,
+        "text": "아침일기",
+        "completed": false,
+        "createdAt": "2025-08-22T04:58:31.523Z"
+      },
+      {
+        "id": 1755838702752,
+        "text": "10분 글쓰기",
+        "completed": true,
+        "createdAt": "2025-08-22T04:58:22.752Z"
+      },
+      {
+        "id": 1755838680599,
+        "text": "도전학기 6주차 과제 제출",
+        "completed": true,
+        "createdAt": "2025-08-22T04:58:00.599Z"
+      },
+      {
+        "id": 1755838669687,
+        "text": "Lidar Radar 퓨전 방법 생각해내기",
+        "completed": true,
+        "createdAt": "2025-08-22T04:57:49.687Z"
+      },
+      {
+        "id": 1755838685611,
+        "text": "도전학기 6주차 강의 돌리기",
+        "completed": false,
+        "createdAt": "2025-08-22T04:58:05.611Z"
+      },
+      {
+        "id": 1755838690880,
+        "text": "도전학기 6주차 퀴즈",
+        "completed": true,
+        "createdAt": "2025-08-22T04:58:10.880Z"
+      },
+      {
+        "id": 1755838876312,
+        "text": "헬스장 가기",
+        "completed": false,
+        "createdAt": "2025-08-22T05:01:16.312Z"
+      },
+      {
+        "id": 1755838816636,
+        "text": "<Easy 딥러닝> ch 1 마저 정독",
+        "completed": false,
+        "createdAt": "2025-08-22T05:00:16.636Z"
+      },
+      {
+        "id": 1755838869546,
+        "text": "<Easy 딥러닝> ch2.0~2.2 정독",
+        "completed": false,
+        "createdAt": "2025-08-22T05:01:09.546Z"
+      }
+    ]
+  }
+}
