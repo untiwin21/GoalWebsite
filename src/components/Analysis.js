@@ -89,13 +89,16 @@ const Analysis = ({ data }) => {
     const averageAchievement = Math.round(totalAchievement / totalCount);
     const totalTasks = data.reduce((sum, item) => sum + (item.total || 0), 0);
     const completedTasks = data.reduce((sum, item) => sum + (item.completed || 0), 0);
-    const bestPerformer = data.reduce((max, item) => item.achievement > max.achievement ? item : max, data[0]);
+    
+    // [FIX] Safely find the best performer
+    const bestPerformer = data.reduce((max, item) => (!max || item.achievement > max.achievement) ? item : max, null);
 
     let bestLabel = '';
-    // [FIX] Use the pre-formatted date string for the label
-    if (type === '일일') bestLabel = bestPerformer.formattedDate;
-    if (type === '주간') bestLabel = bestPerformer.weekLabel;
-    if (type === '월간') bestLabel = bestPerformer.month;
+    if (bestPerformer) {
+        if (type === '일일') bestLabel = bestPerformer.formattedDate;
+        if (type === '주간') bestLabel = bestPerformer.weekLabel;
+        if (type === '월간') bestLabel = bestPerformer.month;
+    }
 
 
     return (
