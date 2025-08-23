@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-// --- 날짜 관련 헬퍼 함수 (App.js와 동일한 로직) ---
+// --- 날짜 관련 헬퍼 함수 ---
 const getWeekNumber = (d) => {
-  const date = new Date(d.getTime());
-  date.setHours(0, 0, 0, 0);
-  const yearStart = new Date(date.getFullYear(), 0, 1);
-  const firstDayOfWeek = yearStart.getDay();
-  const dayOfYear = ((date - yearStart) / 86400000) + 1;
-  return Math.ceil((dayOfYear + firstDayOfWeek) / 7);
+  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+  // Get first day of year
+  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
+  const weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+  // Return array of year and week number
+  return weekNo;
 };
+
 
 const Weekly = ({ data, updateData }) => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -41,15 +46,19 @@ const Weekly = ({ data, updateData }) => {
 
   const getWeekDateRange = (offset = 0) => {
     const today = new Date();
-    const dayOfWeek = today.getDay(); // 0 = Sunday
+    today.setDate(today.getDate() + (offset * 7));
+    const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ...
     const start = new Date(today);
-    start.setDate(today.getDate() - dayOfWeek + (offset * 7));
+    // 주의 시작을 일요일로 설정
+    start.setDate(today.getDate() - dayOfWeek);
     start.setHours(0, 0, 0, 0);
+
     const end = new Date(start);
     end.setDate(start.getDate() + 6);
     end.setHours(23, 59, 59, 999);
     return { start, end };
   };
+
 
   useEffect(() => {
     // 현재 보고 있는 날짜의 할 일을 로드
