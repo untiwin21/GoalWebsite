@@ -728,8 +728,14 @@ body {
 /* Analysis Grid */
 .analysis-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: 1fr;
   gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .analysis-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
 }
 
 .analysis-card {
@@ -766,12 +772,40 @@ body {
   opacity: 0.1;
 }
 
+.analysis-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
 .analysis-title {
   font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 1rem;
   color: var(--light-text);
 }
+
+.analysis-summary {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.summary-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-right: 0.5rem;
+}
+
+.summary-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
 
 .analysis-value {
   font-size: 2.5rem;
@@ -786,6 +820,22 @@ body {
   font-size: 0.95rem;
   line-height: 1.5;
 }
+
+.analysis-text {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+.analysis-text p {
+    margin-bottom: 0.5rem;
+}
+.analysis-text .highlight {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
 
 /* Checkbox Styling */
 .checkbox {
@@ -1022,8 +1072,10 @@ body {
   margin-top: 1rem;
 }
 
-.notes-grid {
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+@media (min-width: 1200px) {
+    .notes-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .note-card {
@@ -2841,8 +2893,8 @@ body {
   }
 }
 
-/* Timetable Styles */
-.timetable-container {
+/* --- Drag and Drop Timetable Styles --- */
+.timetable-container-dnd {
   margin-top: 3rem;
   background: var(--card-bg);
   border-radius: 15px;
@@ -2851,33 +2903,153 @@ body {
   border: 1px solid var(--border-color);
 }
 
-.timetable-container h3 {
+.timetable-container-dnd h3 {
   color: var(--secondary-color);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.timetable-container table {
-  width: 100%;
-  border-collapse: collapse;
+.timetable-guide {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 
-.timetable-container th,
-.timetable-container td {
-  border: 1px solid var(--border-color);
-  padding: 0.5rem;
-  text-align: center;
-  min-width: 100px;
+.timetable-grid {
+    display: flex;
+    height: 800px; /* Adjust height as needed */
 }
 
-.timetable-container th {
-  background-color: var(--gray-color);
+.time-column {
+    width: 60px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.timetable-container td input {
-  width: 100%;
-  background-color: var(--dark-bg);
-  color: var(--light-text);
-  border: none;
-  text-align: center;
+.time-label {
+    height: 60px; /* 1 hour height */
+    text-align: right;
+    padding-right: 10px;
+    position: relative;
+    top: -8px; /* Align with the line */
 }
+
+.schedule-area {
+    flex: 1;
+    display: flex;
+    position: relative;
+    background-image: linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+    background-size: 100% 10px; /* 10-minute grid lines */
+    cursor: crosshair;
+}
+
+.schedule-area::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px);
+    background-size: 100% 60px; /* 1-hour grid lines */
+}
+
+.day-column {
+    flex: 1;
+    border-left: 1px solid var(--border-color);
+}
+.day-column:last-child {
+    border-right: 1px solid var(--border-color);
+}
+
+.time-slot {
+    height: 10px; /* 10 minute height */
+}
+
+.day-header {
+    display: flex;
+    margin-left: 60px; /* Align with schedule area */
+    margin-top: 10px;
+}
+.day-header > div {
+    flex: 1;
+    text-align: center;
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+.schedule-block {
+    position: absolute;
+    background-color: rgba(108, 99, 255, 0.7);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 0.8rem;
+    color: white;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.schedule-block:hover {
+    background-color: rgba(108, 99, 255, 0.9);
+}
+
+.drag-preview {
+    position: absolute;
+    background-color: rgba(66, 245, 221, 0.5);
+    border: 1px dashed var(--secondary-color);
+    border-radius: 4px;
+    pointer-events: none; /* Allows mouse events to pass through */
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: var(--gray-color);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid var(--border-color);
+}
+
+.modal-content h4 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.modal-actions button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.modal-actions button.delete { background: var(--accent-color); color: white;}
+.modal-actions button.cancel { background: var(--hover-bg); color: var(--light-text);}
+.modal-actions button:not(.delete):not(.cancel) { background: var(--primary-color); color: white;}

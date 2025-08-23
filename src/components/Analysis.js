@@ -1,15 +1,22 @@
 import React from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-// 날짜 문자열(YYYY-MM-DD)을 Date 객체로 변환하는 헬퍼 함수
-const parseDate = (dateString) => {
-  const [year, month, day] = dateString.split('-').map(Number);
-  return new Date(year, month - 1, day);
+// --- Helper Functions ---
+
+// 'YYYY-MM-DD' 형식의 날짜 문자열로부터 해당 월의 몇 번째 주인지 계산하는 함수
+const getWeekOfMonthLabel = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.toLocaleString('ko-KR', { month: 'long' });
+    // 월의 첫 날을 기준으로 몇 번째 주인지 계산
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const dayOfWeek = firstDay.getDay(); // 0: Sun, 1: Mon ...
+    const weekOfMonth = Math.ceil((date.getDate() + dayOfWeek) / 7);
+    return `${month} ${weekOfMonth}째주`;
 };
 
 const Analysis = ({ data }) => {
 
-  // --- 데이터 계산 로직 ---
+  // --- Data Calculation Logic ---
 
   const getDailyAchievement = () => {
     if (!data.dailyTodos) return [];
@@ -17,24 +24,17 @@ const Analysis = ({ data }) => {
       const total = todos.length;
       const completed = todos.filter(todo => todo.completed).length;
       return {
-        date: new Date(date), // Date 객체로 변환하여 정렬에 사용
+        date: new Date(date),
+        total,
+        completed,
         achievement: total > 0 ? Math.round((completed / total) * 100) : 0
       };
-    }).sort((a, b) => a.date - b.date); // 날짜순으로 정렬
-  };
-
-  const getWeekNumber = (d) => {
-    const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-    date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
-    const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-    const weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
-    return { year: date.getUTCFullYear(), week: weekNo };
+    }).sort((a, b) => a.date - b.date);
   };
 
   const getWeeklyAchievement = () => {
     if (!data.weeklyGoals) return [];
-    return Object.entries(data.weeklyGoals).flatMap(([year, yearData]) =>
-      Object.entries(yearData).map(([week, goals]) => {
+    return Object.entries(data.weeklyGoals).map(([weekId, goals]) => {
         const total = goals.reduce((acc, goal) => acc + (goal.subGoals?.length || 1), 0);
         const completed = goals.reduce((acc, goal) => {
             if (goal.subGoals && goal.subGoals.length > 0) {
@@ -43,16 +43,14 @@ const Analysis = ({ data }) => {
             return acc + (goal.completed ? 1 : 0);
         }, 0);
         return {
-          year: parseInt(year),
-          week: parseInt(week),
-          weekLabel: `${year}-W${week}`,
+          weekId,
+          total,
+          completed,
+          weekLabel: getWeekOfMonthLabel(weekId),
           achievement: total > 0 ? Math.round((completed / total) * 100) : 0
         };
       })
-    ).sort((a, b) => {
-        if (a.year !== b.year) return a.year - b.year;
-        return a.week - b.week;
-    });
+    .sort((a, b) => new Date(a.weekId) - new Date(b.weekId));
   };
 
   const getMonthlyAchievement = () => {
@@ -61,7 +59,9 @@ const Analysis = ({ data }) => {
       const total = goal.subGoals?.length || 1;
       const completed = goal.subGoals?.filter(sub => sub.completed).length || (goal.completed ? 1 : 0);
       return {
-        month: goal.title.substring(0, 7), // "YYYY-MM" 형식으로 표시
+        month: goal.title.substring(0, 7),
+        total,
+        completed,
         achievement: total > 0 ? Math.round((completed / total) * 100) : 0
       };
     });
@@ -71,29 +71,43 @@ const Analysis = ({ data }) => {
   const allWeeklyData = getWeeklyAchievement();
   const monthlyData = getMonthlyAchievement();
 
-  // 최근 7일 데이터 필터링
   const last7DaysData = allDailyData.slice(-7).map(d => ({
     ...d,
-    date: d.date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' }) // "MM. DD." 형식
+    date: d.date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })
   }));
 
-  // 최근 4주 데이터 필터링
   const last4WeeksData = allWeeklyData.slice(-4);
 
-  // --- 평균 계산 로직 ---
+  // --- Analysis Text Generation ---
 
-  const calculateAverage = (data) => {
-    if (!data || data.length === 0) return 0;
-    const sum = data.reduce((acc, item) => acc + item.achievement, 0);
-    return Math.round(sum / data.length);
-  };
+  const generateAnalysisText = (data, type) => {
+    if (!data || data.length === 0) {
+        return <div className="analysis-text">데이터가 부족하여 분석할 수 없습니다.</div>;
+    }
+    const totalCount = data.length;
+    const totalAchievement = data.reduce((sum, item) => sum + item.achievement, 0);
+    const averageAchievement = Math.round(totalAchievement / totalCount);
+    const totalTasks = data.reduce((sum, item) => sum + (item.total || 0), 0);
+    const completedTasks = data.reduce((sum, item) => sum + (item.completed || 0), 0);
+    const bestPerformer = data.reduce((max, item) => item.achievement > max.achievement ? item : max, data[0]);
 
-  const avgDaily = calculateAverage(last7DaysData);
-  const avgWeekly = calculateAverage(last4WeeksData);
-  const avgMonthly = calculateAverage(monthlyData);
+    let bestLabel = '';
+    if (type === '일일') bestLabel = new Date(bestPerformer.date).toLocaleDateString('ko-KR');
+    if (type === '주간') bestLabel = bestPerformer.weekLabel;
+    if (type === '월간') bestLabel = bestPerformer.month;
 
 
-  // --- 렌더링 ---
+    return (
+        <div className="analysis-text">
+            <p><strong>총 평균 달성률:</strong> <span className="highlight">{averageAchievement}%</span></p>
+            <p>분석 기간 동안 총 <strong>{totalTasks}개</strong>의 목표 중 <strong>{completedTasks}개</strong>를 완료했습니다.</p>
+            {bestPerformer.achievement > 0 &&
+                <p>가장 높은 성과를 보인 {type}은 <strong>{bestLabel}</strong>으로, <span className="highlight">{bestPerformer.achievement}%</span>의 달성률을 기록했습니다.</p>
+            }
+        </div>
+    );
+  }
+
 
   return (
     <div className="page-container">
@@ -101,14 +115,9 @@ const Analysis = ({ data }) => {
       <p className="page-subtitle">데이터를 통해 당신의 성취를 한눈에 확인하고, 성장의 패턴을 발견하세요.</p>
 
       <div className="analysis-grid">
-        {/* --- 일일 달성률 --- */}
         <div className="analysis-card">
             <div className="analysis-header">
                 <h3 className="analysis-title">일일 달성률 (최근 7일)</h3>
-                <div className="analysis-summary">
-                    <span className="summary-label">평균 달성률:</span>
-                    <span className="summary-value">{avgDaily}%</span>
-                </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={last7DaysData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
@@ -120,16 +129,12 @@ const Analysis = ({ data }) => {
                     <Line type="monotone" dataKey="achievement" stroke="#8884d8" strokeWidth={2} name="달성률 (%)" />
                 </LineChart>
             </ResponsiveContainer>
+            {generateAnalysisText(last7DaysData, '일일')}
         </div>
 
-        {/* --- 주간 달성률 --- */}
         <div className="analysis-card">
             <div className="analysis-header">
                 <h3 className="analysis-title">주간 달성률 (최근 4주)</h3>
-                <div className="analysis-summary">
-                    <span className="summary-label">평균 달성률:</span>
-                    <span className="summary-value">{avgWeekly}%</span>
-                </div>
             </div>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={last4WeeksData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
@@ -141,16 +146,12 @@ const Analysis = ({ data }) => {
               <Line type="monotone" dataKey="achievement" stroke="#82ca9d" strokeWidth={2} name="달성률 (%)" />
             </LineChart>
           </ResponsiveContainer>
+           {generateAnalysisText(last4WeeksData, '주간')}
         </div>
 
-        {/* --- 월간 달성률 --- */}
         <div className="analysis-card">
             <div className="analysis-header">
                 <h3 className="analysis-title">월간 달성률</h3>
-                 <div className="analysis-summary">
-                    <span className="summary-label">평균 달성률:</span>
-                    <span className="summary-value">{avgMonthly}%</span>
-                </div>
             </div>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={monthlyData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
@@ -162,6 +163,7 @@ const Analysis = ({ data }) => {
               <Bar dataKey="achievement" fill="#ffc658" name="달성률 (%)" />
             </BarChart>
           </ResponsiveContainer>
+          {generateAnalysisText(monthlyData, '월간')}
         </div>
       </div>
     </div>

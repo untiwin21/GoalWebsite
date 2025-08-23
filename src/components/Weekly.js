@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 // --- 날짜 관련 헬퍼 함수 ---
-const getWeekNumber = (d) => {
-  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  // Set to nearest Thursday: current date + 4 - current day number
-  // Make Sunday's day number 7
-  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
-  // Get first day of year
-  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-  // Calculate full weeks to nearest Thursday
-  const weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
-  // Return array of year and week number
-  return weekNo;
+// 주의 시작일(일요일)을 'YYYY-MM-DD' 형식으로 반환하는 함수
+const getWeekId = (date) => {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day; // 0 for Sunday
+  const weekStart = new Date(d.setDate(diff));
+  return weekStart.toISOString().split('T')[0];
 };
 
 
@@ -30,79 +26,67 @@ const Weekly = ({ data, updateData }) => {
   const [editingTodo, setEditingTodo] = useState(null);
   const [editingTodoText, setEditingTodoText] = useState('');
   const [showTodoInput, setShowTodoInput] = useState(false);
-  const [lastCheckDate, setLastCheckDate] = useState(new Date().toDateString());
   const [draggedTodoIndex, setDraggedTodoIndex] = useState(null);
   const [showEventForm, setShowEventForm] = useState(false);
   const [selectedDate, setSelectedDate] = useState('');
   const [newEvent, setNewEvent] = useState({ title: '', time: '', description: '', status: 'pending' });
   const [editingEvent, setEditingEvent] = useState(null);
-  const [weekOffset, setWeekOffset] = useState(0);
-  const [currentViewDate, setCurrentViewDate] = useState(new Date().toDateString());
+  const [currentDate, setCurrentDate] = useState(new Date()); // 기준 날짜 상태
 
-  // 페이지 진입 시 현재 주로 리셋
-  useEffect(() => {
-    setWeekOffset(0);
-  }, []);
 
-  const getWeekDateRange = (offset = 0) => {
-    const today = new Date();
-    today.setDate(today.getDate() + (offset * 7));
-    const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ...
-    const start = new Date(today);
-    // 주의 시작을 일요일로 설정
-    start.setDate(today.getDate() - dayOfWeek);
-    start.setHours(0, 0, 0, 0);
+  const getWeekDateRange = (baseDate) => {
+      const d = new Date(baseDate);
+      const dayOfWeek = d.getDay(); // 0 = Sunday
+      const start = new Date(d);
+      start.setDate(d.getDate() - dayOfWeek);
+      start.setHours(0, 0, 0, 0);
 
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6);
-    end.setHours(23, 59, 59, 999);
-    return { start, end };
+      const end = new Date(start);
+      end.setDate(start.getDate() + 6);
+      end.setHours(23, 59, 59, 999);
+      return { start, end };
   };
 
+  const [currentViewDate, setCurrentViewDate] = useState(new Date().toDateString());
 
   useEffect(() => {
-    // 현재 보고 있는 날짜의 할 일을 로드
     const dateKey = currentViewDate;
     const dailyTodos = data.dailyTodos || {};
     setTodayTodos(dailyTodos[dateKey] || []);
   }, [currentViewDate, data.dailyTodos]);
 
-  useEffect(() => {
-    const { start } = getWeekDateRange(weekOffset);
-    setSelectedDate(start.toISOString().split('T')[0]);
-    // 주가 바뀔 때 현재 보고 있는 날짜를 해당 주의 오늘 날짜로 설정
-    const today = new Date();
-    const weekStart = start;
-    const weekEnd = new Date(start);
-    weekEnd.setDate(start.getDate() + 6);
 
-    if (today >= weekStart && today <= weekEnd) {
-      // 오늘이 선택한 주에 포함되면 오늘 날짜 사용
-      setCurrentViewDate(today.toDateString());
-    } else {
-      // 오늘이 선택한 주에 포함되지 않으면 해당 주의 첫 날 사용
-      setCurrentViewDate(weekStart.toDateString());
-    }
-  }, [weekOffset]);
+  const navigateWeek = (offset) => {
+      setCurrentDate(prevDate => {
+          const newDate = new Date(prevDate);
+          newDate.setDate(newDate.getDate() + offset * 7);
+          return newDate;
+      });
+  };
+
+  const goToToday = () => {
+      setCurrentDate(new Date());
+      setCurrentViewDate(new Date().toDateString());
+  };
+
 
   const addGoal = () => {
     if (newGoal.title.trim()) {
-      const { start } = getWeekDateRange(weekOffset);
-      const year = start.getFullYear();
-      const week = getWeekNumber(start);
+      const weekId = getWeekId(currentDate);
 
       const goal = {
         id: Date.now(),
         title: newGoal.title,
         subGoals: newGoal.subGoals.map((sub, index) => ({ id: Date.now() + index, title: sub, completed: false })),
         completed: false,
-        createdAt: new Date().toISOString() // 목표 생성 시점의 정확한 시간 저장
+        createdAt: new Date().toISOString()
       };
 
-      const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals || {}));
-      if (!newWeeklyGoals[year]) newWeeklyGoals[year] = {};
-      if (!newWeeklyGoals[year][week]) newWeeklyGoals[year][week] = [];
-      newWeeklyGoals[year][week].push(goal);
+      const newWeeklyGoals = { ...(data.weeklyGoals || {}) };
+      if (!newWeeklyGoals[weekId]) {
+          newWeeklyGoals[weekId] = [];
+      }
+      newWeeklyGoals[weekId].push(goal);
 
       updateData({ ...data, weeklyGoals: newWeeklyGoals });
       setNewGoal({ title: '', subGoals: [] });
@@ -110,18 +94,14 @@ const Weekly = ({ data, updateData }) => {
     }
   };
 
-  const updateGoal = () => {
-    if (newGoal.title.trim() && editingGoal) {
-        const { start } = getWeekDateRange(weekOffset);
-        const year = start.getFullYear();
-        const week = getWeekNumber(start);
+    const updateGoal = () => {
+        if (newGoal.title.trim() && editingGoal) {
+            const weekId = getWeekId(currentDate);
+            const newWeeklyGoals = { ...data.weeklyGoals };
+            const weekGoals = newWeeklyGoals[weekId] || [];
 
-        const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals));
-        const weekGoals = newWeeklyGoals[year]?.[week] || [];
-
-        const updatedWeekGoals = weekGoals.map(goal => {
-            if (goal.id === editingGoal) {
-                return {
+            const updatedWeekGoals = weekGoals.map(goal =>
+                goal.id === editingGoal ? {
                     ...goal,
                     title: newGoal.title,
                     subGoals: newGoal.subGoals.map((sub, index) => ({
@@ -129,40 +109,32 @@ const Weekly = ({ data, updateData }) => {
                         title: sub,
                         completed: goal.subGoals[index]?.completed || false
                     }))
-                };
-            }
-            return goal;
-        });
+                } : goal
+            );
 
-        newWeeklyGoals[year][week] = updatedWeekGoals;
-        updateData({ ...data, weeklyGoals: newWeeklyGoals });
+            newWeeklyGoals[weekId] = updatedWeekGoals;
+            updateData({ ...data, weeklyGoals: newWeeklyGoals });
 
-        setNewGoal({ title: '', subGoals: [] });
-        setShowAddForm(false);
-        setEditingGoal(null);
-    }
-  };
+            setNewGoal({ title: '', subGoals: [] });
+            setShowAddForm(false);
+            setEditingGoal(null);
+        }
+    };
 
-  const removeGoal = (goalId) => {
-    const { start } = getWeekDateRange(weekOffset);
-    const year = start.getFullYear();
-    const week = getWeekNumber(start);
-
-    const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals));
-    if (newWeeklyGoals[year] && newWeeklyGoals[year][week]) {
-        newWeeklyGoals[year][week] = newWeeklyGoals[year][week].filter(g => g.id !== goalId);
-        updateData({ ...data, weeklyGoals: newWeeklyGoals });
-    }
-  };
-
+    const removeGoal = (goalId) => {
+        const weekId = getWeekId(currentDate);
+        const newWeeklyGoals = { ...data.weeklyGoals };
+        if (newWeeklyGoals[weekId]) {
+            newWeeklyGoals[weekId] = newWeeklyGoals[weekId].filter(g => g.id !== goalId);
+            updateData({ ...data, weeklyGoals: newWeeklyGoals });
+        }
+    };
   const toggleMainGoal = (goalId) => {
-    const { start } = getWeekDateRange(weekOffset);
-    const year = start.getFullYear();
-    const week = getWeekNumber(start);
+    const weekId = getWeekId(currentDate);
+    const newWeeklyGoals = { ...data.weeklyGoals };
 
-    const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals));
-    if (newWeeklyGoals[year] && newWeeklyGoals[year][week]) {
-        newWeeklyGoals[year][week] = newWeeklyGoals[year][week].map(g =>
+    if (newWeeklyGoals[weekId]) {
+        newWeeklyGoals[weekId] = newWeeklyGoals[weekId].map(g =>
             g.id === goalId ? { ...g, completed: !g.completed } : g
         );
         updateData({ ...data, weeklyGoals: newWeeklyGoals });
@@ -170,18 +142,17 @@ const Weekly = ({ data, updateData }) => {
   };
 
   const toggleSubGoal = (goalId, subGoalId) => {
-    const { start } = getWeekDateRange(weekOffset);
-    const year = start.getFullYear();
-    const week = getWeekNumber(start);
-
-    const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals));
-    if (newWeeklyGoals[year]?.[week]) {
-        newWeeklyGoals[year][week] = newWeeklyGoals[year][week].map(goal => {
+    const weekId = getWeekId(currentDate);
+    const newWeeklyGoals = { ...data.weeklyGoals };
+    if (newWeeklyGoals[weekId]) {
+        newWeeklyGoals[weekId] = newWeeklyGoals[weekId].map(goal => {
             if (goal.id === goalId) {
-                const updatedSubGoals = goal.subGoals.map(sub =>
-                    sub.id === subGoalId ? { ...sub, completed: !sub.completed } : sub
-                );
-                return { ...goal, subGoals: updatedSubGoals };
+                return {
+                    ...goal,
+                    subGoals: goal.subGoals.map(sub =>
+                        sub.id === subGoalId ? { ...sub, completed: !sub.completed } : sub
+                    )
+                };
             }
             return goal;
         });
@@ -250,29 +221,29 @@ const Weekly = ({ data, updateData }) => {
     setEditingSubGoalText(currentText);
   };
 
-  const saveSubGoalEdit = () => {
-    if (editingSubGoal && editingSubGoalText.trim()) {
-      const { start } = getWeekDateRange(weekOffset);
-      const year = start.getFullYear();
-      const week = getWeekNumber(start);
-      const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals));
+    const saveSubGoalEdit = () => {
+        if (editingSubGoal && editingSubGoalText.trim()) {
+            const weekId = getWeekId(currentDate);
+            const newWeeklyGoals = { ...data.weeklyGoals };
 
-      if (newWeeklyGoals[year]?.[week]) {
-          newWeeklyGoals[year][week] = newWeeklyGoals[year][week].map(goal => {
-              if (goal.id === editingSubGoal.goalId) {
-                  const updatedSubGoals = goal.subGoals.map(sub =>
-                      sub.id === editingSubGoal.subGoalId ? { ...sub, title: editingSubGoalText.trim() } : sub
-                  );
-                  return { ...goal, subGoals: updatedSubGoals };
-              }
-              return goal;
-          });
-          updateData({ ...data, weeklyGoals: newWeeklyGoals });
-      }
-    }
-    setEditingSubGoal(null);
-    setEditingSubGoalText('');
-  };
+            if (newWeeklyGoals[weekId]) {
+                newWeeklyGoals[weekId] = newWeeklyGoals[weekId].map(goal => {
+                    if (goal.id === editingSubGoal.goalId) {
+                        return {
+                            ...goal,
+                            subGoals: goal.subGoals.map(sub =>
+                                sub.id === editingSubGoal.subGoalId ? { ...sub, title: editingSubGoalText.trim() } : sub
+                            )
+                        };
+                    }
+                    return goal;
+                });
+                updateData({ ...data, weeklyGoals: newWeeklyGoals });
+            }
+        }
+        setEditingSubGoal(null);
+        setEditingSubGoalText('');
+    };
 
   const cancelSubGoalEdit = () => {
     setEditingSubGoal(null);
@@ -355,24 +326,21 @@ const Weekly = ({ data, updateData }) => {
 
   const handleDragStart = (e, index) => setDraggedItem(index);
   const handleDragOver = (e) => e.preventDefault();
-  const handleDrop = (e, dropIndex) => {
-    e.preventDefault();
-    if (draggedItem === null || draggedItem === dropIndex) return;
+    const handleDrop = (e, dropIndex) => {
+        e.preventDefault();
+        if (draggedItem === null || draggedItem === dropIndex) return;
 
-    const { start } = getWeekDateRange(weekOffset);
-    const year = start.getFullYear();
-    const week = getWeekNumber(start);
+        const weekId = getWeekId(currentDate);
+        const newWeeklyGoals = { ...data.weeklyGoals };
+        const weekGoals = newWeeklyGoals[weekId] || [];
 
-    const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals));
-    const weekGoals = newWeeklyGoals[year]?.[week] || [];
+        const [draggedGoal] = weekGoals.splice(draggedItem, 1);
+        weekGoals.splice(dropIndex, 0, draggedGoal);
 
-    const [draggedGoal] = weekGoals.splice(draggedItem, 1);
-    weekGoals.splice(dropIndex, 0, draggedGoal);
-
-    newWeeklyGoals[year][week] = weekGoals;
-    updateData({ ...data, weeklyGoals: newWeeklyGoals });
-    setDraggedItem(null);
-  };
+        newWeeklyGoals[weekId] = weekGoals;
+        updateData({ ...data, weeklyGoals: newWeeklyGoals });
+        setDraggedItem(null);
+    };
   const handleDragEnd = () => setDraggedItem(null);
 
   const handleSubGoalDragStart = (e, goalId, subGoalIndex) => {
@@ -384,127 +352,68 @@ const Weekly = ({ data, updateData }) => {
     e.preventDefault();
   };
 
-  const handleSubGoalDrop = (e, goalId, dropIndex) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (draggedSubGoal === null || draggedFromGoal !== goalId || draggedSubGoal === dropIndex) return;
+    const handleSubGoalDrop = (e, goalId, dropIndex) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (draggedSubGoal === null || draggedFromGoal !== goalId || draggedSubGoal === dropIndex) return;
 
-    const { start } = getWeekDateRange(weekOffset);
-    const year = start.getFullYear();
-    const week = getWeekNumber(start);
-    const newWeeklyGoals = JSON.parse(JSON.stringify(data.weeklyGoals));
+        const weekId = getWeekId(currentDate);
+        const newWeeklyGoals = { ...data.weeklyGoals };
 
-    if (newWeeklyGoals[year]?.[week]) {
-        const goalIndex = newWeeklyGoals[year][week].findIndex(g => g.id === goalId);
-        if (goalIndex > -1) {
-            const newSubGoals = [...newWeeklyGoals[year][week][goalIndex].subGoals];
-            const [draggedSub] = newSubGoals.splice(draggedSubGoal, 1);
-            newSubGoals.splice(dropIndex, 0, draggedSub);
-            newWeeklyGoals[year][week][goalIndex].subGoals = newSubGoals;
-            updateData({ ...data, weeklyGoals: newWeeklyGoals });
+        if (newWeeklyGoals[weekId]) {
+            const goalIndex = newWeeklyGoals[weekId].findIndex(g => g.id === goalId);
+            if (goalIndex > -1) {
+                const newSubGoals = [...newWeeklyGoals[weekId][goalIndex].subGoals];
+                const [draggedSub] = newSubGoals.splice(draggedSubGoal, 1);
+                newSubGoals.splice(dropIndex, 0, draggedSub);
+                newWeeklyGoals[weekId][goalIndex].subGoals = newSubGoals;
+                updateData({ ...data, weeklyGoals: newWeeklyGoals });
+            }
         }
-    }
-    setDraggedSubGoal(null);
-    setDraggedFromGoal(null);
-  };
+        setDraggedSubGoal(null);
+        setDraggedFromGoal(null);
+    };
 
-  const renderWeeklyCalendar = (offset) => {
-    const { start } = getWeekDateRange(offset);
-    const today = new Date();
-    const days = [];
-    const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
-    for (let i = 0; i < 7; i++) {
-      const currentDate = new Date(start);
-      currentDate.setDate(start.getDate() + i);
-      const isToday = currentDate.toDateString() === today.toDateString();
-      days.push(
-        <div key={i} className={`calendar-day ${isToday ? 'today' : 'current-week'}`}>
-          <div style={{ fontSize: '0.8rem', color: '#7f8c8d' }}>{dayNames[i]}</div>
-          <div>{currentDate.getDate()}</div>
-        </div>
-      );
-    }
-    return days;
-  };
-
-  const handleDateClick = (clickedDate) => {
-    // 클릭한 날짜가 속한 주의 시작일을 계산
-    const dayOfWeek = clickedDate.getDay(); // 0 = Sunday
-    const weekStart = new Date(clickedDate);
-    weekStart.setDate(clickedDate.getDate() - dayOfWeek);
-    weekStart.setHours(0, 0, 0, 0);
-
-    // 현재 날짜와 비교해서 offset 계산
-    const today = new Date();
-    const todayWeekStart = new Date(today);
-    todayWeekStart.setDate(today.getDate() - today.getDay());
-    todayWeekStart.setHours(0, 0, 0, 0);
-
-    const diffTime = weekStart.getTime() - todayWeekStart.getTime();
-    const diffWeeks = Math.round(diffTime / (7 * 24 * 60 * 60 * 1000));
-
-    setWeekOffset(diffWeeks);
-    // 클릭한 날짜를 현재 보고 있는 날짜로 설정
-    setCurrentViewDate(clickedDate.toDateString());
-  };
+    const handleDateClick = (clickedDate) => {
+        setCurrentDate(clickedDate);
+        setCurrentViewDate(clickedDate.toDateString());
+    };
 
   const renderMonthlyCalendar = () => {
     const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
 
-    // 이번 달의 첫 날과 마지막 날
     const firstDay = new Date(currentYear, currentMonth, 1);
-    const lastDay = new Date(currentYear, currentMonth + 1, 0);
-
-    // 달력 시작일 (이번 달 첫 주의 일요일)
     const startDate = new Date(firstDay);
-    startDate.setDate(firstDay.getDate() - firstDay.getDay());
+    startDate.setDate(firstDay.getDate() - firstDay.getDay()); // Start from Sunday
 
     const days = [];
     const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
 
-    // 요일 헤더 (Monthly와 동일한 스타일)
     dayNames.forEach(day => {
-      days.push(
-        <div key={`header-${day}`} className="calendar-day header">
-          {day}
-        </div>
-      );
+      days.push( <div key={`header-${day}`} className="calendar-day header"> {day} </div> );
     });
 
-    // 날짜들 (Monthly와 동일한 스타일)
     for (let i = 0; i < 42; i++) {
-      const currentDate = new Date(startDate);
-      currentDate.setDate(startDate.getDate() + i);
+      const date = new Date(startDate);
+      date.setDate(startDate.getDate() + i);
 
-      const isToday = currentDate.toDateString() === today.toDateString();
-      const isCurrentMonth = currentDate.getMonth() === currentMonth;
-      const isSelectedWeek = (() => {
-        const { start, end } = getWeekDateRange(weekOffset);
-        return currentDate >= start && currentDate <= end;
-      })();
-
-      // 해당 날짜의 주에 목표가 있는지 확인
-      const dateYear = currentDate.getFullYear();
-      const dateWeek = getWeekNumber(currentDate);
-      const hasGoals = data.weeklyGoals?.[dateYear]?.[dateWeek]?.length > 0;
-
-      const isSelectedDate = currentViewDate === currentDate.toDateString();
+      const isToday = date.toDateString() === today.toDateString();
+      const isCurrentMonth = date.getMonth() === currentMonth;
+      const weekId = getWeekId(date);
+      const hasGoals = data.weeklyGoals?.[weekId]?.length > 0;
+      const isSelectedDate = currentViewDate === date.toDateString();
 
       days.push(
         <div
           key={i}
-          className={`calendar-day ${isToday ? 'today' : ''} ${isSelectedWeek ? 'selected-week' : ''} ${isSelectedDate ? 'selected-date' : ''} ${hasGoals ? 'has-goals' : ''}`}
-          style={{
-            opacity: isCurrentMonth ? 1 : 0.3,
-            cursor: 'pointer',
-            position: 'relative'
-          }}
-          onClick={() => handleDateClick(currentDate)}
+          className={`calendar-day ${isToday ? 'today' : ''} ${isSelectedDate ? 'selected-date' : ''} ${hasGoals ? 'has-goals' : ''}`}
+          style={{ opacity: isCurrentMonth ? 1 : 0.3, cursor: 'pointer' }}
+          onClick={() => handleDateClick(date)}
           title={hasGoals ? '이 주에 목표가 있습니다' : ''}
         >
-          {currentDate.getDate()}
+          {date.getDate()}
           {hasGoals && <div className="goal-indicator">•</div>}
         </div>
       );
@@ -513,10 +422,9 @@ const Weekly = ({ data, updateData }) => {
     return days;
   };
 
-  const { start, end } = getWeekDateRange(weekOffset);
-  const year = start.getFullYear();
-  const week = getWeekNumber(start);
-  const filteredGoals = data.weeklyGoals?.[year]?.[week] || [];
+  const { start, end } = getWeekDateRange(currentDate);
+  const weekId = getWeekId(currentDate);
+  const filteredGoals = data.weeklyGoals?.[weekId] || [];
   const filteredEvents = (data.events || []).filter(event => {
     const eventDate = new Date(event.date);
     return eventDate >= start && eventDate <= end;
@@ -538,6 +446,9 @@ const Weekly = ({ data, updateData }) => {
     day: 'numeric',
     weekday: 'long'
   });
+
+    const isCurrentWeek = getWeekId(new Date()) === getWeekId(currentDate);
+
 
   return (
     <div className="weekly-page-wrapper">
@@ -585,7 +496,7 @@ const Weekly = ({ data, updateData }) => {
         <div className="week-navigation-modern">
           <button
             className="week-nav-btn prev-btn"
-            onClick={() => setWeekOffset(weekOffset - 1)}
+            onClick={() => navigateWeek(-1)}
             title="이전 주"
           >
             <span className="nav-icon">‹</span>
@@ -597,21 +508,21 @@ const Weekly = ({ data, updateData }) => {
             <div className="week-info">
               <span className="week-date-range">{weekTitle}</span>
               <span className="week-status">
-                {weekOffset === 0 ? "이번 주" : weekOffset === -1 ? "저번 주" : weekOffset > 0 ? `${weekOffset}주 후` : `${Math.abs(weekOffset)}주 전`}
+                 {isCurrentWeek ? "이번 주" : ""}
               </span>
               <button
                 className="today-btn"
-                onClick={() => setWeekOffset(0)}
+                onClick={goToToday}
                 title="오늘 날짜로 이동"
               >
-                오늘 날짜
+                오늘
               </button>
             </div>
           </div>
 
           <button
             className="week-nav-btn next-btn"
-            onClick={() => setWeekOffset(weekOffset + 1)}
+            onClick={() => navigateWeek(1)}
             title="다음 주"
           >
             <span className="nav-text">다음 주</span>
@@ -621,7 +532,7 @@ const Weekly = ({ data, updateData }) => {
         <div className="weekly-container-grid">
           <div className="goals-section-left">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-              <h3 style={{ color: 'var(--secondary-color)', fontSize: '1.5rem' }}>{weekOffset === 0 ? "이번 주 할 일" : weekOffset === -1 ? "저번 주 할 일" : "선택한 주 할 일"}</h3>
+              <h3 style={{ color: 'var(--secondary-color)', fontSize: '1.5rem' }}>{isCurrentWeek ? "이번 주 할 일" : "주간 할 일"}</h3>
               <button className="action-btn add-btn" onClick={() => { setShowAddForm(!showAddForm); setEditingGoal(null); setNewGoal({ title: '', subGoals: [] }); }} title="새 목표 추가">+</button>
             </div>
             {showAddForm && (
@@ -692,7 +603,7 @@ const Weekly = ({ data, updateData }) => {
           <div className="calendar-section-right">
             <div className="calendar-mini">
               <div className="calendar-header">
-                {new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })}
+                {currentDate.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })}
               </div>
               <div className="calendar-grid">
                 {renderMonthlyCalendar()}
