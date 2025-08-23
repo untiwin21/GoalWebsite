@@ -2901,6 +2901,11 @@ body {
   padding: 2rem;
   box-shadow: var(--shadow-light);
   border: 1px solid var(--border-color);
+  /* [FIX] Set max-height and overflow for scrolling */
+  max-height: 900px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .timetable-container-dnd h3 {
@@ -2918,7 +2923,11 @@ body {
 
 .timetable-grid {
     display: flex;
-    height: 800px; /* Adjust height as needed */
+    /* [FIX] Let the grid be flexible and scroll */
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 70vh; /* Adjust based on preference */
 }
 
 .time-column {
@@ -2942,6 +2951,7 @@ body {
     background-image: linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
     background-size: 100% 10px; /* 10-minute grid lines */
     cursor: crosshair;
+    height: 1200px; /* Fixed height for all 20 hours (20h * 60px/h) */
 }
 
 .schedule-area::before {
@@ -2969,6 +2979,7 @@ body {
     display: flex;
     margin-left: 60px; /* Align with schedule area */
     margin-top: 10px;
+    padding-right: 15px; /* Account for scrollbar */
 }
 .day-header > div {
     flex: 1;
@@ -2988,6 +2999,7 @@ body {
     overflow: hidden;
     cursor: pointer;
     transition: background-color 0.2s;
+    z-index: 10;
 }
 
 .schedule-block:hover {
@@ -3000,6 +3012,7 @@ body {
     border: 1px dashed var(--secondary-color);
     border-radius: 4px;
     pointer-events: none; /* Allows mouse events to pass through */
+    z-index: 20;
 }
 
 /* Modal Styles */

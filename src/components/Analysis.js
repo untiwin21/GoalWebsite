@@ -73,7 +73,7 @@ const Analysis = ({ data }) => {
 
   const last7DaysData = allDailyData.slice(-7).map(d => ({
     ...d,
-    date: d.date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })
+    formattedDate: d.date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })
   }));
 
   const last4WeeksData = allWeeklyData.slice(-4);
@@ -92,7 +92,8 @@ const Analysis = ({ data }) => {
     const bestPerformer = data.reduce((max, item) => item.achievement > max.achievement ? item : max, data[0]);
 
     let bestLabel = '';
-    if (type === '일일') bestLabel = new Date(bestPerformer.date).toLocaleDateString('ko-KR');
+    // [FIX] Use the pre-formatted date string for the label
+    if (type === '일일') bestLabel = bestPerformer.formattedDate;
     if (type === '주간') bestLabel = bestPerformer.weekLabel;
     if (type === '월간') bestLabel = bestPerformer.month;
 
@@ -101,7 +102,7 @@ const Analysis = ({ data }) => {
         <div className="analysis-text">
             <p><strong>총 평균 달성률:</strong> <span className="highlight">{averageAchievement}%</span></p>
             <p>분석 기간 동안 총 <strong>{totalTasks}개</strong>의 목표 중 <strong>{completedTasks}개</strong>를 완료했습니다.</p>
-            {bestPerformer.achievement > 0 &&
+            {bestPerformer && bestPerformer.achievement > 0 &&
                 <p>가장 높은 성과를 보인 {type}은 <strong>{bestLabel}</strong>으로, <span className="highlight">{bestPerformer.achievement}%</span>의 달성률을 기록했습니다.</p>
             }
         </div>
@@ -122,7 +123,7 @@ const Analysis = ({ data }) => {
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={last7DaysData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
+                    <XAxis dataKey="formattedDate" />
                     <YAxis domain={[0, 100]} />
                     <Tooltip />
                     <Legend />
