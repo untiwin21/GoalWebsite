@@ -1009,6 +1009,84 @@
           ],
           "completed": false,
           "createdAt": "2025-08-24T05:46:53.019Z"
+        },
+        {
+          "id": 1756014589047,
+          "title": "AI",
+          "subGoals": [
+            {
+              "id": 1756014589047,
+              "title": "Easy 딥러닝 1장",
+              "completed": false
+            },
+            {
+              "id": 1756014589048,
+              "title": "Easy 딥러닝 ch 2",
+              "completed": false
+            },
+            {
+              "id": 1756014589049,
+              "title": "Easy 딥러닝 ch 3",
+              "completed": false
+            },
+            {
+              "id": 1756014589050,
+              "title": "Easy 딥러닝 ch 4",
+              "completed": false
+            },
+            {
+              "id": 1756014589051,
+              "title": "인스톨 파이토치 1-1 취사 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589052,
+              "title": "인스톨 파이토치 1-2 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589053,
+              "title": "인스톨 파이토치 2-1",
+              "completed": false
+            },
+            {
+              "id": 1756014589054,
+              "title": "인스톨 파이토치 2-2 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589055,
+              "title": "인스톨 파이토치 2-3 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589056,
+              "title": "인스톨 파이토치 Day 1 파이토치 기초 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589057,
+              "title": "인스톨 파이토치 4-1 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589058,
+              "title": "인스톨 파이토치 4-2 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589059,
+              "title": "인스톨 파이토치 Day 2 인공 신경망 구현 수강",
+              "completed": false
+            },
+            {
+              "id": 1756014589060,
+              "title": "인스톨 파이토치 Day 2 실전 문제 다루기; 이진 분류 수강",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-24T05:49:49.047Z"
         }
       ]
     }
