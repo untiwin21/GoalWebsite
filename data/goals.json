@@ -2341,6 +2341,12 @@
         "text": "velog 글쓰기 10분",
         "completed": false,
         "createdAt": "2025-08-24T05:51:12.847Z"
+      },
+      {
+        "id": 1756014679147,
+        "text": "스피치 연습 10분",
+        "completed": false,
+        "createdAt": "2025-08-24T05:51:19.147Z"
       }
     ]
   }
