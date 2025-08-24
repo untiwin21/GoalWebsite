@@ -2,17 +2,18 @@ import React from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // --- Helper Functions ---
-
-// 'YYYY-MM-DD' 형식의 날짜 문자열로부터 해당 월의 몇 번째 주인지 계산하는 함수
 const getWeekOfMonthLabel = (dateString) => {
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+        return dateString; // Invalid date format
+    }
     const month = date.toLocaleString('ko-KR', { month: 'long' });
-    // 월의 첫 날을 기준으로 몇 번째 주인지 계산
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    const dayOfWeek = firstDay.getDay(); // 0: Sun, 1: Mon ...
+    const dayOfWeek = firstDay.getDay();
     const weekOfMonth = Math.ceil((date.getDate() + dayOfWeek) / 7);
     return `${month} ${weekOfMonth}째주`;
 };
+
 
 const Analysis = ({ data }) => {
 
@@ -34,37 +35,53 @@ const Analysis = ({ data }) => {
 
   const getWeeklyAchievement = () => {
     if (!data.weeklyGoals) return [];
-    return Object.entries(data.weeklyGoals).map(([weekId, goals]) => {
-        const total = goals.reduce((acc, goal) => acc + (goal.subGoals?.length || 1), 0);
-        const completed = goals.reduce((acc, goal) => {
-            if (goal.subGoals && goal.subGoals.length > 0) {
-                return acc + goal.subGoals.filter(sub => sub.completed).length;
-            }
-            return acc + (goal.completed ? 1 : 0);
-        }, 0);
-        return {
-          weekId,
-          total,
-          completed,
-          weekLabel: getWeekOfMonthLabel(weekId),
-          achievement: total > 0 ? Math.round((completed / total) * 100) : 0
-        };
-      })
-    .sort((a, b) => new Date(a.weekId) - new Date(b.weekId));
+
+    return Object.entries(data.weeklyGoals)
+        .flatMap(([year, weeks]) =>
+            Object.entries(weeks).map(([weekNum, goals]) => {
+                const total = goals.reduce((acc, goal) => acc + (goal.subGoals?.length || 1), 0);
+                const completed = goals.reduce((acc, goal) => {
+                    if (goal.subGoals && goal.subGoals.length > 0) {
+                        return acc + goal.subGoals.filter(sub => sub.completed).length;
+                    }
+                    return acc + (goal.completed ? 1 : 0);
+                }, 0);
+                const firstGoalDate = goals.length > 0 ? goals[0].createdAt : `${year}-01-01`;
+
+                return {
+                    weekId: `${year}-W${weekNum}`,
+                    weekLabel: getWeekOfMonthLabel(firstGoalDate),
+                    total,
+                    completed,
+                    achievement: total > 0 ? Math.round((completed / total) * 100) : 0,
+                    date: new Date(firstGoalDate)
+                };
+            })
+        )
+        .sort((a, b) => a.date - b.date);
   };
+
 
   const getMonthlyAchievement = () => {
     if (!data.monthlyGoals) return [];
-    return data.monthlyGoals.map(goal => {
+    const monthlyDataMap = {};
+    data.monthlyGoals.forEach(goal => {
+      const month = new Date(goal.createdAt).toISOString().substring(0, 7);
+      if (!monthlyDataMap[month]) {
+          monthlyDataMap[month] = { total: 0, completed: 0 };
+      }
       const total = goal.subGoals?.length || 1;
       const completed = goal.subGoals?.filter(sub => sub.completed).length || (goal.completed ? 1 : 0);
-      return {
-        month: goal.title.substring(0, 7),
+      monthlyDataMap[month].total += total;
+      monthlyDataMap[month].completed += completed;
+    });
+
+    return Object.entries(monthlyDataMap).map(([month, {total, completed}]) => ({
+        month,
         total,
         completed,
         achievement: total > 0 ? Math.round((completed / total) * 100) : 0
-      };
-    });
+    }));
   };
 
   const allDailyData = getDailyAchievement();
@@ -89,8 +106,7 @@ const Analysis = ({ data }) => {
     const averageAchievement = Math.round(totalAchievement / totalCount);
     const totalTasks = data.reduce((sum, item) => sum + (item.total || 0), 0);
     const completedTasks = data.reduce((sum, item) => sum + (item.completed || 0), 0);
-    
-    // [FIX] Safely find the best performer
+
     const bestPerformer = data.reduce((max, item) => (!max || item.achievement > max.achievement) ? item : max, null);
 
     let bestLabel = '';
