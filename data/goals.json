@@ -1730,6 +1730,15 @@
       "time": "08:00",
       "description": "9월 6일 (토) 밤 11시까지",
       "createdAt": "2025-08-08T05:33:34.768Z"
+    },
+    {
+      "id": 1756033019255,
+      "date": "2025-08-25",
+      "title": "전민혁씨 저녁밥약",
+      "time": "",
+      "description": "",
+      "status": "pending",
+      "createdAt": "2025-08-24T10:56:59.255Z"
     }
   ],
   "writingNotes": [
