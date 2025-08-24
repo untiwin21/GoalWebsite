@@ -2398,6 +2398,12 @@
         "createdAt": "2025-08-24T05:52:00.345Z"
       },
       {
+        "id": 1756015484956,
+        "text": "8km 러닝",
+        "completed": false,
+        "createdAt": "2025-08-24T06:04:44.956Z"
+      },
+      {
         "id": 1756015455087,
         "text": "공학수학1 Input Response Model",
         "completed": false,
@@ -2414,12 +2420,6 @@
         "text": "인스톨 파이토치 1-1 취사 수강",
         "completed": false,
         "createdAt": "2025-08-24T06:04:30.943Z"
-      },
-      {
-        "id": 1756015484956,
-        "text": "8km 러닝",
-        "completed": false,
-        "createdAt": "2025-08-24T06:04:44.956Z"
       }
     ]
   }
