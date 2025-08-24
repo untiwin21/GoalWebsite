@@ -1695,6 +1695,15 @@
       "time": "08:00",
       "description": "9월 6일 (토) 밤 11시까지",
       "createdAt": "2025-08-08T05:33:34.768Z"
+    },
+    {
+      "id": 1756014793064,
+      "date": "2025-08-26",
+      "title": "원중 야구 직관",
+      "time": "",
+      "description": "잠실야구장",
+      "status": "pending",
+      "createdAt": "2025-08-24T05:53:13.064Z"
     }
   ],
   "writingNotes": [
