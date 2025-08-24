@@ -2414,6 +2414,12 @@
         "text": "헬스장 가기",
         "completed": false,
         "createdAt": "2025-08-24T06:04:36.243Z"
+      },
+      {
+        "id": 1756015484956,
+        "text": "8km 러닝",
+        "completed": false,
+        "createdAt": "2025-08-24T06:04:44.956Z"
       }
     ]
   }
