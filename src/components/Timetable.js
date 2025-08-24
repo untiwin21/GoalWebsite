@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 
 // --- Helper Components ---
 
-// Modal for adding/editing a schedule block
 const ScheduleBlockModal = ({ block, categories, onSave, onDelete, onCancel }) => {
     const [title, setTitle] = useState(block.title);
     const [description, setDescription] = useState(block.description || '');
@@ -40,7 +39,6 @@ const ScheduleBlockModal = ({ block, categories, onSave, onDelete, onCancel }) =
     );
 };
 
-// Modal for adding/editing a category
 const CategoryManagerModal = ({ category, onSave, onDelete, onCancel }) => {
     const [editingCategory, setEditingCategory] = useState(category);
     const availableColors = ['#e74c3c', '#e67e22', '#f1c40f', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#1abc9c', '#d35400', '#c0392b'];
@@ -49,7 +47,7 @@ const CategoryManagerModal = ({ category, onSave, onDelete, onCancel }) => {
         e.preventDefault();
         onSave(editingCategory);
     };
-    
+
     return (
         <div className="modal-overlay" onClick={onCancel}>
             <form className="modal-content" onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
@@ -107,18 +105,13 @@ const Timetable = () => {
     }
   });
 
-  // Drag and Drop State
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState(null);
   const [dragCurrent, setDragCurrent] = useState(null);
-  
-  // Modal & Form State
   const [editingBlock, setEditingBlock] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
-  
   const timetableRef = useRef(null);
 
-  // --- USE EFFECT HOOKS ---
   useEffect(() => {
     localStorage.setItem('timetable_schedule', JSON.stringify(schedule));
   }, [schedule]);
@@ -127,24 +120,43 @@ const Timetable = () => {
     localStorage.setItem('timetable_categories', JSON.stringify(categories));
   }, [categories]);
 
-  // --- CONSTANTS ---
+  // --- CONSTANTS & TIME CALCULATION ---
+  const START_HOUR = 5;
+  const END_HOUR = 22;
   const days = ['월', '화', '수', '목', '금', '토', '일'];
-  const hours = Array.from({ length: 20 }, (_, i) => i + 5);
+  const hours = Array.from({ length: END_HOUR - START_HOUR + 1 }, (_, i) => i + START_HOUR);
+  const TIME_SLOT_HEIGHT = 13; // 10분 단위 높이 (78px / 6)
+
+  const timeIndexToTime = (index) => {
+      const totalMinutes = index * 10;
+      const hour = Math.floor(totalMinutes / 60) + START_HOUR;
+      const minute = totalMinutes % 60;
+      return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+  };
 
   // --- EVENT HANDLERS (Drag and Drop) ---
   const getCellInfo = (e) => {
     if (!timetableRef.current) return null;
     const rect = timetableRef.current.getBoundingClientRect();
+
+    // 마우스 포인터의 정확한 위치 사용
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const cellWidth = rect.width / 7;
-    const cellHeight = 10;
-    const dayIndex = Math.floor(x / cellWidth);
-    const timeIndex = Math.floor(y / cellHeight);
 
-    if (dayIndex < 0 || dayIndex >= 7) return null;
+    const cellWidth = rect.width / days.length;
+    const dayIndex = Math.floor(x / cellWidth);
+
+    // 시간 계산 시 시간당 높이(78px)와 10분 단위 높이(13px)를 고려
+    const timeIndex = Math.floor(y / TIME_SLOT_HEIGHT);
+
+    if (dayIndex < 0 || dayIndex >= days.length) return null;
+
+    const maxTimeIndex = (END_HOUR - START_HOUR + 1) * 6;
+    if (timeIndex < 0 || timeIndex >= maxTimeIndex) return null;
+
     return { day: days[dayIndex], timeIndex };
   };
+
 
   const handleMouseDown = (e) => {
     const info = getCellInfo(e);
@@ -174,7 +186,7 @@ const Timetable = () => {
           id: Date.now(),
           day: dragStart.day,
           start: startTimeIndex,
-          end: endTimeIndex + 1,
+          end: endTimeIndex + 1, // end is exclusive
           title: '새 일정',
           description: '',
           categoryId: categories.length > 0 ? categories[0].id : null,
@@ -204,7 +216,7 @@ const Timetable = () => {
     }
     setEditingBlock(null);
   };
-  
+
   const handleSaveCategory = (categoryToSave) => {
     if (categoryToSave.id) {
       setCategories(categories.map(cat => cat.id === categoryToSave.id ? categoryToSave : cat));
@@ -233,25 +245,28 @@ const Timetable = () => {
   // --- RENDER FUNCTIONS ---
   const renderBlocks = () => {
     const categoryMap = new Map(categories.map(cat => [cat.id, cat]));
-    const totalMinutes = 20 * 60;
 
     return Object.values(schedule).map(block => {
-      const top = (block.start * 10 / (totalMinutes / 10 * 10)) * 100 * 2;
-      const height = ((block.end - block.start) * 10 / (totalMinutes / 10 * 10)) * 100 * 2;
-      const left = (days.indexOf(block.day) / 7) * 100;
-      const width = 100 / 7;
+      const top = block.start * TIME_SLOT_HEIGHT;
+      const height = (block.end - block.start) * TIME_SLOT_HEIGHT;
+      const left = (days.indexOf(block.day) / days.length) * 100;
+      const width = 100 / days.length;
       
       const category = categoryMap.get(block.categoryId);
       const backgroundColor = category ? category.color : '#808080';
+
+      const startTime = timeIndexToTime(block.start);
+      const endTime = timeIndexToTime(block.end);
 
       return (
         <div
           key={block.id}
           className="schedule-block"
-          style={{ top: `${top}%`, height: `${height}%`, left: `${left}%`, width: `${width}%`, backgroundColor }}
+          style={{ top: `${top}px`, height: `${height}px`, left: `${left}%`, width: `${width}%`, backgroundColor }}
           onClick={() => setEditingBlock(block)}
         >
-          {block.title}
+            <div className="schedule-block-title">{block.title}</div>
+            <div className="schedule-block-time">{`${startTime} - ${endTime}`}</div>
         </div>
       );
     });
@@ -259,15 +274,15 @@ const Timetable = () => {
 
   const renderDragPreview = () => {
     if (!isDragging || !dragStart || !dragCurrent) return null;
-    const totalMinutes = 20 * 60;
     const startIdx = Math.min(dragStart.timeIndex, dragCurrent.timeIndex);
     const endIdx = Math.max(dragStart.timeIndex, dragCurrent.timeIndex);
-    const top = (startIdx * 10 / (totalMinutes / 10 * 10)) * 100 * 2;
-    const height = ((endIdx - startIdx + 1) * 10 / (totalMinutes / 10 * 10)) * 100 * 2;
-    const left = (days.indexOf(dragStart.day) / 7) * 100;
-    const width = 100 / 7;
 
-    return <div className="drag-preview" style={{ top: `${top}%`, height: `${height}%`, left: `${left}%`, width: `${width}%` }} />;
+    const top = startIdx * TIME_SLOT_HEIGHT;
+    const height = (endIdx - startIdx + 1) * TIME_SLOT_HEIGHT;
+    const left = (days.indexOf(dragStart.day) / days.length) * 100;
+    const width = 100 / days.length;
+
+    return <div className="drag-preview" style={{ top: `${top}px`, height: `${height}px`, left: `${left}%`, width: `${width}%` }} />;
   };
 
   return (
@@ -291,6 +306,10 @@ const Timetable = () => {
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
           >
+            {/* Render vertical lines for each day column */}
+            {days.slice(0, -1).map((_, index) => (
+                <div key={index} className="day-separator" style={{ left: `${(100 / days.length) * (index + 1)}%` }}></div>
+            ))}
             {renderBlocks()}
             {renderDragPreview()}
           </div>
