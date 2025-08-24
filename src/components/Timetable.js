@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 // --- Helper Components ---
 
@@ -110,8 +110,9 @@ const Timetable = () => {
   const [dragCurrent, setDragCurrent] = useState(null);
   const [editingBlock, setEditingBlock] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
-  const timetableRef = useRef(null);
-
+  
+  const scheduleAreaRef = useRef(null); // Ref for the scrollable schedule area
+  
   useEffect(() => {
     localStorage.setItem('timetable_schedule', JSON.stringify(schedule));
   }, [schedule]);
@@ -124,8 +125,10 @@ const Timetable = () => {
   const START_HOUR = 5;
   const END_HOUR = 22;
   const days = ['월', '화', '수', '목', '금', '토', '일'];
-  const hours = Array.from({ length: END_HOUR - START_HOUR + 1 }, (_, i) => i + START_HOUR);
-  const TIME_SLOT_HEIGHT = 13; // 10분 단위 높이 (78px / 6)
+  const hours = Array.from({ length: END_HOUR - START_HOUR }, (_, i) => i + START_HOUR);
+
+  const HOUR_HEIGHT = 78; // 1.3배 늘린 시간당 높이
+  const TIME_SLOT_HEIGHT = HOUR_HEIGHT / 6; // 10분 단위 높이
 
   const timeIndexToTime = (index) => {
       const totalMinutes = index * 10;
@@ -136,27 +139,24 @@ const Timetable = () => {
 
   // --- EVENT HANDLERS (Drag and Drop) ---
   const getCellInfo = (e) => {
-    if (!timetableRef.current) return null;
-    const rect = timetableRef.current.getBoundingClientRect();
+    if (!scheduleAreaRef.current) return null;
+    const rect = scheduleAreaRef.current.getBoundingClientRect();
 
-    // 마우스 포인터의 정확한 위치 사용
+    // 스크롤 위치를 고려한 정확한 마우스 Y 좌표 계산
+    const y = e.clientY - rect.top + scheduleAreaRef.current.scrollTop;
     const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
 
-    const cellWidth = rect.width / days.length;
+    const cellWidth = scheduleAreaRef.current.clientWidth / days.length;
     const dayIndex = Math.floor(x / cellWidth);
-
-    // 시간 계산 시 시간당 높이(78px)와 10분 단위 높이(13px)를 고려
     const timeIndex = Math.floor(y / TIME_SLOT_HEIGHT);
 
     if (dayIndex < 0 || dayIndex >= days.length) return null;
 
-    const maxTimeIndex = (END_HOUR - START_HOUR + 1) * 6;
+    const maxTimeIndex = (END_HOUR - START_HOUR) * 6;
     if (timeIndex < 0 || timeIndex >= maxTimeIndex) return null;
-
+    
     return { day: days[dayIndex], timeIndex };
   };
-
 
   const handleMouseDown = (e) => {
     const info = getCellInfo(e);
@@ -181,12 +181,12 @@ const Timetable = () => {
       const startTimeIndex = Math.min(dragStart.timeIndex, dragCurrent.timeIndex);
       const endTimeIndex = Math.max(dragStart.timeIndex, dragCurrent.timeIndex);
 
-      if (startTimeIndex !== endTimeIndex) {
+      if (startTimeIndex < endTimeIndex) {
         const newBlock = {
           id: Date.now(),
           day: dragStart.day,
           start: startTimeIndex,
-          end: endTimeIndex + 1, // end is exclusive
+          end: endTimeIndex, 
           title: '새 일정',
           description: '',
           categoryId: categories.length > 0 ? categories[0].id : null,
@@ -200,7 +200,7 @@ const Timetable = () => {
     setDragCurrent(null);
   };
 
-  // --- EVENT HANDLERS (CRUD) ---
+  // --- CRUD Handlers ---
   const handleSaveBlock = (updatedBlock) => {
     setSchedule(prev => ({ ...prev, [updatedBlock.id]: updatedBlock }));
     setEditingBlock(null);
@@ -216,7 +216,7 @@ const Timetable = () => {
     }
     setEditingBlock(null);
   };
-
+  
   const handleSaveCategory = (categoryToSave) => {
     if (categoryToSave.id) {
       setCategories(categories.map(cat => cat.id === categoryToSave.id ? categoryToSave : cat));
@@ -230,33 +230,104 @@ const Timetable = () => {
     if (window.confirm('카테고리를 삭제하면 해당 카테고리의 모든 일정이 기본값으로 변경됩니다. 계속하시겠습니까?')) {
         const fallbackCategoryId = categories.find(c => c.id !== categoryId)?.id || null;
         
-        const updatedSchedule = { ...schedule };
-        Object.keys(updatedSchedule).forEach(blockId => {
-            if (updatedSchedule[blockId].categoryId === categoryId) {
-                updatedSchedule[blockId].categoryId = fallbackCategoryId;
-            }
+        setSchedule(prev => {
+            const updatedSchedule = { ...prev };
+            Object.keys(updatedSchedule).forEach(blockId => {
+                if (updatedSchedule[blockId].categoryId === categoryId) {
+                    updatedSchedule[blockId].categoryId = fallbackCategoryId;
+                }
+            });
+            return updatedSchedule;
         });
-        setSchedule(updatedSchedule);
         setCategories(categories.filter(cat => cat.id !== categoryId));
     }
     setEditingCategory(null);
   };
 
-  // --- RENDER FUNCTIONS ---
+  // --- RENDER LOGIC ---
+  const processedSchedule = useMemo(() => {
+    const blocksByDay = {};
+    days.forEach(day => {
+        blocksByDay[day] = Object.values(schedule)
+            .filter(block => block.day === day)
+            .sort((a, b) => a.start - b.start);
+    });
+
+    const layout = {};
+    days.forEach(day => {
+        const dailyBlocks = blocksByDay[day];
+        const columns = [];
+        
+        dailyBlocks.forEach(block => {
+            let placed = false;
+            for (let i = 0; i < columns.length; i++) {
+                const lastBlockInColumn = columns[i][columns[i].length - 1];
+                if (block.start >= lastBlockInColumn.end) {
+                    columns[i].push(block);
+                    layout[block.id] = { ...layout[block.id], col: i };
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                columns.push([block]);
+                layout[block.id] = { ...layout[block.id], col: columns.length - 1 };
+            }
+        });
+
+        columns.forEach((col, colIndex) => {
+            col.forEach(block => {
+                let overlaps = 0;
+                for (let i = colIndex + 1; i < columns.length; i++) {
+                    const nextCol = columns[i];
+                    if (nextCol.some(b => Math.max(block.start, b.start) < Math.min(block.end, b.end))) {
+                        overlaps++;
+                    } else {
+                        break;
+                    }
+                }
+                layout[block.id] = { ...layout[block.id], totalCols: colIndex + overlaps + 1 };
+            });
+        });
+
+        // 최종 너비와 위치 계산
+        dailyBlocks.forEach(block => {
+            let maxTotalCols = 1;
+            for (let b_id in layout) {
+                const b_layout = layout[b_id];
+                const other_block = schedule[b_id];
+                if(other_block.day === day && Math.max(block.start, other_block.start) < Math.min(block.end, other_block.end)) {
+                    maxTotalCols = Math.max(maxTotalCols, b_layout.totalCols || 1);
+                }
+            }
+            layout[block.id].totalCols = maxTotalCols;
+        });
+    });
+
+    return Object.values(schedule).map(block => {
+        const { col = 0, totalCols = 1 } = layout[block.id] || {};
+        return { ...block, col, totalCols };
+    });
+  }, [schedule]);
+
+
   const renderBlocks = () => {
     const categoryMap = new Map(categories.map(cat => [cat.id, cat]));
 
-    return Object.values(schedule).map(block => {
+    return processedSchedule.map(block => {
       const top = block.start * TIME_SLOT_HEIGHT;
       const height = (block.end - block.start) * TIME_SLOT_HEIGHT;
-      const left = (days.indexOf(block.day) / days.length) * 100;
-      const width = 100 / days.length;
+      
+      const width = 100 / block.totalCols;
+      const leftOffset = (days.indexOf(block.day) / days.length) * 100;
+      const left = leftOffset + (block.col * width);
       
       const category = categoryMap.get(block.categoryId);
       const backgroundColor = category ? category.color : '#808080';
 
       const startTime = timeIndexToTime(block.start);
       const endTime = timeIndexToTime(block.end);
+      const showTime = height >= 30; // 블록 높이가 충분할 때만 시간 표시
 
       return (
         <div
@@ -266,7 +337,7 @@ const Timetable = () => {
           onClick={() => setEditingBlock(block)}
         >
             <div className="schedule-block-title">{block.title}</div>
-            <div className="schedule-block-time">{`${startTime} - ${endTime}`}</div>
+            {showTime && <div className="schedule-block-time">{`${startTime} - ${endTime}`}</div>}
         </div>
       );
     });
@@ -278,7 +349,7 @@ const Timetable = () => {
     const endIdx = Math.max(dragStart.timeIndex, dragCurrent.timeIndex);
 
     const top = startIdx * TIME_SLOT_HEIGHT;
-    const height = (endIdx - startIdx + 1) * TIME_SLOT_HEIGHT;
+    const height = (endIdx - startIdx) * TIME_SLOT_HEIGHT;
     const left = (days.indexOf(dragStart.day) / days.length) * 100;
     const width = 100 / days.length;
 
@@ -300,16 +371,12 @@ const Timetable = () => {
           </div>
           <div
             className="schedule-area"
-            ref={timetableRef}
+            ref={scheduleAreaRef}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
           >
-            {/* Render vertical lines for each day column */}
-            {days.slice(0, -1).map((_, index) => (
-                <div key={index} className="day-separator" style={{ left: `${(100 / days.length) * (index + 1)}%` }}></div>
-            ))}
             {renderBlocks()}
             {renderDragPreview()}
           </div>
