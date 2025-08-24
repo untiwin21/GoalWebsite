@@ -2333,7 +2333,7 @@
       {
         "id": 1756014664673,
         "text": "아침일기 작성",
-        "completed": false,
+        "completed": true,
         "createdAt": "2025-08-24T05:51:04.673Z"
       },
       {
@@ -2357,7 +2357,7 @@
       {
         "id": 1756014698974,
         "text": "이 홈페이지 오류 수정",
-        "completed": false,
+        "completed": true,
         "createdAt": "2025-08-24T05:51:38.974Z"
       }
     ]
