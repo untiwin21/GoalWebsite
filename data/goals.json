@@ -2365,6 +2365,12 @@
         "text": "자취방으로 pc 옮기기",
         "completed": false,
         "createdAt": "2025-08-24T05:51:48.366Z"
+      },
+      {
+        "id": 1756014720345,
+        "text": "자취방 책상, 옷장 정리",
+        "completed": false,
+        "createdAt": "2025-08-24T05:52:00.345Z"
       }
     ]
   }
