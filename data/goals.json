@@ -2359,6 +2359,12 @@
         "text": "이 홈페이지 오류 수정",
         "completed": true,
         "createdAt": "2025-08-24T05:51:38.974Z"
+      },
+      {
+        "id": 1756014708366,
+        "text": "자취방으로 pc 옮기기",
+        "completed": false,
+        "createdAt": "2025-08-24T05:51:48.366Z"
       }
     ]
   }
