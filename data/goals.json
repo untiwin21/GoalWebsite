@@ -2390,6 +2390,12 @@
         "text": "자취방 책상, 옷장 정리",
         "completed": false,
         "createdAt": "2025-08-24T05:52:00.345Z"
+      },
+      {
+        "id": 1756015455087,
+        "text": "공학수학1 Input Response Model",
+        "completed": false,
+        "createdAt": "2025-08-24T06:04:15.087Z"
       }
     ]
   }
