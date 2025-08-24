@@ -2328,6 +2328,14 @@
         "completed": false,
         "createdAt": "2025-08-22T05:01:09.546Z"
       }
+    ],
+    "Sun Aug 24 2025": [
+      {
+        "id": 1756014664673,
+        "text": "아침일기 작성",
+        "completed": false,
+        "createdAt": "2025-08-24T05:51:04.673Z"
+      }
     ]
   }
 }
