@@ -2335,6 +2335,12 @@
         "text": "아침일기 작성",
         "completed": false,
         "createdAt": "2025-08-24T05:51:04.673Z"
+      },
+      {
+        "id": 1756014672847,
+        "text": "velog 글쓰기 10분",
+        "completed": false,
+        "createdAt": "2025-08-24T05:51:12.847Z"
       }
     ]
   }
