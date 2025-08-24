@@ -111,7 +111,7 @@ const Timetable = () => {
   const [editingBlock, setEditingBlock] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
   
-  const scheduleAreaRef = useRef(null); // Ref for the scrollable schedule area
+  const scheduleAreaRef = useRef(null);
   
   useEffect(() => {
     localStorage.setItem('timetable_schedule', JSON.stringify(schedule));
@@ -127,8 +127,8 @@ const Timetable = () => {
   const days = ['월', '화', '수', '목', '금', '토', '일'];
   const hours = Array.from({ length: END_HOUR - START_HOUR }, (_, i) => i + START_HOUR);
 
-  const HOUR_HEIGHT = 78; // 1.3배 늘린 시간당 높이
-  const TIME_SLOT_HEIGHT = HOUR_HEIGHT / 6; // 10분 단위 높이
+  const HOUR_HEIGHT = 78;
+  const TIME_SLOT_HEIGHT = HOUR_HEIGHT / 6;
 
   const timeIndexToTime = (index) => {
       const totalMinutes = index * 10;
@@ -137,27 +137,20 @@ const Timetable = () => {
       return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
   };
 
-  // --- EVENT HANDLERS (Drag and Drop) ---
   const getCellInfo = (e) => {
     if (!scheduleAreaRef.current) return null;
     const rect = scheduleAreaRef.current.getBoundingClientRect();
-
-    // 스크롤 위치를 고려한 정확한 마우스 Y 좌표 계산
     const y = e.clientY - rect.top + scheduleAreaRef.current.scrollTop;
     const x = e.clientX - rect.left;
-
     const cellWidth = scheduleAreaRef.current.clientWidth / days.length;
     const dayIndex = Math.floor(x / cellWidth);
     const timeIndex = Math.floor(y / TIME_SLOT_HEIGHT);
-
-    if (dayIndex < 0 || dayIndex >= days.length) return null;
-
     const maxTimeIndex = (END_HOUR - START_HOUR) * 6;
-    if (timeIndex < 0 || timeIndex >= maxTimeIndex) return null;
-    
+    if (dayIndex < 0 || dayIndex >= days.length || timeIndex < 0 || timeIndex >= maxTimeIndex) return null;
     return { day: days[dayIndex], timeIndex };
   };
-
+  
+  // --- DRAG AND DROP HANDLERS ---
   const handleMouseDown = (e) => {
     const info = getCellInfo(e);
     if (info) {
@@ -179,9 +172,9 @@ const Timetable = () => {
   const handleMouseUp = () => {
     if (isDragging && dragStart && dragCurrent) {
       const startTimeIndex = Math.min(dragStart.timeIndex, dragCurrent.timeIndex);
-      const endTimeIndex = Math.max(dragStart.timeIndex, dragCurrent.timeIndex);
+      const endTimeIndex = Math.max(dragStart.timeIndex, dragCurrent.timeIndex) + 1;
 
-      if (startTimeIndex < endTimeIndex) {
+      if (startTimeIndex < endTimeIndex - 1) {
         const newBlock = {
           id: Date.now(),
           day: dragStart.day,
@@ -199,8 +192,8 @@ const Timetable = () => {
     setDragStart(null);
     setDragCurrent(null);
   };
-
-  // --- CRUD Handlers ---
+  
+  // --- CRUD HANDLERS ---
   const handleSaveBlock = (updatedBlock) => {
     setSchedule(prev => ({ ...prev, [updatedBlock.id]: updatedBlock }));
     setEditingBlock(null);
@@ -229,7 +222,6 @@ const Timetable = () => {
   const handleDeleteCategory = (categoryId) => {
     if (window.confirm('카테고리를 삭제하면 해당 카테고리의 모든 일정이 기본값으로 변경됩니다. 계속하시겠습니까?')) {
         const fallbackCategoryId = categories.find(c => c.id !== categoryId)?.id || null;
-        
         setSchedule(prev => {
             const updatedSchedule = { ...prev };
             Object.keys(updatedSchedule).forEach(blockId => {
@@ -246,88 +238,78 @@ const Timetable = () => {
 
   // --- RENDER LOGIC ---
   const processedSchedule = useMemo(() => {
-    const blocksByDay = {};
+    const layoutInfo = {};
     days.forEach(day => {
-        blocksByDay[day] = Object.values(schedule)
-            .filter(block => block.day === day)
+        const dayBlocks = Object.values(schedule)
+            .filter(b => b.day === day)
             .sort((a, b) => a.start - b.start);
-    });
 
-    const layout = {};
-    days.forEach(day => {
-        const dailyBlocks = blocksByDay[day];
         const columns = [];
-        
-        dailyBlocks.forEach(block => {
+        for (const block of dayBlocks) {
             let placed = false;
-            for (let i = 0; i < columns.length; i++) {
-                const lastBlockInColumn = columns[i][columns[i].length - 1];
-                if (block.start >= lastBlockInColumn.end) {
-                    columns[i].push(block);
-                    layout[block.id] = { ...layout[block.id], col: i };
+            for (const col of columns) {
+                if (col[col.length - 1].end <= block.start) {
+                    col.push(block);
                     placed = true;
                     break;
                 }
             }
             if (!placed) {
                 columns.push([block]);
-                layout[block.id] = { ...layout[block.id], col: columns.length - 1 };
             }
-        });
-
-        columns.forEach((col, colIndex) => {
-            col.forEach(block => {
-                let overlaps = 0;
-                for (let i = colIndex + 1; i < columns.length; i++) {
-                    const nextCol = columns[i];
-                    if (nextCol.some(b => Math.max(block.start, b.start) < Math.min(block.end, b.end))) {
-                        overlaps++;
-                    } else {
-                        break;
-                    }
-                }
-                layout[block.id] = { ...layout[block.id], totalCols: colIndex + overlaps + 1 };
-            });
-        });
-
-        // 최종 너비와 위치 계산
-        dailyBlocks.forEach(block => {
-            let maxTotalCols = 1;
-            for (let b_id in layout) {
-                const b_layout = layout[b_id];
-                const other_block = schedule[b_id];
-                if(other_block.day === day && Math.max(block.start, other_block.start) < Math.min(block.end, other_block.end)) {
-                    maxTotalCols = Math.max(maxTotalCols, b_layout.totalCols || 1);
+        }
+        
+        for(let i=0; i<dayBlocks.length; i++){
+            const block = dayBlocks[i];
+            let concurrent = [block];
+            for(let j=i+1; j<dayBlocks.length; j++){
+                const otherBlock = dayBlocks[j];
+                if(otherBlock.start < block.end){
+                    concurrent.push(otherBlock);
                 }
             }
-            layout[block.id].totalCols = maxTotalCols;
-        });
+            
+            const maxConcurrent = concurrent.length;
+            if(!layoutInfo[block.id] || layoutInfo[block.id].totalCols < maxConcurrent){
+                layoutInfo[block.id] = {...layoutInfo[block.id], totalCols: maxConcurrent};
+            }
+
+            let assignedCols = new Array(maxConcurrent).fill(false);
+            for(const cb of concurrent){
+                if(layoutInfo[cb.id] && layoutInfo[cb.id].col !== undefined){
+                    assignedCols[layoutInfo[cb.id].col] = true;
+                }
+            }
+            if(layoutInfo[block.id].col === undefined){
+                 layoutInfo[block.id].col = assignedCols.indexOf(false);
+            }
+        }
     });
 
-    return Object.values(schedule).map(block => {
-        const { col = 0, totalCols = 1 } = layout[block.id] || {};
-        return { ...block, col, totalCols };
-    });
+    return Object.values(schedule).map(block => ({
+        ...block,
+        ...layoutInfo[block.id]
+    }));
   }, [schedule]);
 
 
   const renderBlocks = () => {
     const categoryMap = new Map(categories.map(cat => [cat.id, cat]));
-
     return processedSchedule.map(block => {
       const top = block.start * TIME_SLOT_HEIGHT;
       const height = (block.end - block.start) * TIME_SLOT_HEIGHT;
+      const totalCols = block.totalCols || 1;
+      const col = block.col || 0;
       
-      const width = 100 / block.totalCols;
-      const leftOffset = (days.indexOf(block.day) / days.length) * 100;
-      const left = leftOffset + (block.col * width);
+      const width = 100 / totalCols;
+      const leftDayOffset = (days.indexOf(block.day) / days.length) * 100;
+      const left = leftDayOffset + (col * width);
       
       const category = categoryMap.get(block.categoryId);
       const backgroundColor = category ? category.color : '#808080';
-
       const startTime = timeIndexToTime(block.start);
       const endTime = timeIndexToTime(block.end);
-      const showTime = height >= 30; // 블록 높이가 충분할 때만 시간 표시
+      const showTime = height >= 35;
 
       return (
         <div
@@ -346,13 +328,11 @@ const Timetable = () => {
   const renderDragPreview = () => {
     if (!isDragging || !dragStart || !dragCurrent) return null;
     const startIdx = Math.min(dragStart.timeIndex, dragCurrent.timeIndex);
-    const endIdx = Math.max(dragStart.timeIndex, dragCurrent.timeIndex);
-
+    const endIdx = Math.max(dragStart.timeIndex, dragCurrent.timeIndex) + 1;
     const top = startIdx * TIME_SLOT_HEIGHT;
     const height = (endIdx - startIdx) * TIME_SLOT_HEIGHT;
     const left = (days.indexOf(dragStart.day) / days.length) * 100;
     const width = 100 / days.length;
-
     return <div className="drag-preview" style={{ top: `${top}px`, height: `${height}px`, left: `${left}%`, width: `${width}%` }} />;
   };
 
@@ -362,23 +342,24 @@ const Timetable = () => {
         <h3>시간표</h3>
         <p className="timetable-guide">빈 공간을 드래그하여 새 일정을 추가하세요.</p>
         <div className="day-header">
-          <div className="time-column-header"></div>
           {days.map(day => <div key={day}>{day}</div>)}
         </div>
         <div className="timetable-grid">
           <div className="time-column">
             {hours.map(hour => <div key={hour} className="time-label">{`${hour}:00`}</div>)}
           </div>
-          <div
-            className="schedule-area"
-            ref={scheduleAreaRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-          >
-            {renderBlocks()}
-            {renderDragPreview()}
+          <div className="schedule-area-wrapper">
+            <div
+              className="schedule-area"
+              ref={scheduleAreaRef}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            >
+              {renderBlocks()}
+              {renderDragPreview()}
+            </div>
           </div>
         </div>
       </div>

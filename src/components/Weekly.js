@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
 
 // --- 날짜 관련 헬퍼 함수 ---
-// 주의 시작일(일요일)을 'YYYY-MM-DD' 형식으로 반환하는 함수
-const getWeekId = (date) => {
-  const d = new Date(date);
-  const day = d.getDay();
-  const diff = d.getDate() - day; // 0 for Sunday
-  const weekStart = new Date(d.setDate(diff));
-  return weekStart.toISOString().split('T')[0];
+
+// 주어진 날짜가 해당 연도의 몇 번째 주인지 계산 (일요일 시작 기준)
+const getWeekNumber = (d) => {
+  const date = new Date(d.getTime());
+  date.setHours(0, 0, 0, 0);
+  // Find the first day of the year
+  const yearStart = new Date(date.getFullYear(), 0, 1);
+  // Find the day of the week for the first day of the year (0=Sun, 1=Mon,...)
+  const firstDayOfWeek = yearStart.getDay();
+  // Calculate the number of days past the first Sunday.
+  const dayOfYear = ((date - yearStart) / 86400000) + 1;
+  // Calculate the week number
+  return Math.ceil((dayOfYear + firstDayOfWeek) / 7);
 };
 
+// 년도와 주차 정보를 가져오는 함수
+const getWeekInfo = (date) => {
+  const year = date.getFullYear();
+  const week = getWeekNumber(date);
+  return { year, week };
+};
 
 const Weekly = ({ data, updateData }) => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -72,7 +84,7 @@ const Weekly = ({ data, updateData }) => {
 
   const addGoal = () => {
     if (newGoal.title.trim()) {
-      const weekId = getWeekId(currentDate);
+      const { year, week } = getWeekInfo(currentDate);
 
       const goal = {
         id: Date.now(),
@@ -83,10 +95,9 @@ const Weekly = ({ data, updateData }) => {
       };
 
       const newWeeklyGoals = { ...(data.weeklyGoals || {}) };
-      if (!newWeeklyGoals[weekId]) {
-          newWeeklyGoals[weekId] = [];
-      }
-      newWeeklyGoals[weekId].push(goal);
+      if (!newWeeklyGoals[year]) newWeeklyGoals[year] = {};
+      if (!newWeeklyGoals[year][week]) newWeeklyGoals[year][week] = [];
+      newWeeklyGoals[year][week].push(goal);
 
       updateData({ ...data, weeklyGoals: newWeeklyGoals });
       setNewGoal({ title: '', subGoals: [] });
@@ -96,9 +107,9 @@ const Weekly = ({ data, updateData }) => {
 
     const updateGoal = () => {
         if (newGoal.title.trim() && editingGoal) {
-            const weekId = getWeekId(currentDate);
+            const { year, week } = getWeekInfo(currentDate);
             const newWeeklyGoals = { ...data.weeklyGoals };
-            const weekGoals = newWeeklyGoals[weekId] || [];
+            const weekGoals = newWeeklyGoals[year]?.[week] || [];
 
             const updatedWeekGoals = weekGoals.map(goal =>
                 goal.id === editingGoal ? {
@@ -112,7 +123,8 @@ const Weekly = ({ data, updateData }) => {
                 } : goal
             );
 
-            newWeeklyGoals[weekId] = updatedWeekGoals;
+            if (!newWeeklyGoals[year]) newWeeklyGoals[year] = {};
+            newWeeklyGoals[year][week] = updatedWeekGoals;
             updateData({ ...data, weeklyGoals: newWeeklyGoals });
 
             setNewGoal({ title: '', subGoals: [] });
@@ -122,19 +134,19 @@ const Weekly = ({ data, updateData }) => {
     };
 
     const removeGoal = (goalId) => {
-        const weekId = getWeekId(currentDate);
+        const { year, week } = getWeekInfo(currentDate);
         const newWeeklyGoals = { ...data.weeklyGoals };
-        if (newWeeklyGoals[weekId]) {
-            newWeeklyGoals[weekId] = newWeeklyGoals[weekId].filter(g => g.id !== goalId);
+        if (newWeeklyGoals[year]?.[week]) {
+            newWeeklyGoals[year][week] = newWeeklyGoals[year][week].filter(g => g.id !== goalId);
             updateData({ ...data, weeklyGoals: newWeeklyGoals });
         }
     };
   const toggleMainGoal = (goalId) => {
-    const weekId = getWeekId(currentDate);
+    const { year, week } = getWeekInfo(currentDate);
     const newWeeklyGoals = { ...data.weeklyGoals };
 
-    if (newWeeklyGoals[weekId]) {
-        newWeeklyGoals[weekId] = newWeeklyGoals[weekId].map(g =>
+    if (newWeeklyGoals[year]?.[week]) {
+        newWeeklyGoals[year][week] = newWeeklyGoals[year][week].map(g =>
             g.id === goalId ? { ...g, completed: !g.completed } : g
         );
         updateData({ ...data, weeklyGoals: newWeeklyGoals });
@@ -142,10 +154,10 @@ const Weekly = ({ data, updateData }) => {
   };
 
   const toggleSubGoal = (goalId, subGoalId) => {
-    const weekId = getWeekId(currentDate);
+    const { year, week } = getWeekInfo(currentDate);
     const newWeeklyGoals = { ...data.weeklyGoals };
-    if (newWeeklyGoals[weekId]) {
-        newWeeklyGoals[weekId] = newWeeklyGoals[weekId].map(goal => {
+    if (newWeeklyGoals[year]?.[week]) {
+        newWeeklyGoals[year][week] = newWeeklyGoals[year][week].map(goal => {
             if (goal.id === goalId) {
                 return {
                     ...goal,
@@ -223,11 +235,11 @@ const Weekly = ({ data, updateData }) => {
 
     const saveSubGoalEdit = () => {
         if (editingSubGoal && editingSubGoalText.trim()) {
-            const weekId = getWeekId(currentDate);
+            const { year, week } = getWeekInfo(currentDate);
             const newWeeklyGoals = { ...data.weeklyGoals };
 
-            if (newWeeklyGoals[weekId]) {
-                newWeeklyGoals[weekId] = newWeeklyGoals[weekId].map(goal => {
+            if (newWeeklyGoals[year]?.[week]) {
+                newWeeklyGoals[year][week] = newWeeklyGoals[year][week].map(goal => {
                     if (goal.id === editingSubGoal.goalId) {
                         return {
                             ...goal,
@@ -330,14 +342,15 @@ const Weekly = ({ data, updateData }) => {
         e.preventDefault();
         if (draggedItem === null || draggedItem === dropIndex) return;
 
-        const weekId = getWeekId(currentDate);
+        const { year, week } = getWeekInfo(currentDate);
         const newWeeklyGoals = { ...data.weeklyGoals };
-        const weekGoals = newWeeklyGoals[weekId] || [];
+        const weekGoals = newWeeklyGoals[year]?.[week] || [];
 
         const [draggedGoal] = weekGoals.splice(draggedItem, 1);
         weekGoals.splice(dropIndex, 0, draggedGoal);
 
-        newWeeklyGoals[weekId] = weekGoals;
+        if (!newWeeklyGoals[year]) newWeeklyGoals[year] = {};
+        newWeeklyGoals[year][week] = weekGoals;
         updateData({ ...data, weeklyGoals: newWeeklyGoals });
         setDraggedItem(null);
     };
@@ -357,16 +370,16 @@ const Weekly = ({ data, updateData }) => {
         e.stopPropagation();
         if (draggedSubGoal === null || draggedFromGoal !== goalId || draggedSubGoal === dropIndex) return;
 
-        const weekId = getWeekId(currentDate);
+        const { year, week } = getWeekInfo(currentDate);
         const newWeeklyGoals = { ...data.weeklyGoals };
 
-        if (newWeeklyGoals[weekId]) {
-            const goalIndex = newWeeklyGoals[weekId].findIndex(g => g.id === goalId);
+        if (newWeeklyGoals[year]?.[week]) {
+            const goalIndex = newWeeklyGoals[year][week].findIndex(g => g.id === goalId);
             if (goalIndex > -1) {
-                const newSubGoals = [...newWeeklyGoals[weekId][goalIndex].subGoals];
+                const newSubGoals = [...newWeeklyGoals[year][week][goalIndex].subGoals];
                 const [draggedSub] = newSubGoals.splice(draggedSubGoal, 1);
                 newSubGoals.splice(dropIndex, 0, draggedSub);
-                newWeeklyGoals[weekId][goalIndex].subGoals = newSubGoals;
+                newWeeklyGoals[year][week][goalIndex].subGoals = newSubGoals;
                 updateData({ ...data, weeklyGoals: newWeeklyGoals });
             }
         }
@@ -401,8 +414,8 @@ const Weekly = ({ data, updateData }) => {
 
       const isToday = date.toDateString() === today.toDateString();
       const isCurrentMonth = date.getMonth() === currentMonth;
-      const weekId = getWeekId(date);
-      const hasGoals = data.weeklyGoals?.[weekId]?.length > 0;
+      const { year, week } = getWeekInfo(date);
+      const hasGoals = data.weeklyGoals?.[year]?.[week]?.length > 0;
       const isSelectedDate = currentViewDate === date.toDateString();
 
       days.push(
@@ -423,8 +436,8 @@ const Weekly = ({ data, updateData }) => {
   };
 
   const { start, end } = getWeekDateRange(currentDate);
-  const weekId = getWeekId(currentDate);
-  const filteredGoals = data.weeklyGoals?.[weekId] || [];
+  const { year, week } = getWeekInfo(currentDate);
+  const filteredGoals = data.weeklyGoals?.[year]?.[week] || [];
   const filteredEvents = (data.events || []).filter(event => {
     const eventDate = new Date(event.date);
     return eventDate >= start && eventDate <= end;
@@ -447,7 +460,7 @@ const Weekly = ({ data, updateData }) => {
     weekday: 'long'
   });
 
-    const isCurrentWeek = getWeekId(new Date()) === getWeekId(currentDate);
+    const isCurrentWeek = getWeekNumber(new Date()) === week && new Date().getFullYear() === year;
 
 
   return (
@@ -532,7 +545,7 @@ const Weekly = ({ data, updateData }) => {
         <div className="weekly-container-grid">
           <div className="goals-section-left">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-              <h3 style={{ color: 'var(--secondary-color)', fontSize: '1.5rem' }}>{isCurrentWeek ? "이번 주 할 일" : "주간 할 일"}</h3>
+              <h3 style={{ color: 'var(--secondary-color)', fontSize: '1.5rem' }}>{year}년 {week}주차 목표</h3>
               <button className="action-btn add-btn" onClick={() => { setShowAddForm(!showAddForm); setEditingGoal(null); setNewGoal({ title: '', subGoals: [] }); }} title="새 목표 추가">+</button>
             </div>
             {showAddForm && (
