@@ -2410,7 +2410,7 @@
       {
         "id": 1756014720345,
         "text": "자취방 책상, 옷장 정리",
-        "completed": false,
+        "completed": true,
         "createdAt": "2025-08-24T05:52:00.345Z"
       },
       {
@@ -2436,6 +2436,12 @@
         "text": "인스톨 파이토치 1-1 취사 수강",
         "completed": false,
         "createdAt": "2025-08-24T06:04:30.943Z"
+      },
+      {
+        "id": 1756032928864,
+        "text": "도전학기 강의 돌리기",
+        "completed": false,
+        "createdAt": "2025-08-24T10:55:28.864Z"
       }
     ]
   }
