@@ -936,6 +936,79 @@
           ],
           "completed": false,
           "createdAt": "2025-08-22T07:10:51.937Z"
+        },
+        {
+          "id": 1756014413019,
+          "title": "수학",
+          "subGoals": [
+            {
+              "id": 1756014413019,
+              "title": "공학수학1 Input Response Model",
+              "completed": false
+            },
+            {
+              "id": 1756014413020,
+              "title": "공학수학1 2nd order ODE",
+              "completed": false
+            },
+            {
+              "id": 1756014413021,
+              "title": "공학수학1 Convolution",
+              "completed": false
+            },
+            {
+              "id": 1756014413022,
+              "title": "공학수학1 Laplace transform",
+              "completed": false
+            },
+            {
+              "id": 1756014413023,
+              "title": "공학수학1 Systems of ODE",
+              "completed": false
+            },
+            {
+              "id": 1756014413024,
+              "title": "공학수학2 11.2",
+              "completed": false
+            },
+            {
+              "id": 1756014413025,
+              "title": "공학수학2 ch 11.3",
+              "completed": false
+            },
+            {
+              "id": 1756014413026,
+              "title": "공학수학2 ch 11.4",
+              "completed": false
+            },
+            {
+              "id": 1756014413027,
+              "title": "공학수학2 ch 11.5",
+              "completed": false
+            },
+            {
+              "id": 1756014413028,
+              "title": "공학수학2 ch 11.6",
+              "completed": false
+            },
+            {
+              "id": 1756014413029,
+              "title": "공학수학2 ch 11.7",
+              "completed": false
+            },
+            {
+              "id": 1756014413030,
+              "title": "공학수학2 ch 11.8",
+              "completed": false
+            },
+            {
+              "id": 1756014413031,
+              "title": "공학수학2 ch 11.9",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-24T05:46:53.019Z"
         }
       ]
     }
