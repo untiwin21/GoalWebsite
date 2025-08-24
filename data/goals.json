@@ -1087,6 +1087,69 @@
           ],
           "completed": false,
           "createdAt": "2025-08-24T05:49:49.047Z"
+        },
+        {
+          "id": 1756014632166,
+          "title": "고체역학",
+          "subGoals": [
+            {
+              "id": 1756014632166,
+              "title": "Week 1",
+              "completed": false
+            },
+            {
+              "id": 1756014632167,
+              "title": "Week 12",
+              "completed": false
+            },
+            {
+              "id": 1756014632168,
+              "title": "Week 3",
+              "completed": false
+            },
+            {
+              "id": 1756014632169,
+              "title": "Week 4",
+              "completed": false
+            },
+            {
+              "id": 1756014632170,
+              "title": "Week 5",
+              "completed": false
+            },
+            {
+              "id": 1756014632171,
+              "title": "Week 6",
+              "completed": false
+            },
+            {
+              "id": 1756014632172,
+              "title": "Week 7",
+              "completed": false
+            },
+            {
+              "id": 1756014632173,
+              "title": "Week 8",
+              "completed": false
+            },
+            {
+              "id": 1756014632174,
+              "title": "Week 9",
+              "completed": false
+            },
+            {
+              "id": 1756014632175,
+              "title": "Week 10",
+              "completed": false
+            },
+            {
+              "id": 1756014632176,
+              "title": "Week 11",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-24T05:50:32.166Z"
         }
       ]
     }
