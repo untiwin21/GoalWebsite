@@ -2570,6 +2570,12 @@
         "createdAt": "2025-08-24T14:53:07.874Z"
       },
       {
+        "id": 1756086955468,
+        "text": "10분 스피치 연습",
+        "completed": false,
+        "createdAt": "2025-08-25T01:55:55.468Z"
+      },
+      {
         "id": 1756046049535,
         "text": "인스톨 파이토치 1-1강 리스트 속에 리스트까지수강",
         "completed": false,
@@ -2586,12 +2592,6 @@
         "text": "1. IMU angular_z tf 되는지 확인해보기",
         "completed": false,
         "createdAt": "2025-08-25T01:55:25.165Z"
-      },
-      {
-        "id": 1756086955468,
-        "text": "10분 스피치 연습",
-        "completed": false,
-        "createdAt": "2025-08-25T01:55:55.468Z"
       }
     ]
   }
