@@ -2611,6 +2611,12 @@
         "text": "바텐더 로봇팔 하드웨어 따라할 로봇팔 검색",
         "completed": false,
         "createdAt": "2025-08-25T01:56:29.362Z"
+      },
+      {
+        "id": 1756101994952,
+        "text": "2. Lidar, Radar, IMU 속도값 저장",
+        "completed": false,
+        "createdAt": "2025-08-25T06:06:34.952Z"
       }
     ]
   }
