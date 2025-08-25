@@ -1216,6 +1216,34 @@
           ],
           "completed": false,
           "createdAt": "2025-08-24T13:29:37.933Z"
+        },
+        {
+          "id": 1756086798581,
+          "title": "독서토론",
+          "subGoals": [
+            {
+              "id": 1756086798581,
+              "title": "문화의 수수꼐끼 2장",
+              "completed": false
+            },
+            {
+              "id": 1756086798582,
+              "title": "문화의 수수께끼 3장",
+              "completed": false
+            },
+            {
+              "id": 1756086798583,
+              "title": "문화의 수수께끼 4장",
+              "completed": false
+            },
+            {
+              "id": 1756086798584,
+              "title": "F1 노션 정리",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-25T01:53:18.581Z"
         }
       ]
     }
