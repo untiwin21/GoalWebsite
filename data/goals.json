@@ -2604,6 +2604,12 @@
         "text": "바텐더 로봇팔 하드웨어 따라할 로봇팔 검색",
         "completed": false,
         "createdAt": "2025-08-25T01:56:29.362Z"
+      },
+      {
+        "id": 1756087008919,
+        "text": "velog 글쓰기 10분",
+        "completed": false,
+        "createdAt": "2025-08-25T01:56:48.919Z"
       }
     ]
   }
