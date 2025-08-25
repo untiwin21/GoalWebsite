@@ -1177,24 +1177,6 @@
           "createdAt": "2025-08-24T05:50:32.166Z"
         },
         {
-          "id": 1756042177933,
-          "title": "Discipline",
-          "subGoals": [
-            {
-              "id": 1756042177933,
-              "title": "웹툰은 금요일 저녁에 보기",
-              "completed": false
-            },
-            {
-              "id": 1756042177934,
-              "title": "기상 직후 폰 30분간 보지 않기",
-              "completed": false
-            }
-          ],
-          "completed": false,
-          "createdAt": "2025-08-24T13:29:37.933Z"
-        },
-        {
           "id": 1756086746491,
           "title": "바텐더 로봇팔",
           "subGoals": [
@@ -1216,6 +1198,24 @@
           ],
           "completed": false,
           "createdAt": "2025-08-25T01:52:26.491Z"
+        },
+        {
+          "id": 1756042177933,
+          "title": "Discipline",
+          "subGoals": [
+            {
+              "id": 1756042177933,
+              "title": "웹툰은 금요일 저녁에 보기",
+              "completed": false
+            },
+            {
+              "id": 1756042177934,
+              "title": "기상 직후 폰 30분간 보지 않기",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-24T13:29:37.933Z"
         }
       ]
     }
