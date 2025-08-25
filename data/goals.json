@@ -2509,7 +2509,7 @@
       {
         "id": 1756047116236,
         "text": "9시 반 기상",
-        "completed": false,
+        "completed": true,
         "createdAt": "2025-08-24T14:51:56.236Z"
       },
       {
