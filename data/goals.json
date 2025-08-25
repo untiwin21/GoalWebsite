@@ -2586,6 +2586,12 @@
         "text": "1. IMU angular_z tf 되는지 확인해보기",
         "completed": false,
         "createdAt": "2025-08-25T01:55:25.165Z"
+      },
+      {
+        "id": 1756086955468,
+        "text": "10분 스피치 연습",
+        "completed": false,
+        "createdAt": "2025-08-25T01:55:55.468Z"
       }
     ]
   }
