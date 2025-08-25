@@ -2582,16 +2582,16 @@
         "createdAt": "2025-08-24T14:34:09.535Z"
       },
       {
-        "id": 1756086894998,
-        "text": "Easy 딥러닝 ch 2.7까지 정독",
-        "completed": false,
-        "createdAt": "2025-08-25T01:54:54.998Z"
-      },
-      {
         "id": 1756086925165,
         "text": "1. IMU angular_z tf 되는지 확인해보기",
         "completed": false,
         "createdAt": "2025-08-25T01:55:25.165Z"
+      },
+      {
+        "id": 1756086894998,
+        "text": "Easy 딥러닝 ch 2.7까지 정독",
+        "completed": false,
+        "createdAt": "2025-08-25T01:54:54.998Z"
       },
       {
         "id": 1756086963343,
