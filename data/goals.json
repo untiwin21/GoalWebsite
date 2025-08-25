@@ -2595,12 +2595,6 @@
         "createdAt": "2025-08-24T14:34:09.535Z"
       },
       {
-        "id": 1756086925165,
-        "text": "1. IMU angular_z tf 되는지 확인해보기",
-        "completed": false,
-        "createdAt": "2025-08-25T01:55:25.165Z"
-      },
-      {
         "id": 1756086963343,
         "text": "7km 러닝",
         "completed": false,
