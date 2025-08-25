@@ -1193,6 +1193,29 @@
           ],
           "completed": false,
           "createdAt": "2025-08-24T13:29:37.933Z"
+        },
+        {
+          "id": 1756086746491,
+          "title": "바텐더 로봇팔",
+          "subGoals": [
+            {
+              "id": 1756086746491,
+              "title": "하드웨어 설계 완성",
+              "completed": false
+            },
+            {
+              "id": 1756086746492,
+              "title": "하드웨어 3D 프린팅 및 조립",
+              "completed": false
+            },
+            {
+              "id": 1756086746493,
+              "title": "모터 선정",
+              "completed": false
+            }
+          ],
+          "completed": false,
+          "createdAt": "2025-08-25T01:52:26.491Z"
         }
       ]
     }
