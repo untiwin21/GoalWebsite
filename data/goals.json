@@ -1821,8 +1821,9 @@
       "title": "학부연구생 회의",
       "time": "",
       "description": "",
-      "status": "pending",
-      "createdAt": "2025-08-24T05:53:42.578Z"
+      "status": "completed",
+      "createdAt": "2025-08-24T05:53:42.578Z",
+      "updatedAt": "2025-08-26T02:17:23.720Z"
     },
     {
       "id": 1756014793064,
