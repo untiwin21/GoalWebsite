@@ -1857,8 +1857,9 @@
       "title": "전민혁씨 저녁밥약",
       "time": "",
       "description": "",
-      "status": "pending",
-      "createdAt": "2025-08-24T10:56:59.255Z"
+      "status": "completed",
+      "createdAt": "2025-08-24T10:56:59.255Z",
+      "updatedAt": "2025-08-26T02:17:24.665Z"
     },
     {
       "id": 1756033058961,
@@ -2618,6 +2619,14 @@
         "text": "바텐더 로봇팔 하드웨어 따라할 로봇팔 검색",
         "completed": false,
         "createdAt": "2025-08-25T01:56:29.362Z"
+      }
+    ],
+    "Tue Aug 26 2025": [
+      {
+        "id": 1756174664101,
+        "text": "Lidar Radar IMU 속도값 확인하는 코드 완성",
+        "completed": false,
+        "createdAt": "2025-08-26T02:17:44.101Z"
       }
     ]
   }
