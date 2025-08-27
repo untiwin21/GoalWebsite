@@ -2643,6 +2643,12 @@
         "text": "IMU 초기화 & 제대로 calibration 되는지 체크",
         "completed": false,
         "createdAt": "2025-08-27T09:46:23.914Z"
+      },
+      {
+        "id": 1756288063877,
+        "text": "Easy 딥러닝 ch 2.2~2.4 정독",
+        "completed": false,
+        "createdAt": "2025-08-27T09:47:43.877Z"
       }
     ]
   }
