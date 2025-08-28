@@ -2669,6 +2669,12 @@
         "text": "IMU 속도값 저장",
         "completed": false,
         "createdAt": "2025-08-28T00:04:10.670Z"
+      },
+      {
+        "id": 1756339467220,
+        "text": "복도 주행 데이터 저장",
+        "completed": false,
+        "createdAt": "2025-08-28T00:04:27.220Z"
       }
     ]
   }
