@@ -2682,7 +2682,7 @@
       {
         "id": 1756342129161,
         "text": "IMU 속도값 제대로 출력되는지 확인",
-        "completed": false,
+        "completed": true,
         "createdAt": "2025-08-28T00:48:49.161Z"
       },
       {
