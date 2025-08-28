@@ -2681,6 +2681,12 @@
         "text": "헤븐 회의",
         "completed": false,
         "createdAt": "2025-08-28T00:04:31.718Z"
+      },
+      {
+        "id": 1756339483469,
+        "text": "Easy 딥러닝 Ch 2.2~5",
+        "completed": false,
+        "createdAt": "2025-08-28T00:04:43.469Z"
       }
     ]
   }
