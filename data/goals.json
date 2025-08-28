@@ -2699,6 +2699,12 @@
         "text": "인스톨 파이썬 1시간 수강",
         "completed": false,
         "createdAt": "2025-08-28T00:04:50.948Z"
+      },
+      {
+        "id": 1756342206702,
+        "text": "Easy 딥러닝 Ch 2.2~2.5 정독",
+        "completed": false,
+        "createdAt": "2025-08-28T00:50:06.702Z"
       }
     ]
   }
